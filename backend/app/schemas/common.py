@@ -13,6 +13,7 @@ class ErrorResponse(BaseModel):
 class StatusUpdateRequest(BaseModel):
     status: str
     idempotency_key: str = Field(min_length=1, max_length=128)
+    human_confirmation: bool = False
 
 
 class HealthResponse(BaseModel):

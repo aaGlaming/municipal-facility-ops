@@ -16,3 +16,4 @@ data/chroma/
 logs/*.out
 logs/*.err
 chroma.log
+logs/*.jsonl

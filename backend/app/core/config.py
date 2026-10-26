@@ -25,6 +25,12 @@ class Settings(BaseSettings):
     cors_origins: str = Field("http://localhost:5173", validation_alias="CORS_ORIGINS")
     db_connect_timeout_seconds: int = Field(5, ge=1, le=60, validation_alias="DB_CONNECT_TIMEOUT_SECONDS")
     db_pool_recycle_seconds: int = Field(1800, ge=60, le=86400, validation_alias="DB_POOL_RECYCLE_SECONDS")
+    auth_secret: str = Field("dev-only-change-this-secret", validation_alias="AUTH_SECRET")
+    auth_token_ttl_seconds: int = Field(900, ge=60, le=86400, validation_alias="AUTH_TOKEN_TTL_SECONDS")
+    auth_bootstrap_username: str = Field("", validation_alias="AUTH_BOOTSTRAP_USERNAME")
+    auth_bootstrap_password: str = Field("", validation_alias="AUTH_BOOTSTRAP_PASSWORD")
+    auth_bootstrap_roles: str = Field("admin", validation_alias="AUTH_BOOTSTRAP_ROLES")
+    auth_bootstrap_permissions: str = Field("*", validation_alias="AUTH_BOOTSTRAP_PERMISSIONS")
 
     model_config = SettingsConfigDict(
         env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False, populate_by_name=True

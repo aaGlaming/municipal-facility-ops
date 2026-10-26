@@ -1,11 +1,14 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 
+from app.core.auth import AuthPrincipal, ensure_region_access, require_permission
 from app.schemas.common import StatusUpdateRequest
+from app.services.work_order_service import authorize_work_order_update
+from app.tools.work_order_tools import authorize_work_order_tool
 
 router = APIRouter(prefix="/api/work-orders", tags=["work-orders"])
 
 WORK_ORDERS = {
-    "WO-000001": {"id": "WO-000001", "status": "NEW", "source_type": "synthetic"},
+    "WO-000001": {"id": "WO-000001", "status": "NEW", "source_type": "synthetic", "region": "DISTRICT-01"},
 }
 IDEMPOTENCY_RESULTS: dict[str, dict] = {}
 ALLOWED_TRANSITIONS = {
@@ -25,14 +28,23 @@ ALLOWED_TRANSITIONS = {
 
 
 @router.post("/{work_order_id}/status")
-def update_status(work_order_id: str, payload: StatusUpdateRequest, request: Request) -> dict:
-    if payload.idempotency_key in IDEMPOTENCY_RESULTS:
-        return IDEMPOTENCY_RESULTS[payload.idempotency_key]
+def update_status(
+    work_order_id: str,
+    payload: StatusUpdateRequest,
+    request: Request,
+    principal: AuthPrincipal = Depends(require_permission("work_order:write")),
+) -> dict:
     work_order = WORK_ORDERS.get(work_order_id)
     if work_order is None:
         raise HTTPException(
             status_code=404, detail={"code": "WORK_ORDER_NOT_FOUND", "message": "工单不存在", "retryable": False}
         )
+    ensure_region_access(principal, work_order.get("region"), request)
+    authorize_work_order_update(principal, work_order, payload.status, payload.human_confirmation, request)
+    action = "close" if payload.status == "CLOSED" else "update_status"
+    authorize_work_order_tool(principal, action, work_order, payload.human_confirmation, request)
+    if payload.idempotency_key in IDEMPOTENCY_RESULTS:
+        return IDEMPOTENCY_RESULTS[payload.idempotency_key]
     current = work_order["status"]
     if payload.status not in ALLOWED_TRANSITIONS.get(current, set()):
         raise HTTPException(

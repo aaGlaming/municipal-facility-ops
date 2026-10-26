@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 10 状态
+# 执行手册 Step 1～Step 11 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -50,3 +50,9 @@
 ## Step 10：搭建 FastAPI 应用基础层
 
 **状态：完成**。已实现应用工厂、配置校验、SQLAlchemy session 和依赖注入、CORS、请求/trace ID、JSON 结构化日志、统一异常响应、OpenAPI 元数据、`/health` 和真实依赖检查 `/ready`。详见 `step10-fastapi.md`。
+
+## Step 11：实现认证与权限控制
+
+**状态：完成**。已实现 HS256 Bearer Token 签发与校验、登录和当前用户接口、角色/菜单/API 权限映射、区域数据范围、路由/服务/工具三层授权、高风险工单关闭人工确认，以及登录、令牌无效、权限拒绝、区域拒绝和人工确认事件 JSONL 记录。认证配置通过 `AUTH_*` 环境变量提供，未配置登录凭据时接口安全地返回 `AUTH_NOT_CONFIGURED`。详见 `step11-auth.md`。
+
+Step 12 尚未开始。

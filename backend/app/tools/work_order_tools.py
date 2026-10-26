@@ -1,3 +1,19 @@
-# 文件职责：工单读写工具。
-# 后续提供创建、更新、派工、挂起、关闭和返工工具。
-# 每个写工具必须执行 schema 校验、业务状态机、RBAC、人工确认、幂等和审计。
+from fastapi import HTTPException, Request
+
+from app.core.auth import AuthPrincipal, ensure_region_access, require_human_confirmation
+
+
+def authorize_work_order_tool(
+    principal: AuthPrincipal,
+    action: str,
+    work_order: dict,
+    human_confirmation: bool,
+    request: Request,
+) -> None:
+    if not principal.has_permission("work_order:write"):
+        raise HTTPException(
+            status_code=403, detail={"code": "PERMISSION_DENIED", "message": "没有执行该操作的权限", "retryable": False}
+        )
+    ensure_region_access(principal, work_order.get("region"), request)
+    if action == "close":
+        require_human_confirmation(principal, "close_work_order", human_confirmation, request)

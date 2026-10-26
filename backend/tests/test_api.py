@@ -1,11 +1,17 @@
 import pytest
 from app.api.routes import health as health_route
+from app.core.auth import issue_access_token
 from app.core.config import Settings
 from app.main import app
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
 
 client = TestClient(app)
+
+
+def _auth_headers(permission: str) -> dict[str, str]:
+    token = issue_access_token("test-user", ["dispatcher"], [permission], ["*"], Settings().auth_secret, 900)
+    return {"Authorization": f"Bearer {token}"}
 
 
 def test_health_reports_liveness_and_trace_id() -> None:
@@ -19,7 +25,8 @@ def test_health_reports_liveness_and_trace_id() -> None:
 def test_invalid_work_order_transition_returns_structured_error() -> None:
     response = client.post(
         "/api/work-orders/WO-000001/status",
-        json={"status": "CLOSED", "idempotency_key": "test-transition-1"},
+        json={"status": "CLOSED", "idempotency_key": "test-transition-1", "human_confirmation": True},
+        headers=_auth_headers("work_order:write"),
     )
     assert response.status_code == 409
     body = response.json()
@@ -28,7 +35,9 @@ def test_invalid_work_order_transition_returns_structured_error() -> None:
 
 
 def test_facility_list_exposes_source_type() -> None:
-    response = client.get("/api/facilities", params={"source_type": "synthetic"})
+    response = client.get(
+        "/api/facilities", params={"source_type": "synthetic"}, headers=_auth_headers("facility:read")
+    )
     assert response.status_code == 200
     body = response.json()
     assert body["items"]
@@ -37,8 +46,8 @@ def test_facility_list_exposes_source_type() -> None:
 
 def test_repeated_status_update_with_same_idempotency_key_is_stable() -> None:
     payload = {"status": "TRIAGED", "idempotency_key": "test-idempotent-1"}
-    first = client.post("/api/work-orders/WO-000001/status", json=payload)
-    second = client.post("/api/work-orders/WO-000001/status", json=payload)
+    first = client.post("/api/work-orders/WO-000001/status", json=payload, headers=_auth_headers("work_order:write"))
+    second = client.post("/api/work-orders/WO-000001/status", json=payload, headers=_auth_headers("work_order:write"))
     assert first.status_code == 200
     assert second.status_code == 200
     assert second.json() == first.json()
@@ -53,7 +62,7 @@ def test_request_and_trace_ids_are_returned_in_headers() -> None:
 
 
 def test_validation_errors_use_standard_error_shape() -> None:
-    response = client.post("/api/work-orders/WO-000001/status", json={})
+    response = client.post("/api/work-orders/WO-000001/status", json={}, headers=_auth_headers("work_order:write"))
     assert response.status_code == 422
     assert response.json()["code"] == "VALIDATION_ERROR"
     assert response.json()["retryable"] is False

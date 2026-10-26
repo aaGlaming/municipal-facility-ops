@@ -7,7 +7,7 @@ from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.routes import facilities, health, work_orders
+from app.api.routes import auth, facilities, health, work_orders
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging, request_log_fields
 
@@ -99,6 +99,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return _error_response(request, 500, "INTERNAL_ERROR", "服务内部错误", True)
 
     application.include_router(health.router)
+    application.include_router(auth.router)
     application.include_router(facilities.router)
     application.include_router(work_orders.router)
     return application
