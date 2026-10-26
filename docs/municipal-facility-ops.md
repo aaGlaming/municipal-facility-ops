@@ -1,3 +1,5 @@
+> **Skill/MCP 同步说明：** Step 6～Step 36 的执行计划已为每个步骤标注适用 Skill 和 MCP。Skill 文档位于 `docs/Skills/`，MCP 文档位于 `docs/MCP/`；MCP 只用于受控资料、协作、安全和通知，不能绕过项目权限、状态机、幂等和审计。
+
 # step1：确认项目范围与验收边界
 
 - 确认项目名称为市政设施巡检与维修平台。
@@ -51,6 +53,8 @@
 - 生成 Agent 运行记录和 RAG 演示知识文档。
 - 为每条合成记录写入 `source_type=synthetic`、生成器版本和生成时间。
 
+- **建议 Skill：** [01-test-driven-development](Skills/01-test-driven-development.md)、[02-qa-expert](Skills/02-qa-expert.md)、[03-evaluation](Skills/03-evaluation.md)
+
 # step7：建立数据清洗与统一映射
 
 - 读取公开数据并统一事件编号、问题类别、状态、时间、机构、地址、行政区和坐标字段。
@@ -59,6 +63,9 @@
 - 生成字段统计、缺失值统计、重复值统计和清洗批次信息。
 - 将清洗结果保存到 `data/processed`。
 - 禁止覆盖 `data/raw` 原始文件。
+
+- **建议 Skill：** [03-evaluation](Skills/03-evaluation.md)、[02-qa-expert](Skills/02-qa-expert.md)
+- **建议 MCP：** [03-search-service](MCP/03-search-service.md)
 
 # step8：设计 MySQL 数据模型
 
@@ -73,6 +80,8 @@
 - 为状态、设施 ID、区域、外部 ID、幂等键、创建时间和截止时间建立索引。
 - 为来源类型、来源系统、数据版本和软删除字段留出字段。
 
+- **建议 Skill：** [04-sql-optimization](Skills/04-sql-optimization.md)、[05-security-auditor](Skills/05-security-auditor.md)
+
 # step9：实现数据库初始化与种子导入
 
 - 编写数据库迁移和初始化脚本。
@@ -81,6 +90,8 @@
 - 导入巡检任务、工单、验收和审计种子数据。
 - 校验外键关系、状态值、时间顺序和幂等键唯一性。
 - 为每次导入生成批次 ID 和导入日志。
+
+- **建议 Skill：** [02-qa-expert](Skills/02-qa-expert.md)、[04-sql-optimization](Skills/04-sql-optimization.md)
 
 # step10：搭建 FastAPI 应用基础层
 
@@ -91,6 +102,9 @@
 - 为错误响应增加 `code`、`message`、`trace_id` 和 `retryable`。
 - 实现 `/health` 和 `/ready` 接口。
 
+- **建议 Skill：** [06-api-designer](Skills/06-api-designer.md)、[07-api-documenter](Skills/07-api-documenter.md)、[08-systematic-debugging](Skills/08-systematic-debugging.md)
+- **建议 MCP：** [02-openai-developers](MCP/02-openai-developers.md)
+
 # step11：实现认证与权限控制
 
 - 实现用户认证和 Token 校验。
@@ -99,6 +113,9 @@
 - 在路由层、服务层和工具层分别执行权限校验。
 - 为高风险动作配置人工确认权限。
 - 记录登录、权限拒绝和人工确认事件。
+
+- **建议 Skill：** [05-security-auditor](Skills/05-security-auditor.md)、[08-systematic-debugging](Skills/08-systematic-debugging.md)
+- **建议 MCP：** [01-github](MCP/01-github.md)
 
 # step12：实现设施与问题上报模块
 
@@ -109,6 +126,9 @@
 - 实现重复问题检测和外部 ID 去重。
 - 为问题上报保存原始描述、结构化字段和来源信息。
 
+- **建议 Skill：** [06-api-designer](Skills/06-api-designer.md)、[04-sql-optimization](Skills/04-sql-optimization.md)、[01-test-driven-development](Skills/01-test-driven-development.md)
+- **建议 MCP：** [03-search-service](MCP/03-search-service.md)
+
 # step13：实现工单与巡检业务模块
 
 - 实现巡检任务创建、分配、执行、延期和完成。
@@ -117,6 +137,8 @@
 - 实现状态机校验，禁止非法状态跳转。
 - 实现 SLA 截止时间计算和超时升级。
 - 实现维修证据、处理说明和验收材料关联。
+
+- **建议 Skill：** [01-test-driven-development](Skills/01-test-driven-development.md)、[04-sql-optimization](Skills/04-sql-optimization.md)、[05-security-auditor](Skills/05-security-auditor.md)
 
 # step14：实现 RAG 文档上传与解析
 
@@ -127,6 +149,9 @@
 - 对解析失败文档记录错误状态和失败原因。
 - 将原始文件和解析结果建立关联。
 
+- **建议 Skill：** [09-comprehensive-research-agent](Skills/09-comprehensive-research-agent.md)、[05-security-auditor](Skills/05-security-auditor.md)
+- **建议 MCP：** [03-search-service](MCP/03-search-service.md)、[04-sharepoint](MCP/04-sharepoint.md)、[05-google-drive](MCP/05-google-drive.md)、[06-notion](MCP/06-notion.md)、[07-dropbox](MCP/07-dropbox.md)
+
 # step15：实现文本清洗与 Chunk 预览
 
 - 清理重复空白、页眉页脚、不可见字符和无意义内容。
@@ -136,6 +161,9 @@
 - 提供独立的 Chunk 预览菜单。
 - 允许在入库前查看、调整和重新生成 Chunk。
 
+- **建议 Skill：** [09-comprehensive-research-agent](Skills/09-comprehensive-research-agent.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)
+- **建议 MCP：** [03-search-service](MCP/03-search-service.md)、[04-sharepoint](MCP/04-sharepoint.md)、[05-google-drive](MCP/05-google-drive.md)、[06-notion](MCP/06-notion.md)、[07-dropbox](MCP/07-dropbox.md)
+
 # step16：实现 Embedding 与 Chroma 入库
 
 - 配置 OpenAI 兼容 Embedding 模型。
@@ -144,6 +172,9 @@
 - 记录 Embedding 模型版本、文档版本和入库批次。
 - 支持单文档重建索引和文档删除。
 - Embedding 失败时保留待重试状态，不写入不完整结果。
+
+- **建议 Skill：** [10-advanced-evaluation](Skills/10-advanced-evaluation.md)、[05-security-auditor](Skills/05-security-auditor.md)
+- **建议 MCP：** [02-openai-developers](MCP/02-openai-developers.md)
 
 # step17：实现 RAG 检索与原文展示
 
@@ -156,6 +187,9 @@
 - 实现无召回、过期文档、文档解析失败和检索服务不可用提示。
 - 提供独立的检索调试菜单。
 
+- **建议 Skill：** [03-evaluation](Skills/03-evaluation.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)、[09-comprehensive-research-agent](Skills/09-comprehensive-research-agent.md)
+- **建议 MCP：** [03-search-service](MCP/03-search-service.md)、[04-sharepoint](MCP/04-sharepoint.md)、[05-google-drive](MCP/05-google-drive.md)、[06-notion](MCP/06-notion.md)、[07-dropbox](MCP/07-dropbox.md)
+
 # step18：设计 Agent 状态与工具契约
 
 - 定义 LangGraph 工作状态字段。
@@ -164,6 +198,9 @@
 - 为工具定义只读、写入、高风险和人工确认等级。
 - 为写工具定义幂等键格式和重复执行结果。
 - 为每个工具定义可重试错误和不可重试错误。
+
+- **建议 Skill：** [11-tool-design](Skills/11-tool-design.md)、[12-multi-agent-patterns](Skills/12-multi-agent-patterns.md)、[13-harness-engineering](Skills/13-harness-engineering.md)
+- **建议 MCP：** [02-openai-developers](MCP/02-openai-developers.md)
 
 # step19：实现 Agent 工具层
 
@@ -178,6 +215,8 @@
 - 实现审计事件和人工确认工具。
 - 在工具执行前统一执行 schema、业务规则、权限、风险和幂等校验。
 
+- **建议 Skill：** [11-tool-design](Skills/11-tool-design.md)、[05-security-auditor](Skills/05-security-auditor.md)、[01-test-driven-development](Skills/01-test-driven-development.md)
+
 # step20：实现 Supervisor 与 Agent 循环控制
 
 - 创建 LangGraph Supervisor。
@@ -190,6 +229,9 @@
 - 在证据不足、高风险或需要人工确认时停止并返回待确认状态。
 - 记录每次模型调用、工具调用、迭代次数、token、耗时和停止原因。
 
+- **建议 Skill：** [12-multi-agent-patterns](Skills/12-multi-agent-patterns.md)、[13-harness-engineering](Skills/13-harness-engineering.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)
+- **建议 MCP：** [02-openai-developers](MCP/02-openai-developers.md)
+
 # step21：实现问题分诊与设施识别 Agent
 
 - 编写问题分诊 Agent Prompt。
@@ -199,6 +241,9 @@
 - 输出候选设施、匹配置信度和匹配依据。
 - 低置信度时转人工确认，不直接绑定设施。
 - 为分诊和设施识别建立评测样例。
+
+- **建议 Skill：** [12-multi-agent-patterns](Skills/12-multi-agent-patterns.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)、[05-security-auditor](Skills/05-security-auditor.md)
+- **建议 MCP：** [03-search-service](MCP/03-search-service.md)
 
 # step22：实现 SLA、巡检计划与工单调度 Agent
 
@@ -211,6 +256,8 @@
 - 根据技能、区域、工作量、供应商能力和 SLA 生成派工建议。
 - 对重复派工、人员冲突和容量超限进行拦截。
 
+- **建议 Skill：** [12-multi-agent-patterns](Skills/12-multi-agent-patterns.md)、[03-evaluation](Skills/03-evaluation.md)、[05-security-auditor](Skills/05-security-auditor.md)
+
 # step23：实现安全作业与维修验收 Agent
 
 - 编写安全作业 Agent Prompt。
@@ -220,6 +267,9 @@
 - 检查维修说明、完成时间、照片、材料和验收规则。
 - 输出通过、返工或有条件通过建议。
 - 最终关闭动作要求验收人员确认。
+
+- **建议 Skill：** [05-security-auditor](Skills/05-security-auditor.md)、[11-tool-design](Skills/11-tool-design.md)、[03-evaluation](Skills/03-evaluation.md)
+- **建议 MCP：** [08-codex-security](MCP/08-codex-security.md)
 
 # step24：实现记忆与会话上下文
 
@@ -231,6 +281,8 @@
 - 对地址、联系方式和报修人信息执行脱敏。
 - 不把全部对话自动写入长期向量库。
 
+- **建议 Skill：** [14-memory-systems](Skills/14-memory-systems.md)、[12-multi-agent-patterns](Skills/12-multi-agent-patterns.md)、[05-security-auditor](Skills/05-security-auditor.md)
+
 # step25：实现前端应用壳与菜单
 
 - 创建 Vue 应用入口和全局布局。
@@ -240,6 +292,9 @@
 - 创建 RAG 文档上传、Chunk 切块预览、向量化入库、向量检索和原文片段查看菜单。
 - 创建 Agent 运行记录和审计记录菜单。
 - 配置登录、角色和菜单权限守卫。
+
+- **建议 Skill：** [15-vue-best-practices](Skills/15-vue-best-practices.md)、[16-vue-router-best-practices](Skills/16-vue-router-best-practices.md)、[17-vue-pinia-best-practices](Skills/17-vue-pinia-best-practices.md)、[19-frontend-design](Skills/19-frontend-design.md)
+- **建议 MCP：** [09-figma](MCP/09-figma.md)
 
 # step26：实现前端 Agent 与工单交互
 
@@ -251,6 +306,8 @@
 - 为每次 Agent 操作显示 trace_id。
 - 为加载、成功、失败、待确认和完成状态提供反馈。
 
+- **建议 Skill：** [15-vue-best-practices](Skills/15-vue-best-practices.md)、[18-vue-testing-best-practices](Skills/18-vue-testing-best-practices.md)、[20-webapp-testing](Skills/20-webapp-testing.md)
+
 # step27：实现前端 RAG 管理与检索展示
 
 - 实现文档上传和文档列表。
@@ -260,6 +317,9 @@
 - 展示召回、去重、Rerank 和最终结果。
 - 支持展开查看文档原文片段、页码、Chunk ID 和 metadata。
 - 展示无结果、过期文档和检索失败提示。
+
+- **建议 Skill：** [15-vue-best-practices](Skills/15-vue-best-practices.md)、[18-vue-testing-best-practices](Skills/18-vue-testing-best-practices.md)、[20-webapp-testing](Skills/20-webapp-testing.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)
+- **建议 MCP：** [04-sharepoint](MCP/04-sharepoint.md)、[05-google-drive](MCP/05-google-drive.md)、[06-notion](MCP/06-notion.md)、[07-dropbox](MCP/07-dropbox.md)
 
 # step28：完善日志、审计和运行监控
 
@@ -271,6 +331,9 @@
 - 增加服务健康、错误率、延迟、Chroma 状态、MySQL 状态和模型调用告警。
 - 区分可重试错误、不可重试错误和人工处理错误。
 
+- **建议 Skill：** [21-performance-engineer](Skills/21-performance-engineer.md)、[22-code-reviewer](Skills/22-code-reviewer.md)、[05-security-auditor](Skills/05-security-auditor.md)
+- **建议 MCP：** [08-codex-security](MCP/08-codex-security.md)、[10-slack](MCP/10-slack.md)、[11-teams](MCP/11-teams.md)
+
 # step29：建立评测数据集与基准
 
 - 建立问题分诊 Gold Set。
@@ -281,6 +344,9 @@
 - 建立高风险操作和权限拒绝样例。
 - 固定数据版本、Prompt 版本、模型版本和评测参数。
 
+- **建议 Skill：** [03-evaluation](Skills/03-evaluation.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)、[02-qa-expert](Skills/02-qa-expert.md)
+- **建议 MCP：** [01-github](MCP/01-github.md)
+
 # step30：执行 RAG 评测
 
 - 计算 Recall@K、Hit Rate 和 MRR。
@@ -289,6 +355,8 @@
 - 对无召回、召回跑偏、Chunk 边界错误和知识库缺失进行归因。
 - 使用人工抽检检查原文引用、回答忠实度和答案相关性。
 - 保存每次评测结果、失败样例和版本信息。
+
+- **建议 Skill：** [10-advanced-evaluation](Skills/10-advanced-evaluation.md)、[03-evaluation](Skills/03-evaluation.md)、[22-code-reviewer](Skills/22-code-reviewer.md)
 
 # step31：执行 Agent 评测与安全验证
 
@@ -300,6 +368,9 @@
 - 测试模型超时、工具失败、Chroma 不可用、MySQL 断开和外部 API 不可用。
 - 验证错误返回包含 code、message、trace_id 和 retryable。
 
+- **建议 Skill：** [05-security-auditor](Skills/05-security-auditor.md)、[10-advanced-evaluation](Skills/10-advanced-evaluation.md)、[02-qa-expert](Skills/02-qa-expert.md)
+- **建议 MCP：** [08-codex-security](MCP/08-codex-security.md)
+
 # step32：执行端到端业务验收
 
 - 从问题上报开始执行完整流程。
@@ -310,6 +381,9 @@
 - 验证普通人员、调度员、维修人员、管理员和审计人员的数据权限。
 - 验证公开、合成和用户数据的来源标签在前端可见。
 
+- **建议 Skill：** [20-webapp-testing](Skills/20-webapp-testing.md)、[23-verification-before-completion](Skills/23-verification-before-completion.md)、[22-code-reviewer](Skills/22-code-reviewer.md)
+- **建议 MCP：** [01-github](MCP/01-github.md)、[10-slack](MCP/10-slack.md)、[11-teams](MCP/11-teams.md)
+
 # step33：完成本地环境最终业务验收
 
 - 在本地服务环境中执行完整问题上报、分诊、设施识别、SLA 判断、巡检、派工、维修、验收和关闭流程。
@@ -317,6 +391,8 @@
 - 验证每个 Agent 都能调用 RAG 并返回可定位的原文证据。
 - 验证高风险动作、权限拒绝、人工确认、幂等和审计流程。
 - 修复本地验收中发现的功能、数据、日志和权限问题。
+
+- **建议 Skill：** [20-webapp-testing](Skills/20-webapp-testing.md)、[23-verification-before-completion](Skills/23-verification-before-completion.md)、[08-systematic-debugging](Skills/08-systematic-debugging.md)
 
 # step34：完成数据备份与恢复验证
 
@@ -328,6 +404,8 @@
 - 在独立目录恢复数据并验证公开数据、合成数据、统一处理数据和 RAG 文档可读取。
 - 在本地服务环境中恢复数据并验证系统可以继续运行。
 
+- **建议 Skill：** [02-qa-expert](Skills/02-qa-expert.md)、[23-verification-before-completion](Skills/23-verification-before-completion.md)
+
 # step35：整理项目文档与交付材料
 
 - 更新项目 README。
@@ -337,6 +415,9 @@
 - 记录评测数据集、指标、失败归因和已知问题。
 - 记录本地环境变量、启动命令、备份命令和恢复命令。
 - 清理临时文件、密钥、缓存、编译产物和大体积无关文件。
+
+- **建议 Skill：** [24-documentation-engineer](Skills/24-documentation-engineer.md)、[22-code-reviewer](Skills/22-code-reviewer.md)
+- **建议 MCP：** [01-github](MCP/01-github.md)、[04-sharepoint](MCP/04-sharepoint.md)、[05-google-drive](MCP/05-google-drive.md)
 
 # step36：最后执行 Docker Compose 部署与发布验收
 
@@ -357,3 +438,6 @@
 - 核对日志、审计、指标、备份和恢复流程可用。
 - 创建发布标签并记录版本号、数据版本、模型版本和配置版本。
 - 生成最终交付包和启动说明。
+
+- **建议 Skill：** [25-deployment-engineer](Skills/25-deployment-engineer.md)、[23-verification-before-completion](Skills/23-verification-before-completion.md)、[22-code-reviewer](Skills/22-code-reviewer.md)
+- **建议 MCP：** [01-github](MCP/01-github.md)、[08-codex-security](MCP/08-codex-security.md)、[10-slack](MCP/10-slack.md)、[11-teams](MCP/11-teams.md)
