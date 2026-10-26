@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 9 状态
+# 执行手册 Step 1～Step 10 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -46,3 +46,7 @@
 ## Step 9：实现数据库初始化与种子导入
 
 **状态：完成**。已实现可重复的 seed plan、事务导入、批次日志和失败回滚；导入 63,200 条报修/公开事件、500 个设施、1,600 个巡检任务、1,800 个工单、900 条验收、1,200 次 Agent 运行和 1,800 条审计记录。重复导入行数保持不变，外键、状态、时间顺序和幂等校验通过。详见 `step09-seed-import.md`。
+
+## Step 10：搭建 FastAPI 应用基础层
+
+**状态：完成**。已实现应用工厂、配置校验、SQLAlchemy session 和依赖注入、CORS、请求/trace ID、JSON 结构化日志、统一异常响应、OpenAPI 元数据、`/health` 和真实依赖检查 `/ready`。详见 `step10-fastapi.md`。

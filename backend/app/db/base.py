@@ -1,2 +1,5 @@
-# 文件职责：ORM declarative base 和模型注册。
-# 后续集中导入所有模型，供迁移和建表工具发现；不在这里执行迁移。
+from sqlalchemy.orm import DeclarativeBase
+
+
+class Base(DeclarativeBase):
+    """Base class for SQLAlchemy models discovered by migrations."""

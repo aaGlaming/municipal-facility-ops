@@ -1,6 +1,7 @@
 from functools import lru_cache
+from urllib.parse import urlparse
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -21,8 +22,29 @@ class Settings(BaseSettings):
     agent_max_tool_calls: int = Field(16, ge=1, le=16, validation_alias="AGENT_MAX_TOOL_CALLS")
     agent_timeout_seconds: int = Field(90, ge=1, le=900, validation_alias="AGENT_TIMEOUT_SECONDS")
     log_level: str = "INFO"
+    cors_origins: str = Field("http://localhost:5173", validation_alias="CORS_ORIGINS")
+    db_connect_timeout_seconds: int = Field(5, ge=1, le=60, validation_alias="DB_CONNECT_TIMEOUT_SECONDS")
+    db_pool_recycle_seconds: int = Field(1800, ge=60, le=86400, validation_alias="DB_POOL_RECYCLE_SECONDS")
 
-    model_config = SettingsConfigDict(env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False)
+    model_config = SettingsConfigDict(
+        env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False, populate_by_name=True
+    )
+
+    @field_validator("mysql_url")
+    @classmethod
+    def validate_mysql_url(cls, value: str) -> str:
+        parsed = urlparse(value)
+        if parsed.scheme not in {"mysql+pymysql", "mysql+mysqlconnector"} or not parsed.hostname or not parsed.path:
+            raise ValueError("MYSQL_URL must be a valid mysql+pymysql URL")
+        return value
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+
+    @property
+    def llm_configured(self) -> bool:
+        return self.llm_api_key not in {"", "replace_me"} and self.llm_model not in {"", "replace_me"}
 
 
 @lru_cache

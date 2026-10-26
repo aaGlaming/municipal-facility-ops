@@ -19,3 +19,9 @@ class HealthResponse(BaseModel):
     status: str
     trace_id: str
     checks: dict[str, Any] | None = None
+
+
+class ReadinessResponse(HealthResponse):
+    code: str | None = None
+    message: str | None = None
+    retryable: bool | None = None
