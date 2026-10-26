@@ -1,3 +1,6 @@
+import csv
+import io
+import json
 from pathlib import Path
 
 from scripts.backup_data import copy_tree_with_manifest
@@ -7,10 +10,87 @@ from scripts.prepare_data import prepare_events
 
 
 def test_synthetic_generation_marks_source_and_is_repeatable(tmp_path: Path) -> None:
-    first = generate_synthetic_data(tmp_path / "first", seed=7, facility_count=3)
-    second = generate_synthetic_data(tmp_path / "second", seed=7, facility_count=3)
-    assert first["synthetic_facilities.csv"] == second["synthetic_facilities.csv"]
+    first = generate_synthetic_data(
+        tmp_path / "first", seed=7, facility_count=6, report_count=12, inspection_count=8, work_order_count=10
+    )
+    second = generate_synthetic_data(
+        tmp_path / "second", seed=7, facility_count=6, report_count=12, inspection_count=8, work_order_count=10
+    )
+    assert first == second
     assert "source_type" in first["synthetic_facilities.csv"]
+
+
+def test_synthetic_generation_covers_business_closure_and_foreign_keys(tmp_path: Path) -> None:
+    generated = generate_synthetic_data(
+        tmp_path,
+        seed=11,
+        facility_count=8,
+        report_count=16,
+        inspection_count=12,
+        work_order_count=14,
+        acceptance_count=7,
+        agent_run_count=9,
+        audit_count=15,
+    )
+    expected_files = {
+        "synthetic_facilities.csv",
+        "synthetic_locations.csv",
+        "synthetic_teams.csv",
+        "synthetic_technicians.csv",
+        "synthetic_vendors.csv",
+        "synthetic_sla_rules.csv",
+        "synthetic_citizen_reports.csv",
+        "synthetic_inspection_tasks.csv",
+        "synthetic_work_orders.csv",
+        "synthetic_acceptance_records.csv",
+        "synthetic_agent_runs.csv",
+        "synthetic_audit_logs.csv",
+        "synthetic_knowledge_docs.jsonl",
+    }
+    assert expected_files <= generated.keys()
+
+    def read_csv(name: str) -> list[dict[str, str]]:
+        return list(csv.DictReader(io.StringIO(generated[name])))
+
+    facilities = read_csv("synthetic_facilities.csv")
+    locations = read_csv("synthetic_locations.csv")
+    reports = read_csv("synthetic_citizen_reports.csv")
+    inspections = read_csv("synthetic_inspection_tasks.csv")
+    orders = read_csv("synthetic_work_orders.csv")
+    acceptances = read_csv("synthetic_acceptance_records.csv")
+    runs = read_csv("synthetic_agent_runs.csv")
+    audits = read_csv("synthetic_audit_logs.csv")
+    facility_ids = {row["facility_id"] for row in facilities}
+    report_ids = {row["report_id"] for row in reports}
+    work_order_ids = {row["work_order_id"] for row in orders}
+    run_ids = {row["run_id"] for row in runs}
+
+    assert len(facility_ids) == len(facilities)
+    assert {row["facility_id"] for row in locations} == facility_ids
+    assert {row["facility_id"] for row in reports} <= facility_ids
+    assert {row["facility_id"] for row in inspections} <= facility_ids
+    assert {row["report_id"] for row in orders} <= report_ids
+    assert {row["facility_id"] for row in orders} <= facility_ids
+    assert {row["work_order_id"] for row in acceptances} <= work_order_ids
+    assert {row["run_id"] for row in audits} <= run_ids
+
+    for name, content in generated.items():
+        if name.endswith(".csv"):
+            rows = list(csv.DictReader(io.StringIO(content)))
+            assert all(
+                row["source_type"] == "synthetic"
+                and row["generator_version"] == "synthetic-v2"
+                and row["generated_at"] == "2026-01-01T00:00:00Z"
+                for row in rows
+            )
+        else:
+            docs = [json.loads(line) for line in content.splitlines()]
+            assert all(
+                doc["source_type"] == "synthetic"
+                and doc["generator_version"] == "synthetic-v2"
+                and doc["generated_at"] == "2026-01-01T00:00:00Z"
+                for doc in docs
+            )
 
 
 def test_prepare_events_writes_unified_output(tmp_path: Path) -> None:

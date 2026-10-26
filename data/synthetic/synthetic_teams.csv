@@ -1,0 +1,21 @@
+team_id,team_name,district,primary_skill,max_daily_tasks,active,source_type,generator_version,generated_at
+TEAM-001,Municipal Team 001,DISTRICT-01,electrical,7,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-002,Municipal Team 002,DISTRICT-02,traffic,8,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-003,Municipal Team 003,DISTRICT-03,road,9,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-004,Municipal Team 004,DISTRICT-04,civil,10,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-005,Municipal Team 005,DISTRICT-05,drainage,6,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-006,Municipal Team 006,DISTRICT-06,waste,7,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-007,Municipal Team 007,DISTRICT-07,greenery,8,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-008,Municipal Team 008,DISTRICT-08,electrical,9,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-009,Municipal Team 009,DISTRICT-09,traffic,10,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-010,Municipal Team 010,DISTRICT-10,road,6,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-011,Municipal Team 011,DISTRICT-11,civil,7,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-012,Municipal Team 012,DISTRICT-12,drainage,8,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-013,Municipal Team 013,DISTRICT-01,waste,9,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-014,Municipal Team 014,DISTRICT-02,greenery,10,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-015,Municipal Team 015,DISTRICT-03,electrical,6,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-016,Municipal Team 016,DISTRICT-04,traffic,7,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-017,Municipal Team 017,DISTRICT-05,road,8,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-018,Municipal Team 018,DISTRICT-06,civil,9,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-019,Municipal Team 019,DISTRICT-07,drainage,10,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z
+TEAM-020,Municipal Team 020,DISTRICT-08,waste,6,true,synthetic,synthetic-v2,2026-01-01T00:00:00Z

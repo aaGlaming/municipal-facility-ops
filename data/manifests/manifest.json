@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T01:48:07.496860+00:00",
+  "generated_at": "2026-01-01T00:00:00Z",
   "files": {
     "nyc_311_relevant": {
       "name": "nyc_311_relevant",
@@ -113,121 +113,132 @@
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_facilities.csv",
       "retrieved_at": "2026-10-26T01:50:32.746472Z",
-      "bytes": 90558,
+      "bytes": 95009,
       "rows": 500,
-      "sha256": "5dbd052dfca38297793f36d75ab42b612feb8e876b3651e7a9c53dfd4bc07b03",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "806253e6e627017da5c0069a2736d719e696ef5544bec34a4078ac8a961182a9",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_vendors": {
       "name": "synthetic_vendors",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_vendors.csv",
       "retrieved_at": "2026-10-26T01:50:32.783057Z",
-      "bytes": 5176,
+      "bytes": 4908,
       "rows": 40,
-      "sha256": "573dfb9daa5151e679aca259cd0c83a2ace2ddf4f7ecb86f1ce5b54b91178010",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "9e7f1037f8f7a3780e948d9e38e7b7ccacb32fb7002577d5eb5ae89ff3cbcf46",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_technicians": {
       "name": "synthetic_technicians",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_technicians.csv",
       "retrieved_at": "2026-10-26T01:50:32.824995Z",
-      "bytes": 11008,
+      "bytes": 9500,
       "rows": 100,
-      "sha256": "e1067868200e432cd93fe34b1c8835c372987462f85a75584b04e4321d06971c",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "8d55cda5b25c63c4adcb8210e230a1f28609c5fe16a6508158125e420bd62379",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_sla_rules": {
       "name": "synthetic_sla_rules",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_sla_rules.csv",
       "retrieved_at": "2026-10-26T01:50:32.867113Z",
-      "bytes": 3359,
+      "bytes": 2851,
       "rows": 32,
-      "sha256": "fe291e09f288b1d00ef70148724216476e9870ad69ff2ffccc230fe76ec60361",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "2f88b5047ab60db074f10a1596fb2088fdc18b6723d8390551068214e8cd39da",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_citizen_reports": {
       "name": "synthetic_citizen_reports",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_citizen_reports.csv",
       "retrieved_at": "2026-10-26T01:50:32.923336Z",
-      "bytes": 200661,
+      "bytes": 184031,
       "rows": 1200,
-      "sha256": "0ee1721df6883ac38768f76c433a7381f0bddef718cc438a9722755e6ab400a4",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "1c1c90af87718037d717ea8110f55f824687cdb560c5599bddfa5a039f3123b3",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_inspection_tasks": {
       "name": "synthetic_inspection_tasks",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_inspection_tasks.csv",
       "retrieved_at": "2026-10-26T01:50:33.038961Z",
-      "bytes": 293899,
+      "bytes": 285140,
       "rows": 1600,
-      "sha256": "c8bd62aeec058a0c40d3d2522a04ebc8d62666e3c59e7adb783502f9e9546527",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "14c7757ab3b834b40202d386d22238b45fec30bbdce0a309dc4afab04bf35f71",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_work_orders": {
       "name": "synthetic_work_orders",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_work_orders.csv",
       "retrieved_at": "2026-10-26T01:50:33.106431Z",
-      "bytes": 372997,
+      "bytes": 377096,
       "rows": 1800,
-      "sha256": "1729c45e6f0cd80c29186e1acad3844039b842450412f36528f4d328a0b8c6e7",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "9b1cde652cb88b506bc06defafb21b092706d00845703c261a74d95fdab00e41",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_acceptance_records": {
       "name": "synthetic_acceptance_records",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_acceptance_records.csv",
       "retrieved_at": "2026-10-26T01:50:33.165849Z",
-      "bytes": 163907,
+      "bytes": 156724,
       "rows": 900,
-      "sha256": "76227587decc478325fb68512c28d851d826dafc712371f253e8a73843137345",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "08781621a891ea4d6c5963fdfbf9f0ec2bbcc2b4efb093df19046eb0403a8195",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_agent_runs": {
       "name": "synthetic_agent_runs",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_agent_runs.csv",
       "retrieved_at": "2026-10-26T01:50:33.221580Z",
-      "bytes": 206725,
+      "bytes": 168459,
       "rows": 1200,
-      "sha256": "af80ec785d0046faf8c9d5b371e0cb792e983edf6102164df173ae0ffb63fd43",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "b04ca66c0e9cc3b7ef7b444e7f6f4fff68209463e570d016812ca360ac869d91",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_audit_logs": {
       "name": "synthetic_audit_logs",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_audit_logs.csv",
       "retrieved_at": "2026-10-26T01:50:33.278646Z",
-      "bytes": 432096,
+      "bytes": 367319,
       "rows": 1800,
-      "sha256": "600c08833d3eb65a1dddfe4724550bdcdd33a940ad43cce3311c64da146be571",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "1a95846a5acd13ac0777027c7996c1833a98cacd3b608f313b6e4e3c15bb11a3",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "synthetic_knowledge_docs": {
       "name": "synthetic_knowledge_docs",
       "kind": "synthetic",
       "path": "data/synthetic/synthetic_knowledge_docs.jsonl",
       "retrieved_at": "2026-10-26T01:50:33.317163Z",
-      "bytes": 3212,
+      "bytes": 2701,
       "rows": 7,
-      "sha256": "aac31821a8b23f1435f425b37aa92a4186a2f9d6bcb7b23d054fd62678ecd990",
-      "generator_version": "synthetic-v1",
-      "seed": 20261025
+      "sha256": "8b45d39d970b72424a925be49e0c1fae5c55a73fbe9430a8d0889c4d8e731f96",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z"
     },
     "facility_issue_events": {
       "name": "facility_issue_events",
@@ -237,6 +248,28 @@
       "bytes": 22825837,
       "sha256": "195ad97dd0c9cca17897ab2ae0ab67ebb6e6096196d83b7ebd9f93c8e18b9604",
       "generated_at": "2026-10-26T01:51:57.795131+00:00"
+    },
+    "synthetic_locations": {
+      "name": "synthetic_locations",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_locations.csv",
+      "bytes": 58988,
+      "sha256": "70f7ef24dec255d5fbe11bd92d0f8cbe570cf6adc66acb2ef518b094836c3a07",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z",
+      "rows": 500
+    },
+    "synthetic_teams": {
+      "name": "synthetic_teams",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_teams.csv",
+      "bytes": 2084,
+      "sha256": "06d6e9472cdff1c44acee4f74006ffe9820a423c7c6b90d0e41755520bf8b3ae",
+      "generator_version": "synthetic-v2",
+      "seed": 20261025,
+      "generated_at": "2026-01-01T00:00:00Z",
+      "rows": 20
     }
   },
   "notes": {

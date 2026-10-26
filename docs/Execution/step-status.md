@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 5 状态
+# 执行手册 Step 1～Step 6 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\执行手册\V1\municipal-facility-ops.md`
 
@@ -26,3 +26,7 @@
 ## Step 5：下载并登记公开数据
 
 **状态：完成**。`data/raw/public` 和 `data/raw/docs` 已包含 NYC 311、路灯/交通信号、NYC DOT 坑洞数据及元数据文档；`data/manifests/manifest.json` 已补充 dataset ID、筛选条件、来源系统、文件大小、行数和 SHA256。清单校验结果为 20 个文件、0 个不匹配，原始文件未修改。
+
+## Step 6：生成并登记合成数据
+
+**状态：完成**。已使用 `synthetic-v2` 和固定 seed `20261025` 生成 13 个合成数据文件，覆盖设施、位置、队伍、人员、供应商、SLA、报修、巡检、工单、验收、Agent 运行、审计和知识文档；manifest 已登记 22 个文件并通过 0 不匹配校验。详见 `step06-synthetic-data.md`。
