@@ -63,3 +63,7 @@
 - [ ] 更新项目状态、运行命令和已知边界。
 - [ ] 运行后端测试、数据脚本校验、前端构建和 Git diff 检查。
 - [ ] 初始化 Git，添加远程仓库，提交 `项目骨架提交` 并推送。
+
+## 后续执行计划
+
+本计划只覆盖项目骨架和 Step 1～Step 5。执行手册 Step 6～Step 36 的增强计划、Skill 和 MCP 映射见 [`docs/Execution/step06-36-plan.md`](../../Execution/step06-36-plan.md)。
