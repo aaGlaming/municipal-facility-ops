@@ -1,6 +1,6 @@
 # 执行手册 Step 6～Step 36 增强实施计划
 
-> 本计划以 `D:\LEARN\AI\programs\AgentTask\执行手册\V1\municipal-facility-ops.md` 为执行顺序，以需求分析文档为业务验收依据。Step 1～Step 5 的记录见当前目录下的执行记录文档。
+> 本计划以仓库内 `docs/municipal-facility-ops.md` 为执行顺序，以需求分析文档为业务验收依据。Step 1～Step 5 的记录见当前目录下的执行记录文档。
 
 ## 使用原则
 

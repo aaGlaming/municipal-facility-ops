@@ -1,6 +1,6 @@
 # Step 6：生成并登记合成数据
 
-依据：`D:\LEARN\AI\programs\AgentTask\执行手册\V1\municipal-facility-ops.md`
+依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
 ## 状态
 

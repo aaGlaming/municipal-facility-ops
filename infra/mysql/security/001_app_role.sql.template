@@ -1,0 +1,16 @@
+-- Execute as a MySQL DBA after replacing REPLACE_WITH_SECRET outside Git.
+-- This template deliberately has no usable credential.
+USE municipal_ops;
+
+CREATE ROLE IF NOT EXISTS 'municipal_ops_app_role';
+GRANT SELECT, INSERT, UPDATE, DELETE ON municipal_ops.* TO 'municipal_ops_app_role';
+REVOKE UPDATE, DELETE ON municipal_ops.audit_logs FROM 'municipal_ops_app_role';
+GRANT SELECT, INSERT ON municipal_ops.audit_logs TO 'municipal_ops_app_role';
+
+CREATE USER IF NOT EXISTS 'municipal_ops_app'@'127.0.0.1'
+  IDENTIFIED BY 'REPLACE_WITH_SECRET';
+GRANT 'municipal_ops_app_role' TO 'municipal_ops_app'@'127.0.0.1';
+SET DEFAULT ROLE 'municipal_ops_app_role' TO 'municipal_ops_app'@'127.0.0.1';
+
+-- Keep DDL, account administration, FILE, SUPER and GRANT OPTION outside the app role.
+-- Rotate the password through the secret manager and never commit the rendered SQL.

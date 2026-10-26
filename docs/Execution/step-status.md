@@ -1,6 +1,6 @@
 # 执行手册 Step 1～Step 7 状态
 
-依据：`D:\LEARN\AI\programs\AgentTask\执行手册\V1\municipal-facility-ops.md`
+依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
 ## Step 1：确认项目范围与验收边界
 
@@ -25,7 +25,7 @@
 
 ## Step 5：下载并登记公开数据
 
-**状态：完成**。`data/raw/public` 和 `data/raw/docs` 已包含 NYC 311、路灯/交通信号、NYC DOT 坑洞数据及元数据文档；`data/manifests/manifest.json` 已补充 dataset ID、筛选条件、来源系统、文件大小、行数和 SHA256。清单校验结果为 20 个文件、0 个不匹配，原始文件未修改。
+**状态：完成**。`data/raw/public` 和 `data/raw/docs` 已包含 NYC 311、路灯/交通信号、NYC DOT 坑洞数据及元数据文档；`data/manifests/manifest.json` 已补充 dataset ID、筛选条件、来源系统、文件大小、行数和 SHA256。当前清单校验结果为 23 个文件、0 个不匹配，原始文件未修改。
 
 ## Step 6：生成并登记合成数据
 
@@ -34,3 +34,11 @@
 ## Step 7：建立数据清洗与统一映射
 
 **状态：完成**。已将 3 个公开 CSV 共 62,000 行统一为 `facility_issue_events.csv`，生成字段、缺失值、重复值、失败行和清洗批次报告；原始文件未覆盖。详见 `step07-data-cleaning.md`。
+
+## Step 1～Step 7 复核
+
+**状态：已按仓库执行手册复核**。复核证据、命令和当前边界见 `step01-07-review.md`。Step 4 的模型服务未配置状态保留，Step 9 尚未开始，数据库当前无业务数据。
+
+## Step 8：设计 MySQL 数据模型
+
+**状态：完成**。已完成 17 张核心表、外键、索引、来源/版本/软删除字段、幂等键、区域字段、Agent 运行关联和审计不可变设计；本地空库结构验证通过。应用最小权限账号模板已提供，因当前本地账号没有 `CREATE ROLE`/`CREATE USER` 权限，未擅自修改账号授权。详见 `step08-mysql-model.md`。

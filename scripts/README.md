@@ -22,3 +22,11 @@ python scripts/generate_synthetic_data.py --output-dir data/synthetic --manifest
 ```powershell
 python scripts/prepare_data.py --input-dir data/raw/public --output-dir data/processed --manifest data/manifests/manifest.json --batch-id step07-20261026
 ```
+
+验证 Step 8 本地数据库结构：
+
+```powershell
+python scripts/verify_schema.py --url $env:MYSQL_URL --allow-missing-audit-triggers
+```
+
+完整 schema 和权限边界见 `infra/mysql/init/001_schema.sql` 与 `infra/mysql/security/`。数据库种子导入属于 Step 9。
