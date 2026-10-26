@@ -1,0 +1,223 @@
+{
+  "generated_at": "2026-10-26T01:48:07.496860+00:00",
+  "files": {
+    "nyc_311_relevant": {
+      "name": "nyc_311_relevant",
+      "kind": "public",
+      "path": "data/raw/public/nyc_311_relevant.csv",
+      "source_url": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv",
+      "request_url": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv?%24limit=25000&%24where=created_date+%3E%3D+%272024-01-01T00%3A00%3A00%27+AND+%28complaint_type%3D%27Street+Light+Condition%27+OR+complaint_type%3D%27Pothole%27+OR+complaint_type%3D%27Street+Condition%27+OR+complaint_type%3D%27Traffic+Signal+Condition%27+OR+complaint_type%3D%27Sidewalk+Condition%27+OR+complaint_type%3D%27Damaged+Tree%27%29",
+      "retrieved_at": "2026-10-26T01:47:48.549017+00:00",
+      "bytes": 16780001,
+      "sha256": "2e2e9628ffa39195af464f340da38df0d4a906231eccec514050274edcf3e325",
+      "rows": 25000
+    },
+    "nyc_streetlight_traffic_signal_311": {
+      "name": "nyc_streetlight_traffic_signal_311",
+      "kind": "public",
+      "path": "data/raw/public/nyc_streetlight_traffic_signal_311.csv",
+      "source_url": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv",
+      "request_url": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv?%24limit=12000&%24where=created_date+%3E%3D+%272024-01-01T00%3A00%3A00%27+AND+%28complaint_type%3D%27Street+Light+Condition%27+OR+complaint_type%3D%27Traffic+Signal+Condition%27%29",
+      "retrieved_at": "2026-10-26T01:47:52.894001+00:00",
+      "bytes": 6948342,
+      "sha256": "6aa395376368086dede94e374046afa64a73c8419e5b43e1d3c7a3933348c6c7",
+      "rows": 12000
+    },
+    "nyc_pothole_work_orders_closed": {
+      "name": "nyc_pothole_work_orders_closed",
+      "kind": "public",
+      "path": "data/raw/public/nyc_pothole_work_orders_closed.csv",
+      "source_url": "https://data.cityofnewyork.us/resource/x9wy-ing4.csv",
+      "request_url": "https://data.cityofnewyork.us/resource/x9wy-ing4.csv?%24limit=25000&%24order=rptdate+DESC",
+      "retrieved_at": "2026-10-26T01:47:58.681838+00:00",
+      "bytes": 8421161,
+      "sha256": "8403ecdb418568fcb2b2a89bf4718b12d7739752913fd26f9380024aaeba3ec5",
+      "rows": 25000
+    },
+    "nyc_311_metadata": {
+      "name": "nyc_311_metadata",
+      "kind": "metadata",
+      "path": "data/raw/public/nyc_311_metadata.json",
+      "source_url": "https://data.cityofnewyork.us/api/views/erm2-nwe9/columns.json",
+      "request_url": "https://data.cityofnewyork.us/api/views/erm2-nwe9/columns.json",
+      "retrieved_at": "2026-10-26T01:48:00.575334+00:00",
+      "bytes": 19071,
+      "sha256": "ae3491c5c872f832fbc6c8ff9d7d04f3448ff15341cc66f8801d6eaf19b1f6c3"
+    },
+    "nyc_pothole_metadata": {
+      "name": "nyc_pothole_metadata",
+      "kind": "metadata",
+      "path": "data/raw/public/nyc_pothole_metadata.json",
+      "source_url": "https://data.cityofnewyork.us/api/views/x9wy-ing4/columns.json",
+      "request_url": "https://data.cityofnewyork.us/api/views/x9wy-ing4/columns.json",
+      "retrieved_at": "2026-10-26T01:48:02.416265+00:00",
+      "bytes": 22241,
+      "sha256": "4adc937e1b29b6f6fe36707b73408e0607e5cdb3ed00925eced8e9d6ac03c87c"
+    },
+    "street_potholes_metadata": {
+      "name": "street_potholes_metadata",
+      "kind": "documentation",
+      "path": "data/raw/docs/street_potholes_metadata.pdf",
+      "source_url": "https://www.nyc.gov/html/dot/downloads/pdf/street-potholes-metadata.pdf",
+      "request_url": "https://www.nyc.gov/html/dot/downloads/pdf/street-potholes-metadata.pdf",
+      "retrieved_at": "2026-10-26T01:48:05.037946+00:00",
+      "bytes": 369538,
+      "sha256": "4637390f71bc959d9f54c4e9ad7baed37c3ef0525de81355cf91690b6820b34b"
+    },
+    "nyc_dot_datafeeds": {
+      "name": "nyc_dot_datafeeds",
+      "kind": "documentation",
+      "path": "data/raw/docs/nyc_dot_datafeeds.html",
+      "source_url": "https://www.nyc.gov/html/dot/html/about/datafeeds.shtml",
+      "request_url": "https://www.nyc.gov/html/dot/html/about/datafeeds.shtml",
+      "retrieved_at": "2026-10-26T01:48:06.331826+00:00",
+      "bytes": 49772,
+      "sha256": "19dd72fdd77ae51ed3f321b96af7f8b8860907a7adaec01bb9b309f6248064fd"
+    },
+    "open311_georeport_v2": {
+      "name": "open311_georeport_v2",
+      "kind": "documentation",
+      "path": "data/raw/docs/open311_georeport_v2.md",
+      "source_url": "https://raw.githubusercontent.com/open311/open311.github.io/master/GeoReport/v2/index.md",
+      "request_url": "https://raw.githubusercontent.com/open311/open311.github.io/master/GeoReport/v2/index.md",
+      "retrieved_at": "2026-10-26T01:48:07.470335+00:00",
+      "bytes": 82111,
+      "sha256": "68142973d042d7f59ff1cf9659998d9d5989470e74b76dc431b0108e2d3b4459"
+    },
+    "synthetic_facilities": {
+      "name": "synthetic_facilities",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_facilities.csv",
+      "retrieved_at": "2026-10-26T01:50:32.746472Z",
+      "bytes": 90558,
+      "rows": 500,
+      "sha256": "5dbd052dfca38297793f36d75ab42b612feb8e876b3651e7a9c53dfd4bc07b03",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_vendors": {
+      "name": "synthetic_vendors",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_vendors.csv",
+      "retrieved_at": "2026-10-26T01:50:32.783057Z",
+      "bytes": 5176,
+      "rows": 40,
+      "sha256": "573dfb9daa5151e679aca259cd0c83a2ace2ddf4f7ecb86f1ce5b54b91178010",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_technicians": {
+      "name": "synthetic_technicians",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_technicians.csv",
+      "retrieved_at": "2026-10-26T01:50:32.824995Z",
+      "bytes": 11008,
+      "rows": 100,
+      "sha256": "e1067868200e432cd93fe34b1c8835c372987462f85a75584b04e4321d06971c",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_sla_rules": {
+      "name": "synthetic_sla_rules",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_sla_rules.csv",
+      "retrieved_at": "2026-10-26T01:50:32.867113Z",
+      "bytes": 3359,
+      "rows": 32,
+      "sha256": "fe291e09f288b1d00ef70148724216476e9870ad69ff2ffccc230fe76ec60361",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_citizen_reports": {
+      "name": "synthetic_citizen_reports",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_citizen_reports.csv",
+      "retrieved_at": "2026-10-26T01:50:32.923336Z",
+      "bytes": 200661,
+      "rows": 1200,
+      "sha256": "0ee1721df6883ac38768f76c433a7381f0bddef718cc438a9722755e6ab400a4",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_inspection_tasks": {
+      "name": "synthetic_inspection_tasks",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_inspection_tasks.csv",
+      "retrieved_at": "2026-10-26T01:50:33.038961Z",
+      "bytes": 293899,
+      "rows": 1600,
+      "sha256": "c8bd62aeec058a0c40d3d2522a04ebc8d62666e3c59e7adb783502f9e9546527",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_work_orders": {
+      "name": "synthetic_work_orders",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_work_orders.csv",
+      "retrieved_at": "2026-10-26T01:50:33.106431Z",
+      "bytes": 372997,
+      "rows": 1800,
+      "sha256": "1729c45e6f0cd80c29186e1acad3844039b842450412f36528f4d328a0b8c6e7",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_acceptance_records": {
+      "name": "synthetic_acceptance_records",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_acceptance_records.csv",
+      "retrieved_at": "2026-10-26T01:50:33.165849Z",
+      "bytes": 163907,
+      "rows": 900,
+      "sha256": "76227587decc478325fb68512c28d851d826dafc712371f253e8a73843137345",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_agent_runs": {
+      "name": "synthetic_agent_runs",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_agent_runs.csv",
+      "retrieved_at": "2026-10-26T01:50:33.221580Z",
+      "bytes": 206725,
+      "rows": 1200,
+      "sha256": "af80ec785d0046faf8c9d5b371e0cb792e983edf6102164df173ae0ffb63fd43",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_audit_logs": {
+      "name": "synthetic_audit_logs",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_audit_logs.csv",
+      "retrieved_at": "2026-10-26T01:50:33.278646Z",
+      "bytes": 432096,
+      "rows": 1800,
+      "sha256": "600c08833d3eb65a1dddfe4724550bdcdd33a940ad43cce3311c64da146be571",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "synthetic_knowledge_docs": {
+      "name": "synthetic_knowledge_docs",
+      "kind": "synthetic",
+      "path": "data/synthetic/synthetic_knowledge_docs.jsonl",
+      "retrieved_at": "2026-10-26T01:50:33.317163Z",
+      "bytes": 3212,
+      "rows": 7,
+      "sha256": "aac31821a8b23f1435f425b37aa92a4186a2f9d6bcb7b23d054fd62678ecd990",
+      "generator_version": "synthetic-v1",
+      "seed": 20261025
+    },
+    "facility_issue_events": {
+      "name": "facility_issue_events",
+      "kind": "processed",
+      "path": "data/processed/facility_issue_events.csv",
+      "rows": 62000,
+      "bytes": 22825837,
+      "sha256": "195ad97dd0c9cca17897ab2ae0ab67ebb6e6096196d83b7ebd9f93c8e18b9604",
+      "generated_at": "2026-10-26T01:51:57.795131+00:00"
+    }
+  },
+  "notes": {
+    "sampling": "311 and specialized datasets are controlled samples from 2024-01-01 onward; pothole sample is 25,000 rows ordered by report date.",
+    "public_sources": "NYC Open Data, NYC DOT, and Open311 documentation.",
+    "privacy": "Public source data is stored as published; the application should not treat it as personally identifying customer data."
+  }
+}

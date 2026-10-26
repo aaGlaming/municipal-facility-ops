@@ -1,0 +1,35 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    ports: ["8000:8000"]
+    depends_on:
+      mysql: { condition: service_healthy }
+      chroma: { condition: service_started }
+    volumes: ["./data:/app/data:ro", "./uploads:/app/uploads"]
+  frontend:
+    build: ./frontend
+    ports: ["5173:80"]
+    depends_on: [backend]
+  mysql:
+    image: mysql:8.0.40
+    environment:
+      MYSQL_DATABASE: municipal_ops
+      MYSQL_USER: municipal
+      MYSQL_PASSWORD: municipal_dev
+      MYSQL_ROOT_PASSWORD: root_dev_only
+    ports: ["3306:3306"]
+    volumes: ["mysql-data:/var/lib/mysql", "./infra/mysql/init:/docker-entrypoint-initdb.d:ro"]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "municipal", "-pmunicipal_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  chroma:
+    image: chromadb/chroma:0.5.23
+    ports: ["8001:8000"]
+    volumes: ["chroma-data:/data"]
+
+volumes:
+  mysql-data:
+  chroma-data:

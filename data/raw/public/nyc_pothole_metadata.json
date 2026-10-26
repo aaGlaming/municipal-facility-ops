@@ -1,0 +1,1064 @@
+[ {
+  "id" : 640490501,
+  "name" : "the_geom",
+  "dataTypeName" : "multiline",
+  "description" : "",
+  "fieldName" : "the_geom",
+  "position" : 1,
+  "renderTypeName" : "multiline",
+  "tableColumnId" : 95170426,
+  "format" : { }
+}, {
+  "id" : 640490502,
+  "name" : "DefNum",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "defnum",
+  "position" : 2,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170428,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "DX2026271025",
+    "null" : "0",
+    "top" : [ {
+      "item" : "DM2011034016",
+      "count" : "1"
+    }, {
+      "item" : "DB2015179020",
+      "count" : "1"
+    }, {
+      "item" : "DB2013141014",
+      "count" : "1"
+    }, {
+      "item" : "DB2025080038",
+      "count" : "1"
+    }, {
+      "item" : "DM2017121006",
+      "count" : "1"
+    }, {
+      "item" : "DB2012333018",
+      "count" : "1"
+    }, {
+      "item" : "DS2023137012",
+      "count" : "1"
+    }, {
+      "item" : "DQ2012291050",
+      "count" : "1"
+    }, {
+      "item" : "DQ2017293010",
+      "count" : "1"
+    }, {
+      "item" : "DB2019346077",
+      "count" : "1"
+    }, {
+      "item" : "DQ2012300056",
+      "count" : "1"
+    }, {
+      "item" : "DB2018365015",
+      "count" : "1"
+    }, {
+      "item" : "DB2014222001",
+      "count" : "1"
+    }, {
+      "item" : "DQ2020346091",
+      "count" : "1"
+    }, {
+      "item" : "DM2016133004",
+      "count" : "1"
+    }, {
+      "item" : "DX2011301028",
+      "count" : "1"
+    }, {
+      "item" : "DQ2012167039",
+      "count" : "1"
+    }, {
+      "item" : "DQ2020059111",
+      "count" : "1"
+    }, {
+      "item" : "DM2015340001",
+      "count" : "1"
+    }, {
+      "item" : "DB2020131009",
+      "count" : "1"
+    } ],
+    "smallest" : "DB2004041154",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490503,
+  "name" : "InitBy",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "initby",
+  "position" : 3,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170429,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "YRD",
+    "null" : "0",
+    "top" : [ {
+      "item" : "YRD",
+      "count" : "150233"
+    }, {
+      "item" : "CSC",
+      "count" : "113574"
+    }, {
+      "item" : "SPH",
+      "count" : "74297"
+    }, {
+      "item" : "ONF",
+      "count" : "60491"
+    }, {
+      "item" : "OFF",
+      "count" : "5220"
+    }, {
+      "item" : "SBO",
+      "count" : "4765"
+    }, {
+      "item" : "HIQ",
+      "count" : "1265"
+    }, {
+      "item" : "DOT",
+      "count" : "1210"
+    }, {
+      "item" : "QBO",
+      "count" : "579"
+    }, {
+      "item" : "MBO",
+      "count" : "44"
+    }, {
+      "item" : "XBO",
+      "count" : "37"
+    }, {
+      "item" : "KBO",
+      "count" : "19"
+    }, {
+      "item" : "CIU",
+      "count" : "5"
+    }, {
+      "item" : "PBR",
+      "count" : "4"
+    }, {
+      "item" : "RFU",
+      "count" : "1"
+    }, {
+      "item" : "COM",
+      "count" : "1"
+    } ],
+    "smallest" : "CIU",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490504,
+  "name" : "HouseNum",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "housenum",
+  "position" : 4,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170430,
+  "cachedContents" : {
+    "non_null" : "249378",
+    "largest" : "EAST 161 STR",
+    "null" : "162367",
+    "top" : [ {
+      "item" : "1",
+      "count" : "778"
+    }, {
+      "item" : "100",
+      "count" : "756"
+    }, {
+      "item" : "200",
+      "count" : "541"
+    }, {
+      "item" : "2",
+      "count" : "536"
+    }, {
+      "item" : "10",
+      "count" : "535"
+    }, {
+      "item" : "15",
+      "count" : "522"
+    }, {
+      "item" : "25",
+      "count" : "517"
+    }, {
+      "item" : "20",
+      "count" : "461"
+    }, {
+      "item" : "55",
+      "count" : "442"
+    }, {
+      "item" : "50",
+      "count" : "436"
+    }, {
+      "item" : "30",
+      "count" : "412"
+    }, {
+      "item" : "300",
+      "count" : "410"
+    }, {
+      "item" : "120",
+      "count" : "404"
+    }, {
+      "item" : "40",
+      "count" : "403"
+    }, {
+      "item" : "1000",
+      "count" : "400"
+    }, {
+      "item" : "35",
+      "count" : "395"
+    }, {
+      "item" : "60",
+      "count" : "393"
+    }, {
+      "item" : "110",
+      "count" : "391"
+    }, {
+      "item" : "160",
+      "count" : "380"
+    }, {
+      "item" : "500",
+      "count" : "378"
+    } ],
+    "smallest" : "004",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490505,
+  "name" : "OFT",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "oft",
+  "position" : 5,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170431,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "570429510300525908",
+    "null" : "0",
+    "top" : [ {
+      "item" : "308530305010305130",
+      "count" : "202"
+    }, {
+      "item" : "375760360440375730",
+      "count" : "174"
+    }, {
+      "item" : "372250337280337510",
+      "count" : "136"
+    }, {
+      "item" : "461090454580459590",
+      "count" : "127"
+    }, {
+      "item" : "308180305130305280",
+      "count" : "127"
+    }, {
+      "item" : "305130308530308580",
+      "count" : "120"
+    }, {
+      "item" : "209220275175275185",
+      "count" : "116"
+    }, {
+      "item" : "340930310545314910",
+      "count" : "113"
+    }, {
+      "item" : "226490252120256820",
+      "count" : "112"
+    }, {
+      "item" : "113610120425126630",
+      "count" : "108"
+    }, {
+      "item" : "360530357030386430",
+      "count" : "108"
+    }, {
+      "item" : "134610110610110810",
+      "count" : "103"
+    }, {
+      "item" : "231220207720209320",
+      "count" : "101"
+    }, {
+      "item" : "570007524630570023",
+      "count" : "95"
+    }, {
+      "item" : "133490115550122410",
+      "count" : "94"
+    }, {
+      "item" : "273720227750227780",
+      "count" : "94"
+    }, {
+      "item" : "442780424590424840",
+      "count" : "94"
+    }, {
+      "item" : "224940244230275140",
+      "count" : "93"
+    }, {
+      "item" : "267540270635275175",
+      "count" : "93"
+    }, {
+      "item" : "241920224785258740",
+      "count" : "90"
+    } ],
+    "smallest" : "100016127050132700",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490506,
+  "name" : "OnFaceName",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "onfacename",
+  "position" : 6,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170432,
+  "cachedContents" : {
+    "non_null" : "411026",
+    "largest" : "ZWICKY AV",
+    "null" : "719",
+    "top" : [ {
+      "item" : "BDWY",
+      "count" : "5699"
+    }, {
+      "item" : "3 AV",
+      "count" : "3119"
+    }, {
+      "item" : "JAMAICA AV",
+      "count" : "2652"
+    }, {
+      "item" : "QUEENS BL",
+      "count" : "2625"
+    }, {
+      "item" : "NORTHERN BL",
+      "count" : "2591"
+    }, {
+      "item" : "5 AV",
+      "count" : "2375"
+    }, {
+      "item" : "HYLAN BL",
+      "count" : "2133"
+    }, {
+      "item" : "PK AV",
+      "count" : "1849"
+    }, {
+      "item" : "2 AV",
+      "count" : "1841"
+    }, {
+      "item" : "OCEAN PY",
+      "count" : "1840"
+    }, {
+      "item" : "ROOSEVELT AV",
+      "count" : "1783"
+    }, {
+      "item" : "FRANCIS LEWIS BL",
+      "count" : "1666"
+    }, {
+      "item" : "FLATBUSH AV",
+      "count" : "1627"
+    }, {
+      "item" : "HILLSIDE AV",
+      "count" : "1586"
+    }, {
+      "item" : "ATLANTIC AV",
+      "count" : "1528"
+    }, {
+      "item" : "1 AV",
+      "count" : "1468"
+    }, {
+      "item" : "AMBOY RD",
+      "count" : "1445"
+    }, {
+      "item" : "4 AV",
+      "count" : "1437"
+    }, {
+      "item" : "UNION TP",
+      "count" : "1431"
+    }, {
+      "item" : "8 AV",
+      "count" : "1399"
+    } ],
+    "smallest" : "100 AV",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490507,
+  "name" : "OnPrimName",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "onprimname",
+  "position" : 7,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170433,
+  "cachedContents" : {
+    "non_null" : "411668",
+    "largest" : "ZWICKY AVENUE",
+    "null" : "77",
+    "top" : [ {
+      "item" : "BROADWAY",
+      "count" : "5713"
+    }, {
+      "item" : "3 AVENUE",
+      "count" : "3119"
+    }, {
+      "item" : "JAMAICA AVENUE",
+      "count" : "2672"
+    }, {
+      "item" : "QUEENS BOULEVARD",
+      "count" : "2625"
+    }, {
+      "item" : "NORTHERN BOULEVARD",
+      "count" : "2603"
+    }, {
+      "item" : "5 AVENUE",
+      "count" : "2380"
+    }, {
+      "item" : "HYLAN BOULEVARD",
+      "count" : "2133"
+    }, {
+      "item" : "PARK AVENUE",
+      "count" : "1859"
+    }, {
+      "item" : "OCEAN PARKWAY",
+      "count" : "1840"
+    }, {
+      "item" : "2 AVENUE",
+      "count" : "1824"
+    }, {
+      "item" : "ROOSEVELT AVENUE",
+      "count" : "1785"
+    }, {
+      "item" : "FRANCIS LEWIS BOULEVARD",
+      "count" : "1670"
+    }, {
+      "item" : "8 AVENUE",
+      "count" : "1665"
+    }, {
+      "item" : "FLATBUSH AVENUE",
+      "count" : "1627"
+    }, {
+      "item" : "HILLSIDE AVENUE",
+      "count" : "1623"
+    }, {
+      "item" : "7 AVENUE",
+      "count" : "1546"
+    }, {
+      "item" : "ATLANTIC AVENUE",
+      "count" : "1529"
+    }, {
+      "item" : "1 AVENUE",
+      "count" : "1468"
+    }, {
+      "item" : "AMBOY ROAD",
+      "count" : "1447"
+    }, {
+      "item" : "4 AVENUE",
+      "count" : "1437"
+    } ],
+    "smallest" : "100 AVENUE",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490508,
+  "name" : "FrmPrimNam",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "frmprimnam",
+  "position" : 8,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170434,
+  "cachedContents" : {
+    "non_null" : "411715",
+    "largest" : "ZANU G SIMPSON WAY",
+    "null" : "30",
+    "top" : [ {
+      "item" : "BEND",
+      "count" : "8321"
+    }, {
+      "item" : "5 AVENUE",
+      "count" : "3704"
+    }, {
+      "item" : "1 AVENUE",
+      "count" : "3233"
+    }, {
+      "item" : "BROADWAY",
+      "count" : "3135"
+    }, {
+      "item" : "DEAD END",
+      "count" : "3094"
+    }, {
+      "item" : "3 AVENUE",
+      "count" : "2869"
+    }, {
+      "item" : "7 AVENUE",
+      "count" : "2840"
+    }, {
+      "item" : "2 AVENUE",
+      "count" : "2747"
+    }, {
+      "item" : "8 AVENUE",
+      "count" : "2394"
+    }, {
+      "item" : "AMSTERDAM AVENUE",
+      "count" : "1989"
+    }, {
+      "item" : "BEDFORD AVENUE",
+      "count" : "1755"
+    }, {
+      "item" : "AVENUE OF THE AMERICAS",
+      "count" : "1501"
+    }, {
+      "item" : "89 AVENUE",
+      "count" : "1481"
+    }, {
+      "item" : "34 AVENUE",
+      "count" : "1433"
+    }, {
+      "item" : "4 AVENUE",
+      "count" : "1411"
+    }, {
+      "item" : "9 AVENUE",
+      "count" : "1410"
+    }, {
+      "item" : "LEXINGTON AVENUE",
+      "count" : "1164"
+    }, {
+      "item" : "43 AVENUE",
+      "count" : "1135"
+    }, {
+      "item" : "MADISON AVENUE",
+      "count" : "1131"
+    }, {
+      "item" : "11 AVENUE",
+      "count" : "1100"
+    } ],
+    "smallest" : "100 AVENUE",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490509,
+  "name" : "ToPrimName",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "toprimname",
+  "position" : 9,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170435,
+  "cachedContents" : {
+    "non_null" : "411639",
+    "largest" : "ZWICKY AVENUE",
+    "null" : "106",
+    "top" : [ {
+      "item" : "BEND",
+      "count" : "4062"
+    }, {
+      "item" : "BROADWAY",
+      "count" : "2926"
+    }, {
+      "item" : "DEAD END",
+      "count" : "2814"
+    }, {
+      "item" : "3 AVENUE",
+      "count" : "2613"
+    }, {
+      "item" : "PARK AVENUE",
+      "count" : "2538"
+    }, {
+      "item" : "2 AVENUE",
+      "count" : "2119"
+    }, {
+      "item" : "8 AVENUE",
+      "count" : "1873"
+    }, {
+      "item" : "NYCTA SUBWAY",
+      "count" : "1739"
+    }, {
+      "item" : "JAMAICA AVENUE",
+      "count" : "1674"
+    }, {
+      "item" : "7 AVENUE",
+      "count" : "1651"
+    }, {
+      "item" : "NORTHERN BOULEVARD",
+      "count" : "1637"
+    }, {
+      "item" : "LINDEN BOULEVARD",
+      "count" : "1569"
+    }, {
+      "item" : "9 AVENUE",
+      "count" : "1437"
+    }, {
+      "item" : "LIBERTY AVENUE",
+      "count" : "1392"
+    }, {
+      "item" : "SUTTER AVENUE",
+      "count" : "1348"
+    }, {
+      "item" : "LONG ISLAND RAILROAD",
+      "count" : "1259"
+    }, {
+      "item" : "5 AVENUE",
+      "count" : "1249"
+    }, {
+      "item" : "LEXINGTON AVENUE",
+      "count" : "1205"
+    }, {
+      "item" : "MADISON AVENUE",
+      "count" : "1165"
+    }, {
+      "item" : "COLUMBUS AVENUE",
+      "count" : "1132"
+    } ],
+    "smallest" : "100 AVENUE",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490510,
+  "name" : "SpecLoc",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "specloc",
+  "position" : 10,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170436,
+  "cachedContents" : {
+    "non_null" : "141997",
+    "largest" : "(ZIP CODE 11377)  NEAR CROSSWALK BY PARK",
+    "null" : "269748",
+    "top" : [ {
+      "item" : "POTHOLE",
+      "count" : "21317"
+    }, {
+      "item" : "IN FRONT OF ADDRESS",
+      "count" : "912"
+    }, {
+      "item" : "MULTIPLE POTHOLES",
+      "count" : "803"
+    }, {
+      "item" : "IN FRONT OF",
+      "count" : "741"
+    }, {
+      "item" : "IN FRONT OF LOCATION",
+      "count" : "499"
+    }, {
+      "item" : "MIDDLE OF THE STREET",
+      "count" : "472"
+    }, {
+      "item" : "MIDDLE OF STREET",
+      "count" : "466"
+    }, {
+      "item" : "IN THE MIDDLE OF THE STREET",
+      "count" : "446"
+    }, {
+      "item" : "IN FRONT",
+      "count" : "395"
+    }, {
+      "item" : "INSIDE OLD CUT",
+      "count" : "348"
+    }, {
+      "item" : "NUMEROUS",
+      "count" : "330"
+    }, {
+      "item" : "IN FRONT OF THIS ADDRESS",
+      "count" : "275"
+    }, {
+      "item" : "DRIVING LANE",
+      "count" : "250"
+    }, {
+      "item" : "IN FRONT OF THE ADDRESS",
+      "count" : "244"
+    }, {
+      "item" : "IN FRONT OF DRIVEWAY",
+      "count" : "228"
+    }, {
+      "item" : "MULTIPLE HOLES",
+      "count" : "198"
+    }, {
+      "item" : "2 POTHOLES",
+      "count" : "179"
+    }, {
+      "item" : "IFO ADDRESS",
+      "count" : "159"
+    }, {
+      "item" : "POTHOLES",
+      "count" : "157"
+    }, {
+      "item" : "SEVERAL POTHOLES",
+      "count" : "137"
+    } ],
+    "smallest" : "`",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490511,
+  "name" : "Boro",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "boro",
+  "position" : 11,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170437,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "X",
+    "null" : "0",
+    "top" : [ {
+      "item" : "Q",
+      "count" : "135868"
+    }, {
+      "item" : "B",
+      "count" : "110830"
+    }, {
+      "item" : "M",
+      "count" : "56542"
+    }, {
+      "item" : "X",
+      "count" : "54932"
+    }, {
+      "item" : "S",
+      "count" : "53573"
+    } ],
+    "smallest" : "B",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490512,
+  "name" : "Source",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "source",
+  "position" : 12,
+  "renderTypeName" : "text",
+  "tableColumnId" : 95170438,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "YRD",
+    "null" : "0",
+    "top" : [ {
+      "item" : "CTZ",
+      "count" : "254632"
+    }, {
+      "item" : "YRD",
+      "count" : "138862"
+    }, {
+      "item" : "OSE",
+      "count" : "7655"
+    }, {
+      "item" : "OFF",
+      "count" : "3886"
+    }, {
+      "item" : "HIQ",
+      "count" : "2942"
+    }, {
+      "item" : "SBO",
+      "count" : "1918"
+    }, {
+      "item" : "KBO",
+      "count" : "1181"
+    }, {
+      "item" : "QBO",
+      "count" : "246"
+    }, {
+      "item" : "XBO",
+      "count" : "164"
+    }, {
+      "item" : "COR",
+      "count" : "84"
+    }, {
+      "item" : "CB",
+      "count" : "51"
+    }, {
+      "item" : "MBO",
+      "count" : "37"
+    }, {
+      "item" : "CEN",
+      "count" : "31"
+    }, {
+      "item" : "PCT",
+      "count" : "29"
+    }, {
+      "item" : "OTH",
+      "count" : "9"
+    }, {
+      "item" : "POL",
+      "count" : "4"
+    }, {
+      "item" : "RAD",
+      "count" : "4"
+    }, {
+      "item" : "MAP",
+      "count" : "3"
+    }, {
+      "item" : "RFU",
+      "count" : "2"
+    }, {
+      "item" : "TRF",
+      "count" : "2"
+    } ],
+    "smallest" : "CB",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+}, {
+  "id" : 640490517,
+  "name" : "RptDate",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "rptdate",
+  "position" : 13,
+  "renderTypeName" : "text",
+  "tableColumnId" : 170236418,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "2026/09/28 00:00:00",
+    "null" : "0",
+    "top" : [ {
+      "item" : "2015/03/11 00:00:00",
+      "count" : "497"
+    }, {
+      "item" : "2010/03/02 00:00:00",
+      "count" : "449"
+    }, {
+      "item" : "2011/02/08 00:00:00",
+      "count" : "446"
+    }, {
+      "item" : "2015/03/12 00:00:00",
+      "count" : "427"
+    }, {
+      "item" : "2015/03/16 00:00:00",
+      "count" : "422"
+    }, {
+      "item" : "2015/03/10 00:00:00",
+      "count" : "417"
+    }, {
+      "item" : "2015/03/09 00:00:00",
+      "count" : "404"
+    }, {
+      "item" : "2010/03/19 00:00:00",
+      "count" : "402"
+    }, {
+      "item" : "2015/03/17 00:00:00",
+      "count" : "396"
+    }, {
+      "item" : "2010/03/03 00:00:00",
+      "count" : "387"
+    }, {
+      "item" : "2011/02/17 00:00:00",
+      "count" : "374"
+    }, {
+      "item" : "2014/02/21 00:00:00",
+      "count" : "366"
+    }, {
+      "item" : "2010/03/05 00:00:00",
+      "count" : "365"
+    }, {
+      "item" : "2015/03/27 00:00:00",
+      "count" : "361"
+    }, {
+      "item" : "2011/04/07 00:00:00",
+      "count" : "352"
+    }, {
+      "item" : "2014/03/22 00:00:00",
+      "count" : "349"
+    }, {
+      "item" : "2015/03/18 00:00:00",
+      "count" : "349"
+    }, {
+      "item" : "2010/03/26 00:00:00",
+      "count" : "348"
+    }, {
+      "item" : "2014/02/25 00:00:00",
+      "count" : "347"
+    }, {
+      "item" : "2010/02/24 00:00:00",
+      "count" : "345"
+    } ],
+    "smallest" : "1995/05/02 00:00:00",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : {
+    "view" : "date"
+  }
+}, {
+  "id" : 640490516,
+  "name" : "RptClosed",
+  "dataTypeName" : "text",
+  "description" : "",
+  "fieldName" : "rptclosed",
+  "position" : 14,
+  "renderTypeName" : "text",
+  "tableColumnId" : 170236417,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "2026/09/29 00:00:00",
+    "null" : "0",
+    "top" : [ {
+      "item" : "2017/04/08 00:00:00",
+      "count" : "592"
+    }, {
+      "item" : "2015/05/30 00:00:00",
+      "count" : "590"
+    }, {
+      "item" : "2017/04/29 00:00:00",
+      "count" : "581"
+    }, {
+      "item" : "2015/04/25 00:00:00",
+      "count" : "567"
+    }, {
+      "item" : "2015/04/18 00:00:00",
+      "count" : "547"
+    }, {
+      "item" : "2022/04/09 00:00:00",
+      "count" : "541"
+    }, {
+      "item" : "2015/04/04 00:00:00",
+      "count" : "538"
+    }, {
+      "item" : "2015/05/17 00:00:00",
+      "count" : "530"
+    }, {
+      "item" : "2021/04/24 00:00:00",
+      "count" : "528"
+    }, {
+      "item" : "2015/04/11 00:00:00",
+      "count" : "513"
+    }, {
+      "item" : "2018/03/04 00:00:00",
+      "count" : "507"
+    }, {
+      "item" : "2022/04/30 00:00:00",
+      "count" : "504"
+    }, {
+      "item" : "2021/04/10 00:00:00",
+      "count" : "488"
+    }, {
+      "item" : "2015/03/28 00:00:00",
+      "count" : "481"
+    }, {
+      "item" : "2015/03/22 00:00:00",
+      "count" : "478"
+    }, {
+      "item" : "2026/03/28 00:00:00",
+      "count" : "477"
+    }, {
+      "item" : "2018/02/17 00:00:00",
+      "count" : "473"
+    }, {
+      "item" : "2026/04/18 00:00:00",
+      "count" : "471"
+    }, {
+      "item" : "2014/04/27 00:00:00",
+      "count" : "469"
+    }, {
+      "item" : "2026/03/21 00:00:00",
+      "count" : "464"
+    } ],
+    "smallest" : "2010/01/01 00:00:00",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : {
+    "view" : "date"
+  }
+}, {
+  "id" : 640490515,
+  "name" : "Shape_Leng",
+  "dataTypeName" : "number",
+  "description" : "",
+  "fieldName" : "shape_leng",
+  "position" : 15,
+  "renderTypeName" : "number",
+  "tableColumnId" : 95170439,
+  "cachedContents" : {
+    "non_null" : "411745",
+    "largest" : "140472.811396",
+    "null" : "0",
+    "top" : [ {
+      "item" : "793.585339025",
+      "count" : "202"
+    }, {
+      "item" : "259.773822816",
+      "count" : "174"
+    }, {
+      "item" : "540.274572785",
+      "count" : "145"
+    }, {
+      "item" : "1317.60829457",
+      "count" : "136"
+    }, {
+      "item" : "836.10356655",
+      "count" : "127"
+    }, {
+      "item" : "270.934313379",
+      "count" : "120"
+    }, {
+      "item" : "1004.12624122",
+      "count" : "116"
+    }, {
+      "item" : "4836.65094628",
+      "count" : "113"
+    }, {
+      "item" : "709.978750881",
+      "count" : "112"
+    }, {
+      "item" : "624.12300226",
+      "count" : "108"
+    }, {
+      "item" : "386.651333067",
+      "count" : "108"
+    }, {
+      "item" : "900.139625401",
+      "count" : "103"
+    }, {
+      "item" : "679.538915577",
+      "count" : "101"
+    }, {
+      "item" : "1212.60996329",
+      "count" : "96"
+    }, {
+      "item" : "880.264037832",
+      "count" : "96"
+    }, {
+      "item" : "597.19187568",
+      "count" : "95"
+    }, {
+      "item" : "479.988072658",
+      "count" : "94"
+    }, {
+      "item" : "1091.2335842",
+      "count" : "94"
+    }, {
+      "item" : "849.979616853",
+      "count" : "94"
+    }, {
+      "item" : "630.794249105",
+      "count" : "93"
+    } ],
+    "smallest" : "9.82138192615",
+    "count" : "411745",
+    "cardinality" : "411745"
+  },
+  "format" : { }
+} ]
