@@ -26,7 +26,7 @@
 
 ## 验证结果
 
-- 本地 `municipal_ops` 原有表在复核时均为 0 行，随后按 canonical schema 重建结构；当前仍为 0 行，未开始 Step 9。
+- 本地 `municipal_ops` 原有表在复核时均为 0 行，随后按 canonical schema 重建结构；Step 9 导入前已完成结构校验。
 - `scripts/verify_schema.py --allow-missing-audit-triggers`：17 张表、关键字段、索引和外键通过。
 - 本地 MySQL 开启 binary logging，而 Step 4 创建的 `municipal` 账号没有 SUPER/`log_bin_trust_function_creators` 权限，因此触发器创建被 MySQL 拒绝；canonical SQL 和 DBA 权限模板均已保留，需由 DBA 执行后再移除 `--allow-missing-audit-triggers`。
 - 当前本地 `municipal` 账号仍是 Step 4 创建的开发账号，未擅自修改其授权；最小权限模板没有真实密码，避免把凭据写入仓库。

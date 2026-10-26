@@ -107,6 +107,8 @@ CREATE TABLE IF NOT EXISTS facilities (
   location_id BIGINT,
   region VARCHAR(100),
   external_id VARCHAR(128),
+  install_date DATE,
+  condition_score TINYINT UNSIGNED,
   source_type VARCHAR(32) NOT NULL,
   source_system VARCHAR(64) NOT NULL,
   data_version VARCHAR(64) NOT NULL DEFAULT 'v1',

@@ -282,6 +282,15 @@
       "batch_id": "step07-20261026",
       "mapping_version": "public-events-v2",
       "generated_at": "2026-10-26T06:58:39.236023+00:00"
+    },
+    "seed_imports": {
+      "name": "seed_imports",
+      "kind": "processed",
+      "path": "data/manifests/seed_imports.jsonl",
+      "rows": 3,
+      "bytes": 2414,
+      "sha256": "98ebd64db0d64388f07d716b8aa64a048d1f84745f77c480f54ac03e6930bb3a",
+      "generated_at": "2026-10-26T08:22:48.480864+00:00"
     }
   },
   "notes": {

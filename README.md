@@ -63,6 +63,7 @@ $py = 'D:\LEARN\AI\programs\AgentTask\env\agent-task\Scripts\python.exe'
 & $py scripts\download_public_data.py
 & $py scripts\generate_synthetic_data.py
 & $py scripts\prepare_data.py
+& $py scripts\seed_database.py --data-root data --batch-id step09-20261026
 & $py scripts\backup_data.py
 ```
 

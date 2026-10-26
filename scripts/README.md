@@ -30,3 +30,11 @@ python scripts/verify_schema.py --url $env:MYSQL_URL --allow-missing-audit-trigg
 ```
 
 完整 schema 和权限边界见 `infra/mysql/init/001_schema.sql` 与 `infra/mysql/security/`。数据库种子导入属于 Step 9。
+
+执行 Step 9 的默认命令：
+
+```powershell
+python scripts/seed_database.py --data-root data --batch-id step09-20261026 --log data/manifests/seed_imports.jsonl
+```
+
+使用 `--dry-run` 只执行外键、状态、时间顺序和幂等键校验，不写入数据库。

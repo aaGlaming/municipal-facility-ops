@@ -29,6 +29,8 @@ REQUIRED_COLUMNS = {
         "id",
         "facility_code",
         "location_id",
+        "install_date",
+        "condition_score",
         "source_type",
         "source_system",
         "data_version",
