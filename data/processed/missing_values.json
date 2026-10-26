@@ -1,0 +1,23 @@
+{
+  "batch_id": "step07-20261026",
+  "fields": {
+    "event_id": 0,
+    "source_dataset": 0,
+    "source_type": 0,
+    "category": 0,
+    "subcategory": 0,
+    "description": 0,
+    "status": 0,
+    "created_at": 0,
+    "closed_at": 10806,
+    "agency": 0,
+    "address": 15477,
+    "borough": 0,
+    "latitude": 28747,
+    "longitude": 28747,
+    "external_id": 0,
+    "source_row_number": 0,
+    "mapping_version": 0,
+    "cleaning_batch_id": 0
+  }
+}

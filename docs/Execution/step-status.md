@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 6 状态
+# 执行手册 Step 1～Step 7 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\执行手册\V1\municipal-facility-ops.md`
 
@@ -30,3 +30,7 @@
 ## Step 6：生成并登记合成数据
 
 **状态：完成**。已使用 `synthetic-v2` 和固定 seed `20261025` 生成 13 个合成数据文件，覆盖设施、位置、队伍、人员、供应商、SLA、报修、巡检、工单、验收、Agent 运行、审计和知识文档；manifest 已登记 22 个文件并通过 0 不匹配校验。详见 `step06-synthetic-data.md`。
+
+## Step 7：建立数据清洗与统一映射
+
+**状态：完成**。已将 3 个公开 CSV 共 62,000 行统一为 `facility_issue_events.csv`，生成字段、缺失值、重复值、失败行和清洗批次报告；原始文件未覆盖。详见 `step07-data-cleaning.md`。

@@ -1,0 +1,37 @@
+{
+  "batch_id": "step07-20261026",
+  "generated_at": "2026-10-26T06:58:39.236023+00:00",
+  "mapping_version": "public-events-v2",
+  "input_files": [
+    {
+      "source_dataset": "nyc_311_relevant",
+      "path": "data/raw/public/nyc_311_relevant.csv",
+      "bytes": 16780001,
+      "sha256": "2e2e9628ffa39195af464f340da38df0d4a906231eccec514050274edcf3e325",
+      "rows": 25000
+    },
+    {
+      "source_dataset": "nyc_pothole_work_orders_closed",
+      "path": "data/raw/public/nyc_pothole_work_orders_closed.csv",
+      "bytes": 8421161,
+      "sha256": "8403ecdb418568fcb2b2a89bf4718b12d7739752913fd26f9380024aaeba3ec5",
+      "rows": 25000
+    },
+    {
+      "source_dataset": "nyc_streetlight_traffic_signal_311",
+      "path": "data/raw/public/nyc_streetlight_traffic_signal_311.csv",
+      "bytes": 6948342,
+      "sha256": "6aa395376368086dede94e374046afa64a73c8419e5b43e1d3c7a3933348c6c7",
+      "rows": 12000
+    }
+  ],
+  "output": {
+    "path": "data/processed/facility_issue_events.csv",
+    "rows": 62000,
+    "bytes": 24727350,
+    "sha256": "150d251eede3455fa6d48088ca4cdedb4f1028c64e7e77078ab5d738b41b4651"
+  },
+  "failed_values": 0,
+  "failure_file": "data/processed/cleaning_failures.jsonl",
+  "filter": "none; all source rows retained"
+}

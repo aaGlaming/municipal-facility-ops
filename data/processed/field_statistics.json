@@ -1,0 +1,113 @@
+{
+  "batch_id": "step07-20261026",
+  "fields": {
+    "event_id": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 62000
+    },
+    "source_dataset": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 3
+    },
+    "source_type": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 1
+    },
+    "category": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 5
+    },
+    "subcategory": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 128
+    },
+    "description": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 5996
+    },
+    "status": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 5
+    },
+    "created_at": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 26309
+    },
+    "closed_at": {
+      "row_count": 62000,
+      "non_empty": 51194,
+      "missing": 10806,
+      "unique_count": 15192
+    },
+    "agency": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 3
+    },
+    "address": {
+      "row_count": 62000,
+      "non_empty": 46523,
+      "missing": 15477,
+      "unique_count": 21284
+    },
+    "borough": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 6
+    },
+    "latitude": {
+      "row_count": 62000,
+      "non_empty": 33253,
+      "missing": 28747,
+      "unique_count": 17611
+    },
+    "longitude": {
+      "row_count": 62000,
+      "non_empty": 33253,
+      "missing": 28747,
+      "unique_count": 17613
+    },
+    "external_id": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 52880
+    },
+    "source_row_number": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 25000
+    },
+    "mapping_version": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 1
+    },
+    "cleaning_batch_id": {
+      "row_count": 62000,
+      "non_empty": 62000,
+      "missing": 0,
+      "unique_count": 1
+    }
+  }
+}

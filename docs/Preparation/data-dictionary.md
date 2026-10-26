@@ -16,6 +16,9 @@
 | `address` / `borough` | 地址和行政区 |
 | `latitude` / `longitude` | WGS84 坐标 |
 | `external_id` | 来源系统编号 |
+| `source_row_number` | 原始文件中的行号 |
+| `mapping_version` | 字段清洗和映射规则版本 |
+| `cleaning_batch_id` | 本次清洗批次编号 |
 
 ## 合成业务表
 

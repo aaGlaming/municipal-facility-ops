@@ -245,9 +245,11 @@
       "kind": "processed",
       "path": "data/processed/facility_issue_events.csv",
       "rows": 62000,
-      "bytes": 22825837,
-      "sha256": "195ad97dd0c9cca17897ab2ae0ab67ebb6e6096196d83b7ebd9f93c8e18b9604",
-      "generated_at": "2026-10-26T01:51:57.795131+00:00"
+      "bytes": 24727350,
+      "sha256": "150d251eede3455fa6d48088ca4cdedb4f1028c64e7e77078ab5d738b41b4651",
+      "generated_at": "2026-10-26T06:58:39.236023+00:00",
+      "batch_id": "step07-20261026",
+      "mapping_version": "public-events-v2"
     },
     "synthetic_locations": {
       "name": "synthetic_locations",
@@ -270,6 +272,16 @@
       "seed": 20261025,
       "generated_at": "2026-01-01T00:00:00Z",
       "rows": 20
+    },
+    "facility_issue_events_summary": {
+      "name": "facility_issue_events_summary",
+      "kind": "processed",
+      "path": "data/processed/facility_issue_events_summary.json",
+      "bytes": 912,
+      "sha256": "d4540054567f6fb9c5eca9b16d40d7fa09d6e2be73d931fcb6881e129fcc34ff",
+      "batch_id": "step07-20261026",
+      "mapping_version": "public-events-v2",
+      "generated_at": "2026-10-26T06:58:39.236023+00:00"
     }
   },
   "notes": {

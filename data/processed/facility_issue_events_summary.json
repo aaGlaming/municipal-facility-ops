@@ -1,39 +1,20 @@
 {
-  "generated_at": "2026-10-26T01:51:57.795131+00:00",
+  "generated_at": "2026-10-26T06:58:38.962099+00:00",
   "output": "data/processed/facility_issue_events.csv",
   "rows": 62000,
   "source_counts": {
     "nyc_311_relevant": 25000,
-    "nyc_streetlight_traffic_signal_311": 12000,
-    "nyc_pothole_work_orders_closed": 25000
+    "nyc_pothole_work_orders_closed": 25000,
+    "nyc_streetlight_traffic_signal_311": 12000
   },
-  "category_counts": [
-    [
-      "Pothole Work Order",
-      25000
-    ],
-    [
-      "Street Light Condition",
-      11247
-    ],
-    [
-      "Traffic Signal Condition",
-      9873
-    ],
-    [
-      "Street Condition",
-      7690
-    ],
-    [
-      "Damaged Tree",
-      5515
-    ],
-    [
-      "Sidewalk Condition",
-      2675
-    ]
-  ],
-  "sha256": "195ad97dd0c9cca17897ab2ae0ab67ebb6e6096196d83b7ebd9f93c8e18b9604",
+  "category_counts": {
+    "road_surface": 32690,
+    "street_light": 11303,
+    "sidewalk_condition": 2675,
+    "damaged_tree": 5515,
+    "traffic_signal": 9817
+  },
+  "sha256": "150d251eede3455fa6d48088ca4cdedb4f1028c64e7e77078ab5d738b41b4651",
   "fields": [
     "event_id",
     "source_dataset",
@@ -49,6 +30,9 @@
     "borough",
     "latitude",
     "longitude",
-    "external_id"
+    "external_id",
+    "source_row_number",
+    "mapping_version",
+    "cleaning_batch_id"
   ]
 }

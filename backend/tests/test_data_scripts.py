@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -100,6 +101,54 @@ def test_prepare_events_writes_unified_output(tmp_path: Path) -> None:
     result = prepare_events([raw], output)
     assert result["rows"] == 1
     assert output.read_text(encoding="utf-8").splitlines()[0].startswith("event_id,")
+
+
+def test_prepare_events_normalizes_sources_and_writes_quality_reports(tmp_path: Path) -> None:
+    three_one_one = tmp_path / "nyc_311_relevant.csv"
+    three_one_one.write_text(
+        "unique_key,created_date,closed_date,agency,agency_name,complaint_type,descriptor,descriptor_2,status,incident_address,borough,latitude,longitude\n"
+        "X-1,2026-10-24T01:56:18.000,,DOT,Department of Transportation,Street Light Condition,Street Light Out,,Open,1 MAIN ST,MN,40.7,-73.9\n"
+        "X-1,bad-date,,DOT,Department of Transportation,Traffic Signal Condition,Signal Out,,In Progress,2 MAIN ST,Q,999,-73.8\n",
+        encoding="utf-8",
+    )
+    potholes = tmp_path / "nyc_pothole_work_orders_closed.csv"
+    potholes.write_text(
+        "defnum,rptdate,rptclosed,boro,housenum,onfacename,source\n"
+        "D-1,2026/09/28 00:00:00,2026/09/29 00:00:00,B,100,ALBANY AV,CTZ\n",
+        encoding="utf-8",
+    )
+    before_hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in (three_one_one, potholes)}
+    output = tmp_path / "processed" / "facility_issue_events.csv"
+    report_dir = tmp_path / "processed"
+
+    result = prepare_events([three_one_one, potholes], output, report_dir=report_dir, batch_id="batch-test")
+
+    rows = list(csv.DictReader(output.open(newline="", encoding="utf-8")))
+    assert result["rows"] == 3
+    assert len({row["event_id"] for row in rows}) == 3
+    assert rows[0]["category"] == "street_light"
+    assert rows[0]["borough"] == "MANHATTAN"
+    assert rows[0]["created_at"] == "2026-10-24T01:56:18Z"
+    assert rows[1]["category"] == "traffic_signal"
+    assert rows[1]["borough"] == "QUEENS"
+    assert rows[1]["latitude"] == ""
+    assert rows[2]["category"] == "road_surface"
+    assert rows[2]["borough"] == "BROOKLYN"
+    assert rows[2]["address"] == "100 ALBANY AV"
+    assert rows[0]["cleaning_batch_id"] == "batch-test"
+
+    duplicate_report = json.loads((report_dir / "duplicate_values.json").read_text(encoding="utf-8"))
+    missing_report = json.loads((report_dir / "missing_values.json").read_text(encoding="utf-8"))
+    batch_report = json.loads((report_dir / "cleaning_batch.json").read_text(encoding="utf-8"))
+    failures = (report_dir / "cleaning_failures.jsonl").read_text(encoding="utf-8").splitlines()
+    assert duplicate_report["duplicate_external_ids"] == {"nyc_311_relevant": {"X-1": 2}}
+    assert missing_report["fields"]["closed_at"] == 2
+    assert batch_report["batch_id"] == "batch-test"
+    assert batch_report["failed_values"] >= 2
+    assert len(failures) >= 2
+    assert all(
+        hashlib.sha256(path.read_bytes()).hexdigest() == before_hashes[path.name] for path in (three_one_one, potholes)
+    )
 
 
 def test_backup_records_hashes(tmp_path: Path) -> None:
