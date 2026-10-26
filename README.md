@@ -54,7 +54,7 @@ npm run dev
 
 后端测试：`python -m pytest -q`
 
-完整依赖服务：复制 `backend/.env.example` 为 `backend/.env` 后执行 `docker compose up --build`。Docker Compose 需要本机安装 Docker；当前环境未安装 Docker，因此本次只验证了应用代码和前端构建。
+Docker Compose 按执行手册 Step 36 才实现和启动；当前 Step 1～Step 5 阶段不执行 Compose。当前本机未安装 Docker。
 
 ## 数据准备
 

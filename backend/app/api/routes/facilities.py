@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Query, Request
 
-
 router = APIRouter(prefix="/api/facilities", tags=["facilities"])
 
 FACILITIES = [

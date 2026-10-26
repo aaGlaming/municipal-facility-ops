@@ -21,7 +21,13 @@ def copy_tree_with_manifest(source: Path, target: Path) -> dict[str, object]:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source / relative, destination)
     target_files = {path.relative_to(target) for path in target.rglob("*") if path.is_file()}
-    mismatches = [str(relative) for relative in sorted(source_files | target_files) if relative not in source_files or relative not in target_files or _sha256(source / relative) != _sha256(target / relative)]
+    mismatches = [
+        str(relative)
+        for relative in sorted(source_files | target_files)
+        if relative not in source_files
+        or relative not in target_files
+        or _sha256(source / relative) != _sha256(target / relative)
+    ]
     return {"copied_files": len(source_files), "target_files": len(target_files), "mismatches": mismatches}
 
 

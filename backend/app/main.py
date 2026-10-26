@@ -6,7 +6,6 @@ from fastapi.responses import JSONResponse
 
 from app.api.routes import facilities, health, work_orders
 
-
 app = FastAPI(title="Municipal Facility Operations", version="0.1.0")
 
 
@@ -20,7 +19,7 @@ async def trace_middleware(request: Request, call_next):
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
-    detail = exc.detail if isinstance(exc.detail, dict) else {}
+    detail: dict[str, object] = exc.detail if isinstance(exc.detail, dict) else {}
     return JSONResponse(
         status_code=exc.status_code,
         content={
@@ -36,7 +35,12 @@ async def http_exception_handler(request: Request, exc: HTTPException):
 async def unhandled_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=500,
-        content={"code": "INTERNAL_ERROR", "message": "服务内部错误", "trace_id": request.state.trace_id, "retryable": True},
+        content={
+            "code": "INTERNAL_ERROR",
+            "message": "服务内部错误",
+            "trace_id": request.state.trace_id,
+            "retryable": True,
+        },
     )
 
 

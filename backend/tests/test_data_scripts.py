@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from scripts.backup_data import copy_tree_with_manifest
+from scripts.download_public_data import verify_manifest
 from scripts.generate_synthetic_data import generate_synthetic_data
 from scripts.prepare_data import prepare_events
 
@@ -28,4 +29,9 @@ def test_backup_records_hashes(tmp_path: Path) -> None:
     (source / "a.txt").write_text("hello", encoding="utf-8")
     report = copy_tree_with_manifest(source, target)
     assert report["copied_files"] == 1
+    assert report["mismatches"] == []
+
+
+def test_public_manifest_matches_downloaded_files() -> None:
+    report = verify_manifest(Path("data/manifests/manifest.json"))
     assert report["mismatches"] == []

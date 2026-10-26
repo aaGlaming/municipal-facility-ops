@@ -4,7 +4,6 @@ import random
 from datetime import UTC, datetime
 from pathlib import Path
 
-
 GENERATOR_VERSION = "synthetic-v1"
 
 
@@ -21,7 +20,7 @@ def generate_synthetic_data(output_dir: Path, seed: int = 20261025, facility_cou
     # 固定生成时间，确保相同 seed 的输出可直接比较和复现。
     generated_at = datetime(2026, 1, 1, tzinfo=UTC).isoformat().replace("+00:00", "Z")
     output_dir.mkdir(parents=True, exist_ok=True)
-    rows = []
+    rows: list[dict[str, object]] = []
     types = ["street_light", "traffic_signal", "road_surface", "manhole", "waste_bin", "green_space"]
     for index in range(1, facility_count + 1):
         rows.append(

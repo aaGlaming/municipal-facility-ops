@@ -10,7 +10,10 @@
       "retrieved_at": "2026-10-26T01:47:48.549017+00:00",
       "bytes": 16780001,
       "sha256": "2e2e9628ffa39195af464f340da38df0d4a906231eccec514050274edcf3e325",
-      "rows": 25000
+      "rows": 25000,
+      "dataset_id": "erm2-nwe9",
+      "filters": "created_date >= 2024-01-01; complaint_type in [Street Light Condition, Pothole, Street Condition, Traffic Signal Condition, Sidewalk Condition, Damaged Tree]",
+      "source_system": "NYC Open Data Socrata"
     },
     "nyc_streetlight_traffic_signal_311": {
       "name": "nyc_streetlight_traffic_signal_311",
@@ -21,7 +24,10 @@
       "retrieved_at": "2026-10-26T01:47:52.894001+00:00",
       "bytes": 6948342,
       "sha256": "6aa395376368086dede94e374046afa64a73c8419e5b43e1d3c7a3933348c6c7",
-      "rows": 12000
+      "rows": 12000,
+      "dataset_id": "erm2-nwe9",
+      "filters": "created_date >= 2024-01-01; complaint_type in [Street Light Condition, Traffic Signal Condition]",
+      "source_system": "NYC Open Data Socrata"
     },
     "nyc_pothole_work_orders_closed": {
       "name": "nyc_pothole_work_orders_closed",
@@ -32,7 +38,10 @@
       "retrieved_at": "2026-10-26T01:47:58.681838+00:00",
       "bytes": 8421161,
       "sha256": "8403ecdb418568fcb2b2a89bf4718b12d7739752913fd26f9380024aaeba3ec5",
-      "rows": 25000
+      "rows": 25000,
+      "dataset_id": "x9wy-ing4",
+      "filters": "order by rptdate DESC; limit 25000",
+      "source_system": "NYC DOT Open Data"
     },
     "nyc_311_metadata": {
       "name": "nyc_311_metadata",
@@ -42,7 +51,10 @@
       "request_url": "https://data.cityofnewyork.us/api/views/erm2-nwe9/columns.json",
       "retrieved_at": "2026-10-26T01:48:00.575334+00:00",
       "bytes": 19071,
-      "sha256": "ae3491c5c872f832fbc6c8ff9d7d04f3448ff15341cc66f8801d6eaf19b1f6c3"
+      "sha256": "ae3491c5c872f832fbc6c8ff9d7d04f3448ff15341cc66f8801d6eaf19b1f6c3",
+      "dataset_id": "erm2-nwe9",
+      "filters": "columns metadata",
+      "source_system": "NYC Open Data API"
     },
     "nyc_pothole_metadata": {
       "name": "nyc_pothole_metadata",
@@ -52,7 +64,10 @@
       "request_url": "https://data.cityofnewyork.us/api/views/x9wy-ing4/columns.json",
       "retrieved_at": "2026-10-26T01:48:02.416265+00:00",
       "bytes": 22241,
-      "sha256": "4adc937e1b29b6f6fe36707b73408e0607e5cdb3ed00925eced8e9d6ac03c87c"
+      "sha256": "4adc937e1b29b6f6fe36707b73408e0607e5cdb3ed00925eced8e9d6ac03c87c",
+      "dataset_id": "x9wy-ing4",
+      "filters": "columns metadata",
+      "source_system": "NYC Open Data API"
     },
     "street_potholes_metadata": {
       "name": "street_potholes_metadata",
@@ -62,7 +77,10 @@
       "request_url": "https://www.nyc.gov/html/dot/downloads/pdf/street-potholes-metadata.pdf",
       "retrieved_at": "2026-10-26T01:48:05.037946+00:00",
       "bytes": 369538,
-      "sha256": "4637390f71bc959d9f54c4e9ad7baed37c3ef0525de81355cf91690b6820b34b"
+      "sha256": "4637390f71bc959d9f54c4e9ad7baed37c3ef0525de81355cf91690b6820b34b",
+      "dataset_id": "street-potholes-metadata",
+      "filters": "official PDF metadata",
+      "source_system": "NYC DOT"
     },
     "nyc_dot_datafeeds": {
       "name": "nyc_dot_datafeeds",
@@ -72,7 +90,10 @@
       "request_url": "https://www.nyc.gov/html/dot/html/about/datafeeds.shtml",
       "retrieved_at": "2026-10-26T01:48:06.331826+00:00",
       "bytes": 49772,
-      "sha256": "19dd72fdd77ae51ed3f321b96af7f8b8860907a7adaec01bb9b309f6248064fd"
+      "sha256": "19dd72fdd77ae51ed3f321b96af7f8b8860907a7adaec01bb9b309f6248064fd",
+      "dataset_id": "nyc-dot-datafeeds",
+      "filters": "official HTML data feeds page",
+      "source_system": "NYC DOT"
     },
     "open311_georeport_v2": {
       "name": "open311_georeport_v2",
@@ -82,7 +103,10 @@
       "request_url": "https://raw.githubusercontent.com/open311/open311.github.io/master/GeoReport/v2/index.md",
       "retrieved_at": "2026-10-26T01:48:07.470335+00:00",
       "bytes": 82111,
-      "sha256": "68142973d042d7f59ff1cf9659998d9d5989470e74b76dc431b0108e2d3b4459"
+      "sha256": "68142973d042d7f59ff1cf9659998d9d5989470e74b76dc431b0108e2d3b4459",
+      "dataset_id": "open311-georeport-v2",
+      "filters": "official Markdown specification",
+      "source_system": "Open311"
     },
     "synthetic_facilities": {
       "name": "synthetic_facilities",

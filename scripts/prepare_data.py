@@ -2,10 +2,22 @@ import csv
 import hashlib
 from pathlib import Path
 
-
 HEADERS = [
-    "event_id", "source_dataset", "source_type", "category", "subcategory", "description", "status",
-    "created_at", "closed_at", "agency", "address", "borough", "latitude", "longitude", "external_id",
+    "event_id",
+    "source_dataset",
+    "source_type",
+    "category",
+    "subcategory",
+    "description",
+    "status",
+    "created_at",
+    "closed_at",
+    "agency",
+    "address",
+    "borough",
+    "latitude",
+    "longitude",
+    "external_id",
 ]
 
 
@@ -14,7 +26,9 @@ def prepare_events(input_files: list[Path], output_file: Path) -> dict[str, obje
     for input_file in input_files:
         with input_file.open(newline="", encoding="utf-8-sig") as stream:
             for index, source in enumerate(csv.DictReader(stream), start=1):
-                external_id = source.get("unique_key") or source.get("Unique Key") or source.get("external_id") or str(index)
+                external_id = (
+                    source.get("unique_key") or source.get("Unique Key") or source.get("external_id") or str(index)
+                )
                 rows.append(
                     {
                         "event_id": f"{input_file.stem}-{external_id}",

@@ -6,8 +6,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_env: str = "development"
-    mysql_url: str = Field("mysql+pymysql://municipal:municipal_dev@mysql:3306/municipal_ops", validation_alias="MYSQL_URL")
+    mysql_url: str = Field(
+        "mysql+pymysql://municipal:municipal_dev@mysql:3306/municipal_ops", validation_alias="MYSQL_URL"
+    )
     chroma_persist_directory: str = Field("./.chroma", validation_alias="CHROMA_PERSIST_DIRECTORY")
+    chroma_host: str = Field("127.0.0.1", validation_alias="CHROMA_HOST")
+    chroma_port: int = Field(8001, ge=1, le=65535, validation_alias="CHROMA_PORT")
     llm_base_url: str = Field("http://localhost:11434/v1", validation_alias="LLM_BASE_URL")
     llm_api_key: str = Field("replace_me", validation_alias="LLM_API_KEY")
     llm_model: str = Field("replace_me", validation_alias="LLM_MODEL")
@@ -18,9 +22,9 @@ class Settings(BaseSettings):
     agent_timeout_seconds: int = Field(90, ge=1, le=900, validation_alias="AGENT_TIMEOUT_SECONDS")
     log_level: str = "INFO"
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore", case_sensitive=False)
+    model_config = SettingsConfigDict(env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False)
 
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    return Settings()  # type: ignore[call-arg]

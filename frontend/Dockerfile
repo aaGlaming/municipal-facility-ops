@@ -1,10 +1,2 @@
-FROM node:22-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM nginx:1.27-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
+# 前端容器按执行手册 Step 36 实现。
+# 当前阶段不构建或启动 Docker 镜像。

@@ -12,3 +12,7 @@ uploads/*
 .superpowers/
 data/raw/public/*.zip
 data/raw/public/*.parquet
+data/chroma/
+logs/*.out
+logs/*.err
+chroma.log

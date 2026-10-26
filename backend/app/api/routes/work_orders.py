@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException, Request
 
 from app.schemas.common import StatusUpdateRequest
 
-
 router = APIRouter(prefix="/api/work-orders", tags=["work-orders"])
 
 WORK_ORDERS = {
@@ -31,7 +30,9 @@ def update_status(work_order_id: str, payload: StatusUpdateRequest, request: Req
         return IDEMPOTENCY_RESULTS[payload.idempotency_key]
     work_order = WORK_ORDERS.get(work_order_id)
     if work_order is None:
-        raise HTTPException(status_code=404, detail={"code": "WORK_ORDER_NOT_FOUND", "message": "工单不存在", "retryable": False})
+        raise HTTPException(
+            status_code=404, detail={"code": "WORK_ORDER_NOT_FOUND", "message": "工单不存在", "retryable": False}
+        )
     current = work_order["status"]
     if payload.status not in ALLOWED_TRANSITIONS.get(current, set()):
         raise HTTPException(
