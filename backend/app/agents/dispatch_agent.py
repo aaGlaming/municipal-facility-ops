@@ -1,4 +1,5 @@
-# 文件职责：维修工单调度 Agent。
-# 输入：已分诊工单、SLA、设施位置、人员技能、供应商能力和日程。
-# 输出：派工候选、预计到达时间、替代方案和理由。
-# 实际派工必须经过权限、容量、冲突和幂等校验，必要时进入人工确认。
+"""Dispatch Agent exports."""
+
+from app.agents.scheduling_agent import DispatchAgent, DispatchPlanRequest, DispatchPlanResult
+
+__all__ = ["DispatchAgent", "DispatchPlanRequest", "DispatchPlanResult"]

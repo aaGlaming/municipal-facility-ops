@@ -1,0 +1,3 @@
+{"id":"sla-001","issue_type":"traffic_signal","priority":"P3","region":"中心区","reported_at":"2026-01-01T08:00:00","public_safety":true,"repeated_report":false,"expected_priority":"P1","expected_sla_minutes":240}
+{"id":"sla-002","issue_type":"street_light","priority":"P3","region":"中心区","reported_at":"2026-01-01T08:00:00","public_safety":false,"repeated_report":true,"expected_priority":"P2","expected_sla_minutes":1440}
+{"id":"sla-003","issue_type":"waste_bin","priority":"P4","region":"中心区","reported_at":"2026-01-01T08:00:00","public_safety":false,"repeated_report":false,"expected_priority":"P4","expected_sla_minutes":10080}
