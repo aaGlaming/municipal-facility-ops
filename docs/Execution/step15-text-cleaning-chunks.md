@@ -13,7 +13,7 @@
 
 ## 数据库迁移
 
-新增 `document_chunks` 表；已有 MySQL 实例使用 `infra/mysql/init/004_step15_chunks.sql` 增量迁移。Step16 Embedding 尚未开始，Chunk 仍只保存在 MySQL。
+新增 `document_chunks` 表；已有 MySQL 实例使用 `infra/mysql/init/004_step15_chunks.sql` 增量迁移。Embedding 字段由 Step16 的 `infra/mysql/init/005_step16_embeddings.sql` 增量迁移提供。
 
 ## 配置
 
@@ -26,4 +26,4 @@
 - `python -m ruff check backend scripts`：通过
 - `python -m ruff format --check backend scripts`：通过
 
-Step 16 尚未开始。
+Step16 已完成，详见 `step16-embedding-chroma.md`。

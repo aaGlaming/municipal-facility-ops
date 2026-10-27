@@ -19,6 +19,7 @@ from app.models.document import DocumentPart
 from app.services.document_service import get_document
 
 MAX_CHUNKS_PER_DOCUMENT = 10_000
+MAX_CHUNK_RESPONSE_BYTES = 8 * 1024 * 1024
 
 
 def _error(status_code: int, code: str, message: str) -> HTTPException:
@@ -30,6 +31,11 @@ def _validate_parameters(target_tokens: int, overlap_tokens: int) -> None:
         raise _error(422, "INVALID_CHUNK_PARAMETERS", "target_tokens 必须在 20 到 4000 之间")
     if overlap_tokens < 0 or overlap_tokens >= target_tokens:
         raise _error(422, "INVALID_CHUNK_PARAMETERS", "overlap_tokens 必须小于 target_tokens")
+
+
+def _ensure_response_size(items: list[dict]) -> None:
+    if sum(len(str(item["text"]).encode("utf-8")) for item in items) > MAX_CHUNK_RESPONSE_BYTES:
+        raise _error(413, "CHUNK_RESPONSE_TOO_LARGE", "Chunk 预览结果超过响应大小上限")
 
 
 def approximate_tokens(text: str) -> int:
@@ -125,6 +131,7 @@ def preview_chunks(
                 }
             )
             index += 1
+    _ensure_response_size(items)
     return items, target_tokens, overlap_tokens
 
 
@@ -137,7 +144,9 @@ def persisted_chunks(
     ).all()
     if not rows:
         return [], 0, 0
-    return [chunk_dict(row) for row in rows], rows[0].target_tokens, rows[0].overlap_tokens
+    items = [chunk_dict(row) for row in rows]
+    _ensure_response_size(items)
+    return items, rows[0].target_tokens, rows[0].overlap_tokens
 
 
 def regenerate_chunks(

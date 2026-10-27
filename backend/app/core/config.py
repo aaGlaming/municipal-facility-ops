@@ -37,6 +37,12 @@ class Settings(BaseSettings):
     )
     rag_chunk_target_tokens: int = Field(800, ge=20, le=4000, validation_alias="RAG_CHUNK_TARGET_TOKENS")
     rag_chunk_overlap_tokens: int = Field(120, ge=0, le=1000, validation_alias="RAG_CHUNK_OVERLAP_TOKENS")
+    embedding_timeout_seconds: float = Field(30.0, ge=1, le=300, validation_alias="EMBEDDING_TIMEOUT_SECONDS")
+    embedding_max_retries: int = Field(3, ge=0, le=6, validation_alias="EMBEDDING_MAX_RETRIES")
+    embedding_batch_size: int = Field(32, ge=1, le=256, validation_alias="EMBEDDING_BATCH_SIZE")
+    embedding_rate_limit_per_minute: int = Field(60, ge=1, le=10000, validation_alias="EMBEDDING_RATE_LIMIT_PER_MINUTE")
+    embedding_cache_directory: str = Field(".cache/embeddings", validation_alias="EMBEDDING_CACHE_DIRECTORY")
+    chroma_collection_name: str = Field("municipal_facility_ops", validation_alias="CHROMA_COLLECTION_NAME")
 
     model_config = SettingsConfigDict(
         env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False, populate_by_name=True

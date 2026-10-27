@@ -364,10 +364,30 @@ CREATE TABLE IF NOT EXISTS document_chunks (
   target_tokens INT UNSIGNED NOT NULL,
   overlap_tokens INT UNSIGNED NOT NULL,
   cleaning_version VARCHAR(64) NOT NULL DEFAULT 'step15-v1',
+  embedding_status VARCHAR(32) NOT NULL DEFAULT 'PENDING',
+  embedding_batch_id VARCHAR(64),
+  embedding_model VARCHAR(255),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_document_chunk_index (document_id, chunk_index),
   KEY idx_document_chunks_document (document_id, chunk_index),
   CONSTRAINT fk_document_chunk_document FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS embedding_batches (
+  id VARCHAR(64) PRIMARY KEY,
+  document_id VARCHAR(64) NOT NULL,
+  model_name VARCHAR(255) NOT NULL,
+  status VARCHAR(32) NOT NULL,
+  chunk_count INT UNSIGNED NOT NULL,
+  embedded_count INT UNSIGNED NOT NULL DEFAULT 0,
+  attempt_count INT UNSIGNED NOT NULL DEFAULT 0,
+  error_reason TEXT,
+  retryable BOOLEAN NOT NULL DEFAULT TRUE,
+  document_version VARCHAR(64) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  finished_at TIMESTAMP NULL,
+  KEY idx_embedding_batch_document (document_id, created_at),
+  KEY idx_embedding_batch_status (status, created_at)
 );
 
 CREATE TABLE IF NOT EXISTS agent_runs (

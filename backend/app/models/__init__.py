@@ -3,6 +3,7 @@
 
 from app.models.chunk import DocumentChunk
 from app.models.document import Document, DocumentPart
+from app.models.embedding import EmbeddingBatch
 from app.models.facility import CitizenReport, Facility, Location
 from app.models.people import Technician, Vendor
 from app.models.work_order import AcceptanceRecord, InspectionTask, WorkOrder, WorkOrderStatusEvent
@@ -13,6 +14,7 @@ __all__ = [
     "Document",
     "DocumentPart",
     "DocumentChunk",
+    "EmbeddingBatch",
     "Facility",
     "InspectionTask",
     "Location",

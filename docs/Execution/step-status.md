@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 15 状态
+# 执行手册 Step 1～Step 16 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -71,4 +71,6 @@
 
 **状态：完成**。已实现不可见字符/重复空白/页眉页脚清洗、标题/段落/表格边界切分、默认 800/120 Chunk 参数、来源和偏移元数据、预览、参数调整和持久化重生成。详见 `step15-text-cleaning-chunks.md`。
 
-Step 16 尚未开始。
+## Step 16：实现 Embedding 与 Chroma 入库
+
+**状态：完成**。已实现 OpenAI 兼容 Embedding 批量调用、超时、指数退避重试、限流和文件缓存；已实现 Chroma 写入、文档级重建和删除；已记录模型版本、文档版本和入库批次；失败批次保留可重试状态且不写入不完整向量。详见 `step16-embedding-chroma.md`。实际模型和 Chroma 连通性需配置服务后验证。

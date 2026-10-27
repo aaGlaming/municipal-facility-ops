@@ -7,9 +7,10 @@ from sqlalchemy.orm import Session
 from app.core.auth import AuthPrincipal, require_permission
 from app.core.config import Settings
 from app.core.dependencies import get_db_session, get_settings_dependency
-from app.schemas.rag import ChunkPreviewResponse, ChunkRegenerateRequest, DocumentDetailResponse
+from app.schemas.rag import ChunkPreviewResponse, ChunkRegenerateRequest, DocumentDetailResponse, EmbeddingResponse
 from app.services.chunk_service import persisted_chunks, preview_chunks, regenerate_chunks
 from app.services.document_service import document_dict, get_document, part_dict, upload_document
+from app.services.embedding_service import delete_document_embeddings, rebuild_document_embeddings
 
 router = APIRouter(prefix="/api/rag", tags=["rag"])
 
@@ -105,3 +106,25 @@ def chunks(
 ) -> dict:
     items, target, overlap = persisted_chunks(db, principal, request, document_id)
     return {"items": items, "target_tokens": target, "overlap_tokens": overlap}
+
+
+@router.post("/documents/{document_id}/embeddings/rebuild", response_model=EmbeddingResponse)
+def rebuild_embeddings(
+    document_id: str,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    settings: Settings = Depends(get_settings_dependency),
+    principal: AuthPrincipal = Depends(require_permission("document:embed")),
+) -> dict:
+    return rebuild_document_embeddings(db, settings, principal, request, document_id)
+
+
+@router.delete("/documents/{document_id}/embeddings", response_model=dict)
+def delete_embeddings(
+    document_id: str,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    settings: Settings = Depends(get_settings_dependency),
+    principal: AuthPrincipal = Depends(require_permission("document:embed")),
+) -> dict:
+    return delete_document_embeddings(db, settings, principal, request, document_id)

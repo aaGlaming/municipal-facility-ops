@@ -23,4 +23,7 @@ class DocumentChunk(Base):
     target_tokens: Mapped[int] = mapped_column(Integer, nullable=False)
     overlap_tokens: Mapped[int] = mapped_column(Integer, nullable=False)
     cleaning_version: Mapped[str] = mapped_column(String(64), nullable=False, default="step15-v1")
+    embedding_status: Mapped[str] = mapped_column(String(32), nullable=False, default="PENDING")
+    embedding_batch_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    embedding_model: Mapped[str | None] = mapped_column(String(255))
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.now)

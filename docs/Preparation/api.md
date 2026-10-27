@@ -85,3 +85,10 @@
 - `GET /api/rag/documents/{document_id}/chunks/preview`：按参数预览清洗和切块结果，不修改数据库。
 - `POST /api/rag/documents/{document_id}/chunks/regenerate`：按新目标/重叠参数重新生成并持久化 Chunk，需要 `document:chunk`。
 - `GET /api/rag/documents/{document_id}/chunks`：查看当前持久化 Chunk。
+
+## Embedding 与 Chroma
+
+- `POST /api/rag/documents/{document_id}/embeddings/rebuild`：按当前 Chunk 批量生成 Embedding 并写入 Chroma，需要 `document:embed`。
+- `DELETE /api/rag/documents/{document_id}/embeddings`：删除该文档在 Chroma 中的向量并将 Chunk 状态重置为 `PENDING`，需要 `document:embed`。
+
+重建响应包含 `batch_id`、模型名、文档版本对应的批次统计和 `embedded_count`。模型或 Chroma 失败时返回 `EMBEDDING_FAILED` 或 `CHROMA_WRITE_FAILED`，并通过 `retryable` 标记是否可以重试。

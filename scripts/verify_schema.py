@@ -24,6 +24,7 @@ REQUIRED_TABLES = {
     "documents",
     "document_parts",
     "document_chunks",
+    "embedding_batches",
     "agent_runs",
     "tool_calls",
     "audit_logs",
@@ -64,7 +65,27 @@ REQUIRED_COLUMNS = {
         "version",
     },
     "document_parts": {"id", "document_id", "part_index", "text"},
-    "document_chunks": {"id", "document_id", "chunk_index", "text", "token_count", "target_tokens", "overlap_tokens"},
+    "document_chunks": {
+        "id",
+        "document_id",
+        "chunk_index",
+        "text",
+        "token_count",
+        "target_tokens",
+        "overlap_tokens",
+        "embedding_status",
+        "embedding_batch_id",
+        "embedding_model",
+    },
+    "embedding_batches": {
+        "id",
+        "document_id",
+        "model_name",
+        "status",
+        "chunk_count",
+        "embedded_count",
+        "document_version",
+    },
     "agent_runs": {"id", "trace_id", "status", "started_at", "finished_at", "source_type", "version", "is_deleted"},
     "audit_logs": {"id", "agent_run_id", "tool_call_id", "action", "human_confirmation", "event_hash", "created_at"},
 }
@@ -155,7 +176,7 @@ def verify_schema(url: str, allow_missing_audit_triggers: bool = False) -> dict[
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Verify the Step 8 MySQL schema")
+    parser = argparse.ArgumentParser(description="Verify the municipal facility operations MySQL schema")
     parser.add_argument(
         "--url", default=os.getenv("MYSQL_URL", "mysql+pymysql://municipal:municipal_dev@127.0.0.1:3306/municipal_ops")
     )

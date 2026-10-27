@@ -63,3 +63,13 @@ class ChunkPreviewResponse(BaseModel):
 class ChunkRegenerateRequest(BaseModel):
     target_tokens: int = 800
     overlap_tokens: int = 120
+
+
+class EmbeddingResponse(BaseModel):
+    status: str
+    batch_id: str
+    document_id: str
+    model: str
+    chunk_count: int
+    embedded_count: int
+    attempt_count: int

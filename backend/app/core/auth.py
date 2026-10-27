@@ -177,6 +177,7 @@ MENU_PERMISSIONS = {
     "document_upload": "document:upload",
     "chunk_preview": "document:read",
     "chunk_regenerate": "document:chunk",
+    "embedding_management": "document:embed",
     "work_orders": "work_order:read",
     "work_order_updates": "work_order:write",
     "inspections": "inspection:read",
