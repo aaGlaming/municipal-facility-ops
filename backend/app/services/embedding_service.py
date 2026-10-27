@@ -188,6 +188,15 @@ class ChromaStore:
         except Exception as exc:  # pragma: no cover - requires running Chroma service
             raise EmbeddingProviderError("Chroma delete failed", retryable=True) from exc
 
+    def query(self, *, embedding: list[float], n_results: int, where: dict[str, Any] | None = None) -> dict[str, Any]:
+        try:
+            arguments: dict[str, Any] = {"query_embeddings": [embedding], "n_results": n_results}
+            if where:
+                arguments["where"] = where
+            return self._collection.query(**arguments)
+        except Exception as exc:  # pragma: no cover - requires running Chroma service
+            raise EmbeddingProviderError("Chroma query failed", retryable=True) from exc
+
 
 def get_embedding_provider(settings: Settings) -> EmbeddingProvider:
     return EmbeddingProvider(settings)
@@ -214,6 +223,7 @@ def _metadata(document: Any, chunk: DocumentChunk, model: str, batch_id: str) ->
         "effective_date": document.effective_date.isoformat() if document.effective_date else "",
         "expiry_date": document.expiry_date.isoformat() if document.expiry_date else "",
         "source_type": document.source_type,
+        "version": document.version,
         "embedding_model": model,
         "embedding_batch_id": batch_id,
     }

@@ -92,3 +92,10 @@
 - `DELETE /api/rag/documents/{document_id}/embeddings`：删除该文档在 Chroma 中的向量并将 Chunk 状态重置为 `PENDING`，需要 `document:embed`。
 
 重建响应包含 `batch_id`、模型名、文档版本对应的批次统计和 `embedded_count`。模型或 Chroma 失败时返回 `EMBEDDING_FAILED` 或 `CHROMA_WRITE_FAILED`，并通过 `retryable` 标记是否可以重试。
+
+## RAG 检索
+
+- `POST /api/rag/search`：执行向量与关键词混合检索，支持 `facility_type`、`region`、`version`、`as_of_date`、`top_k` 和 `rerank`。
+- `POST /api/rag/search/debug`：返回同样的检索结果及召回数量、合并数量、模型和耗时等调试信息。
+
+两个接口需要 `document:read` 权限；结果包含文档名、页码、Chunk ID、相似度、metadata 和原文片段。

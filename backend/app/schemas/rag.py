@@ -1,6 +1,7 @@
 from datetime import date, datetime
+from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class DocumentPartResponse(BaseModel):
@@ -73,3 +74,37 @@ class EmbeddingResponse(BaseModel):
     chunk_count: int
     embedded_count: int
     attempt_count: int
+
+
+class RagSearchRequest(BaseModel):
+    query: str = Field(min_length=1, max_length=2000)
+    facility_type: str | None = Field(default=None, max_length=64)
+    region: str | None = Field(default=None, max_length=100)
+    version: str | None = Field(default=None, max_length=64)
+    as_of_date: date | None = None
+    top_k: int = Field(default=5, ge=1, le=50)
+    rerank: bool = False
+
+
+class RagSearchItem(BaseModel):
+    chunk_id: str
+    document_id: str
+    document_name: str
+    page_number: int | None
+    similarity: float
+    snippet: str
+    metadata: dict[str, Any]
+
+
+class RagSearchResponse(BaseModel):
+    status: str
+    message: str | None
+    query: str
+    rewritten_query: str
+    filters: dict[str, Any]
+    items: list[RagSearchItem]
+    warnings: list[str] = Field(default_factory=list)
+
+
+class RagSearchDebugResponse(RagSearchResponse):
+    debug: dict[str, Any]

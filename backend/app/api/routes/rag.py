@@ -7,12 +7,43 @@ from sqlalchemy.orm import Session
 from app.core.auth import AuthPrincipal, require_permission
 from app.core.config import Settings
 from app.core.dependencies import get_db_session, get_settings_dependency
-from app.schemas.rag import ChunkPreviewResponse, ChunkRegenerateRequest, DocumentDetailResponse, EmbeddingResponse
+from app.schemas.rag import (
+    ChunkPreviewResponse,
+    ChunkRegenerateRequest,
+    DocumentDetailResponse,
+    EmbeddingResponse,
+    RagSearchDebugResponse,
+    RagSearchRequest,
+    RagSearchResponse,
+)
 from app.services.chunk_service import persisted_chunks, preview_chunks, regenerate_chunks
 from app.services.document_service import document_dict, get_document, part_dict, upload_document
 from app.services.embedding_service import delete_document_embeddings, rebuild_document_embeddings
+from app.services.retrieval_service import search_documents
 
 router = APIRouter(prefix="/api/rag", tags=["rag"])
+
+
+@router.post("/search", response_model=RagSearchResponse)
+def search(
+    payload: RagSearchRequest,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    settings: Settings = Depends(get_settings_dependency),
+    principal: AuthPrincipal = Depends(require_permission("document:read")),
+) -> dict:
+    return search_documents(db, settings, principal, request, payload)
+
+
+@router.post("/search/debug", response_model=RagSearchDebugResponse)
+def search_debug(
+    payload: RagSearchRequest,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    settings: Settings = Depends(get_settings_dependency),
+    principal: AuthPrincipal = Depends(require_permission("document:read")),
+) -> dict:
+    return search_documents(db, settings, principal, request, payload, debug=True)
 
 
 @router.post("/documents", status_code=201, response_model=DocumentDetailResponse)
