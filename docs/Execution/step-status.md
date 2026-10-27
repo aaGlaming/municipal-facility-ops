@@ -126,3 +126,7 @@
 ## Step 29：建立评测数据集与基准
 
 **状态：完成**。已固定评测版本、seed、模型/Prompt/参数和指标阈值，建立分诊、设施匹配、SLA/调度、状态流转、RAG、高风险和安全验收 7 组数据集，并新增统一基线脚本和报告。可执行的确定性基线指标达到阈值；设施台账命中率和真实 RAG 召回指标留待 Step30/31 的固定 fixture 评测。详见 `step29-evaluation-benchmark.md`。
+
+## Step 30：执行 RAG 评测
+
+**状态：完成**。已使用固定 SQLite/Embedding/Chroma fixture 调用生产检索逻辑，完成 Recall@1、Hit Rate@3/5、MRR、来源正确率、Chunk 可定位率、metadata 过滤正确率和过期文档拦截率评测，当前结果均为 1.0；报告包含版本、样例、失败归因和改进建议。详见 `step30-rag-evaluation.md`。
