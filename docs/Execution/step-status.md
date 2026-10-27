@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 16 状态
+# 执行手册 Step 1～Step 18 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -78,3 +78,7 @@
 ## Step 17：实现 RAG 检索与原文展示
 
 **状态：完成**。已实现查询改写和字段提取、区域/设施类型/版本/生效日期过滤、Chroma 向量召回、MySQL 关键词召回、候选去重合并、可选 rerank、默认 Top-K 5、原文片段和 metadata 展示，以及无召回/过期/解析失败/检索服务不可用提示。已提供普通检索和检索调试接口。详见 `step17-rag-retrieval.md`。
+
+## Step 18：设计 Agent 状态与工具契约
+
+**状态：完成**。已定义 LangGraph `AgentState`、请求/计划/观察/证据/错误/停止原因/人工确认/工具调用结构；已登记 13 个命名空间工具的输入输出 schema、Agent 白名单、权限、风险等级、确认策略、幂等规则、审计动作和可重试错误。详见 `step18-agent-contracts.md`。具体工具执行安排在 Step19，Supervisor 循环安排在 Step20。
