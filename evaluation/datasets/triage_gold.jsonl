@@ -1,0 +1,6 @@
+{"id":"triage-001","description":"中心区人民路有一个很深的坑，车辆通行危险","region":"中心区","expected_category":"road_damage","expected_priority":"P1"}
+{"id":"triage-002","description":"路灯整晚不亮，晚上看不清道路","region":"中心区","expected_category":"street_light","expected_priority":"P3"}
+{"id":"triage-003","description":"十字路口红绿灯故障，车辆无法判断通行","region":"中心区","expected_category":"traffic_signal","expected_priority":"P2"}
+{"id":"triage-004","description":"暴雨后道路积水，排水口堵塞","region":"中心区","expected_category":"drainage","expected_priority":"P2"}
+{"id":"triage-005","description":"垃圾桶已经装满并有异味","region":"中心区","expected_category":"waste_bin","expected_priority":"P3"}
+{"id":"triage-006","description":"这里有问题，请尽快看看","region":"中心区","expected_category":"other","expected_priority":"P4"}

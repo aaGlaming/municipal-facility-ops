@@ -90,3 +90,7 @@
 ## Step 20：实现 Supervisor 与 Agent 循环控制
 
 **状态：完成**。已实现七类 Agent 意图路由、结构化模型决策、模型/工具调用预算、超时、无进展停止、人工确认暂停和 `agent_runs` 运行记录。详见 `step20-supervisor-loop.md`。
+
+## Step 21：实现问题分诊与设施识别 Agent
+
+**状态：完成**。已实现结构化分诊 Prompt、问题类别与优先级判断、区域设施候选匹配、重复报修识别和低置信度人工确认；已建立 6 条 Gold Set 并提供可重复评测脚本，类别和优先级准确率均为 1.0。详见 `step21-triage-facility.md`。
