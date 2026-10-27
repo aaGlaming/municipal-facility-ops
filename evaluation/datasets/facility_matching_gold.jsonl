@@ -1,0 +1,5 @@
+{"id":"facility-001","complexity":"simple","description":"人民路路灯整晚不亮","address":"人民路","region":"中心区","expected_category":"street_light","expected_facility_id":"FAC-LIGHT-001","expected_requires_confirmation":false}
+{"id":"facility-002","complexity":"medium","description":"人民路与解放路路口信号灯故障","address":"人民路与解放路交叉口","region":"中心区","expected_category":"traffic_signal","expected_facility_id":"FAC-SIGNAL-001","expected_requires_confirmation":false}
+{"id":"facility-003","complexity":"medium","description":"东湖路有明显坑洼，车辆通行危险","address":"东湖路","region":"东区","expected_category":"road_damage","expected_facility_id":"FAC-ROAD-001","expected_requires_confirmation":false}
+{"id":"facility-004","complexity":"complex","description":"不知道具体哪一盏灯，附近多处照明异常","address":null,"region":"中心区","expected_category":"street_light","expected_facility_id":null,"expected_requires_confirmation":true}
+{"id":"facility-005","complexity":"very_complex","description":"暴雨后多处积水且无法确认排水设施位置","address":null,"region":"西区","expected_category":"drainage","expected_facility_id":null,"expected_requires_confirmation":true}

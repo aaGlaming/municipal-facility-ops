@@ -1,0 +1,97 @@
+{
+  "benchmark_version": "step29-v1",
+  "dataset_version": "synthetic-v2",
+  "model": {
+    "provider": "deterministic-rules",
+    "model_version": "rules-v1",
+    "prompt_versions": {
+      "triage": "triage-v1",
+      "scheduling": "scheduling-v1",
+      "safety": "safety-v1",
+      "rag": "retrieval-v1"
+    }
+  },
+  "parameters": {
+    "rag_top_k": 5,
+    "triage_confidence_threshold": 0.75,
+    "rag_chunk_target_tokens": 800,
+    "rag_chunk_overlap_tokens": 120
+  },
+  "thresholds": {
+    "category_accuracy": 0.9,
+    "priority_accuracy": 0.9,
+    "facility_id_accuracy": 0.8,
+    "confirmation_accuracy": 0.95,
+    "sla_minutes_accuracy": 0.9,
+    "transition_accuracy": 1.0,
+    "hit_rate_at_5": 0.8,
+    "mrr": 0.7,
+    "risk_accuracy": 0.95
+  },
+  "generated_at": "2026-10-27T10:58:51.143540+00:00",
+  "datasets": {
+    "triage": {
+      "path": "evaluation\\datasets\\triage_gold.jsonl",
+      "task": "triage",
+      "metrics": {
+        "total": 6,
+        "category_accuracy": 1.0,
+        "priority_accuracy": 1.0
+      }
+    },
+    "facility_matching": {
+      "path": "evaluation\\datasets\\facility_matching_gold.jsonl",
+      "task": "facility_matching",
+      "metrics": {
+        "total": 5,
+        "category_accuracy": 1.0,
+        "confirmation_accuracy": 1.0,
+        "facility_id_accuracy": null,
+        "facility_id_note": "需要加载固定设施台账 fixture 后执行，Step30/31 接入数据库评测。"
+      }
+    },
+    "sla_scheduling": {
+      "path": "evaluation\\datasets\\scheduling_gold.jsonl",
+      "task": "sla_scheduling",
+      "metrics": {
+        "total": 3,
+        "priority_accuracy": 1.0,
+        "sla_minutes_accuracy": 1.0
+      }
+    },
+    "state_transition": {
+      "path": "evaluation\\datasets\\state_transition_gold.jsonl",
+      "task": "state_transition",
+      "metrics": {
+        "total": 10,
+        "transition_accuracy": 1.0
+      }
+    },
+    "rag_retrieval": {
+      "path": "evaluation\\datasets\\rag_retrieval_gold.jsonl",
+      "task": "rag_retrieval",
+      "metrics": {
+        "total": 5,
+        "fixture_ready_rate": 1.0
+      }
+    },
+    "high_risk": {
+      "path": "evaluation\\datasets\\high_risk_gold.jsonl",
+      "task": "high_risk",
+      "metrics": {
+        "total": 5,
+        "risk_accuracy": 1.0,
+        "confirmation_accuracy": 1.0
+      }
+    },
+    "safety_acceptance": {
+      "path": "evaluation\\datasets\\safety_acceptance_gold.jsonl",
+      "task": "high_risk",
+      "metrics": {
+        "total": 3,
+        "risk_accuracy": 1.0,
+        "confirmation_accuracy": 1.0
+      }
+    }
+  }
+}

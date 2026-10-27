@@ -1,0 +1,5 @@
+{"id":"rag-001","complexity":"simple","query":"路灯故障维修安全要求","region":"中心区","facility_type":"street_light","version":"v1","expected_document":"street-light-maintenance-v1","relevant_terms":["路灯","安全","维修"],"top_k":5}
+{"id":"rag-002","complexity":"medium","query":"交通信号灯带电维修和封路要求","region":"中心区","facility_type":"traffic_signal","version":"v1","expected_document":"traffic-signal-safety-v1","relevant_terms":["交通信号","带电","封路"],"top_k":5}
+{"id":"rag-003","complexity":"medium","query":"暴雨后排水设施巡检步骤","region":"西区","facility_type":"drainage","version":"v2","expected_document":"drainage-inspection-v2","relevant_terms":["暴雨","排水","巡检"],"top_k":5}
+{"id":"rag-004","complexity":"complex","query":"P1 道路坑洼首次响应时限","region":"东区","facility_type":"road_damage","version":"v1","expected_document":"sla-priority-v1","relevant_terms":["P1","道路","响应"],"top_k":5}
+{"id":"rag-005","complexity":"very_complex","query":"维修完成后如何提交照片并进行验收","region":"中心区","facility_type":null,"version":"v1","expected_document":"repair-acceptance-v1","relevant_terms":["照片","维修","验收"],"top_k":5}

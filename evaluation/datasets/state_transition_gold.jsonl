@@ -1,0 +1,10 @@
+{"id":"state-001","complexity":"simple","from":"NEW","to":"TRIAGED","expected_allowed":true}
+{"id":"state-002","complexity":"simple","from":"TRIAGED","to":"ASSIGNED","expected_allowed":true}
+{"id":"state-003","complexity":"medium","from":"ASSIGNED","to":"IN_PROGRESS","expected_allowed":true}
+{"id":"state-004","complexity":"medium","from":"IN_PROGRESS","to":"WAITING_CONFIRMATION","expected_allowed":true}
+{"id":"state-005","complexity":"complex","from":"WAITING_CONFIRMATION","to":"COMPLETED","expected_allowed":true}
+{"id":"state-006","complexity":"complex","from":"COMPLETED","to":"ACCEPTED","expected_allowed":true}
+{"id":"state-007","complexity":"simple","from":"ACCEPTED","to":"CLOSED","expected_allowed":true}
+{"id":"state-008","complexity":"medium","from":"NEW","to":"CLOSED","expected_allowed":false}
+{"id":"state-009","complexity":"medium","from":"CANCELLED","to":"IN_PROGRESS","expected_allowed":false}
+{"id":"state-010","complexity":"very_complex","from":"CLOSED","to":"REJECTED","expected_allowed":false}
