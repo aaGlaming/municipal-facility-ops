@@ -32,6 +32,8 @@ class AgentState(TypedDict, total=False):
     pending_confirmation: HumanConfirmation | None
     stop_reason: StopReason | None
     model_calls: int
+    model_input_tokens: int
+    model_output_tokens: int
     tool_calls: int
     no_progress_count: int
     progress_fingerprint: str | None
@@ -55,6 +57,8 @@ def initial_agent_state(request: AgentRequest, run_id: str, started_at: datetime
         "pending_confirmation": None,
         "stop_reason": None,
         "model_calls": 0,
+        "model_input_tokens": 0,
+        "model_output_tokens": 0,
         "tool_calls": 0,
         "no_progress_count": 0,
         "progress_fingerprint": None,

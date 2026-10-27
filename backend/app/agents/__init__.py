@@ -1,2 +1,5 @@
-# 包说明：市政设施业务 Agent。
-# 后续导出 Supervisor 和各业务 Agent 的构造函数，避免在包导入时初始化 LLM 客户端。
+"""Business Agents and Supervisor exports."""
+
+from app.agents.supervisor import Supervisor, SupervisorDecision, build_supervisor, route_intent
+
+__all__ = ["Supervisor", "SupervisorDecision", "build_supervisor", "route_intent"]
