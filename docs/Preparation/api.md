@@ -79,3 +79,9 @@
 - `GET /api/rag/documents/{document_id}`：查看文档元数据、解析状态和原文分段。
 
 上传接口需要 `document:upload` 权限，查看接口需要 `document:read` 权限；解析失败会保留失败文档记录并返回 `DOCUMENT_PARSE_FAILED`。
+
+## Chunk 预览
+
+- `GET /api/rag/documents/{document_id}/chunks/preview`：按参数预览清洗和切块结果，不修改数据库。
+- `POST /api/rag/documents/{document_id}/chunks/regenerate`：按新目标/重叠参数重新生成并持久化 Chunk，需要 `document:chunk`。
+- `GET /api/rag/documents/{document_id}/chunks`：查看当前持久化 Chunk。

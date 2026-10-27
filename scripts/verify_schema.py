@@ -23,6 +23,7 @@ REQUIRED_TABLES = {
     "work_order_status_events",
     "documents",
     "document_parts",
+    "document_chunks",
     "agent_runs",
     "tool_calls",
     "audit_logs",
@@ -63,6 +64,7 @@ REQUIRED_COLUMNS = {
         "version",
     },
     "document_parts": {"id", "document_id", "part_index", "text"},
+    "document_chunks": {"id", "document_id", "chunk_index", "text", "token_count", "target_tokens", "overlap_tokens"},
     "agent_runs": {"id", "trace_id", "status", "started_at", "finished_at", "source_type", "version", "is_deleted"},
     "audit_logs": {"id", "agent_run_id", "tool_call_id", "action", "human_confirmation", "event_hash", "created_at"},
 }

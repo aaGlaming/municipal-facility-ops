@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 14 状态
+# 执行手册 Step 1～Step 15 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -67,4 +67,8 @@
 
 **状态：完成**。已实现 PDF、DOCX、Markdown、TXT、HTML 上传，文件大小/类型/文件名/内容安全校验、SHA256 去重、来源元数据、原始文件保存、段落/标题/页码/表格解析和失败状态记录。详见 `step14-rag-documents.md`。
 
-Step 15 尚未开始。
+## Step 15：实现文本清洗与 Chunk 预览
+
+**状态：完成**。已实现不可见字符/重复空白/页眉页脚清洗、标题/段落/表格边界切分、默认 800/120 Chunk 参数、来源和偏移元数据、预览、参数调整和持久化重生成。详见 `step15-text-cleaning-chunks.md`。
+
+Step 16 尚未开始。

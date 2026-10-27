@@ -35,6 +35,8 @@ class Settings(BaseSettings):
     rag_max_upload_bytes: int = Field(
         10 * 1024 * 1024, ge=1024, le=100 * 1024 * 1024, validation_alias="RAG_MAX_UPLOAD_BYTES"
     )
+    rag_chunk_target_tokens: int = Field(800, ge=20, le=4000, validation_alias="RAG_CHUNK_TARGET_TOKENS")
+    rag_chunk_overlap_tokens: int = Field(120, ge=0, le=1000, validation_alias="RAG_CHUNK_OVERLAP_TOKENS")
 
     model_config = SettingsConfigDict(
         env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False, populate_by_name=True

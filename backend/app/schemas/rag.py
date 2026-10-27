@@ -36,3 +36,30 @@ class DocumentResponse(BaseModel):
 class DocumentDetailResponse(BaseModel):
     item: DocumentResponse
     parts: list[DocumentPartResponse]
+
+
+class ChunkResponse(BaseModel):
+    id: str
+    document_id: str
+    chunk_index: int
+    text: str
+    token_count: int
+    page_number: int | None
+    heading: str | None
+    source_part_id: str | None
+    start_offset: int
+    end_offset: int
+    target_tokens: int
+    overlap_tokens: int
+    cleaning_version: str
+
+
+class ChunkPreviewResponse(BaseModel):
+    items: list[ChunkResponse]
+    target_tokens: int
+    overlap_tokens: int
+
+
+class ChunkRegenerateRequest(BaseModel):
+    target_tokens: int = 800
+    overlap_tokens: int = 120

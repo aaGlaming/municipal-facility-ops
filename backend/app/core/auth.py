@@ -175,6 +175,8 @@ MENU_PERMISSIONS = {
     "public_report_import": "report:import",
     "documents": "document:read",
     "document_upload": "document:upload",
+    "chunk_preview": "document:read",
+    "chunk_regenerate": "document:chunk",
     "work_orders": "work_order:read",
     "work_order_updates": "work_order:write",
     "inspections": "inspection:read",
