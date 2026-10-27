@@ -1,4 +1,10 @@
-# 文件职责：安全作业和风险 Agent。
-# 输入：设施类型、问题描述、现场信息和维修方案。
-# 输出：风险标签、隔离措施、PPE/交通防护要求、禁止动作和人工确认要求。
-# 只输出建议和风险判断；涉及断电、封路、危险区域等动作必须显式确认。
+"""Safety Agent exports."""
+
+from app.agents.safety_acceptance_agent import (
+    SafetyAgent,
+    SafetyAssessmentRequest,
+    SafetyAssessmentResult,
+    assess_safety,
+)
+
+__all__ = ["SafetyAgent", "SafetyAssessmentRequest", "SafetyAssessmentResult", "assess_safety"]

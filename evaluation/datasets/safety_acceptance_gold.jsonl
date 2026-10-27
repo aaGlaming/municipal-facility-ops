@@ -1,0 +1,3 @@
+{"id":"safety-001","facility_type":"traffic_signal","issue_type":"electrical","work_description":"带电信号灯维修并封路","region":"中心区","live_power":true,"road_closure":true,"expected_risk":"CRITICAL","expected_confirmation":true}
+{"id":"safety-002","facility_type":"waste_bin","issue_type":"cleaning","work_description":"清理垃圾桶","region":"中心区","live_power":false,"road_closure":false,"expected_risk":"LOW","expected_confirmation":false}
+{"id":"safety-003","facility_type":"street_light","issue_type":"lamp replacement","work_description":"高空更换路灯","region":"中心区","high_work":true,"expected_risk":"HIGH","expected_confirmation":true}
