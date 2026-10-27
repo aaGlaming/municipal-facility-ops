@@ -34,6 +34,13 @@ class DocumentResponse(BaseModel):
     created_at: datetime
 
 
+class DocumentListResponse(BaseModel):
+    items: list[DocumentResponse]
+    total: int
+    page: int
+    page_size: int
+
+
 class DocumentDetailResponse(BaseModel):
     item: DocumentResponse
     parts: list[DocumentPartResponse]

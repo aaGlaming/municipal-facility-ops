@@ -15,7 +15,7 @@ const routes = [
   { path: '/work-orders', component: WorkOrderView, meta: { title: '工单中心', permission: 'work_order:read', module: 'work-orders', state: 'ready' } },
   { path: '/agents/:module', component: ModuleView, meta: { title: 'Agent 工作台', permission: 'agent:run', module: 'agent' } },
   { path: '/rag', redirect: '/rag/documents' },
-  { path: '/rag/:module', component: ModuleView, meta: { title: 'RAG 工作台', permission: 'document:read', module: 'rag' } },
+  { path: '/rag/:module', component: RagWorkbench, meta: { title: 'RAG 工作台', permission: 'document:read', module: 'rag' } },
   { path: '/records/:module', component: ModuleView, meta: { title: '运行与审计记录', permission: 'agent:read', module: 'records' } },
 ]
 

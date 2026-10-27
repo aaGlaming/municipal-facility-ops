@@ -11,13 +11,14 @@ from app.schemas.rag import (
     ChunkPreviewResponse,
     ChunkRegenerateRequest,
     DocumentDetailResponse,
+    DocumentListResponse,
     EmbeddingResponse,
     RagSearchDebugResponse,
     RagSearchRequest,
     RagSearchResponse,
 )
 from app.services.chunk_service import persisted_chunks, preview_chunks, regenerate_chunks
-from app.services.document_service import document_dict, get_document, part_dict, upload_document
+from app.services.document_service import document_dict, get_document, list_documents, part_dict, upload_document
 from app.services.embedding_service import delete_document_embeddings, rebuild_document_embeddings
 from app.services.retrieval_service import search_documents
 
@@ -44,6 +45,21 @@ def search_debug(
     principal: AuthPrincipal = Depends(require_permission("document:read")),
 ) -> dict:
     return search_documents(db, settings, principal, request, payload, debug=True)
+
+
+@router.get("/documents", response_model=DocumentListResponse)
+def list_route(
+    request: Request,
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=20, ge=1, le=100),
+    status: str | None = Query(default=None, max_length=32),
+    region: str | None = Query(default=None, max_length=100),
+    facility_type: str | None = Query(default=None, max_length=64),
+    version: str | None = Query(default=None, max_length=64),
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("document:read")),
+) -> dict:
+    return list_documents(db, principal, request, page, page_size, status, region, facility_type, version)
 
 
 @router.post("/documents", status_code=201, response_model=DocumentDetailResponse)

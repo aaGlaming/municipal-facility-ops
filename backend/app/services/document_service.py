@@ -195,6 +195,40 @@ async def upload_document(
         raise
 
 
+def list_documents(
+    db: Session,
+    principal: AuthPrincipal,
+    request: Request,
+    page: int,
+    page_size: int,
+    status: str | None = None,
+    region: str | None = None,
+    facility_type: str | None = None,
+    version: str | None = None,
+) -> dict:
+    from sqlalchemy import func
+
+    ensure_region_access(principal, region, request)
+    stmt = select(Document).where(Document.is_deleted.is_(False))
+    if "*" not in principal.regions and "admin" not in principal.roles:
+        stmt = stmt.where(
+            Document.region.in_(sorted(principal.regions)) if principal.regions else Document.id == "__none__"
+        )
+    if region:
+        stmt = stmt.where(Document.region == region)
+    if status:
+        stmt = stmt.where(Document.status == status)
+    if facility_type:
+        stmt = stmt.where(Document.facility_type == facility_type)
+    if version:
+        stmt = stmt.where(Document.version == version)
+    total = db.scalar(select(func.count()).select_from(stmt.order_by(None).subquery())) or 0
+    rows = db.scalars(
+        stmt.order_by(Document.created_at.desc(), Document.id).offset((page - 1) * page_size).limit(page_size)
+    ).all()
+    return {"items": [document_dict(row) for row in rows], "total": total, "page": page, "page_size": page_size}
+
+
 def get_document(
     db: Session, principal: AuthPrincipal, request: Request, document_id: str
 ) -> tuple[Document, list[DocumentPart]]:
