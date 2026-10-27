@@ -33,6 +33,17 @@ uploads/       文档上传暂存区
 
 Step 1～32 的业务、Agent、RAG、前端、评测和离线验收已完成。Step 33 的真实依赖门禁因本机未运行 MySQL、Chroma 和模型而阻断；Step 34 已完成文件备份与独立恢复，MySQL 逻辑 dump 待 Step 36 Compose 环境补做。交付总览见 `docs/DELIVERY.md`。
 
+## Windows IDE 直启（不使用 Docker）
+
+项目支持在 Windows IDE 中分终端启动 MySQL、Chroma、FastAPI 和 Vue。完整步骤见 [`docs/Execution/windows-direct-start.md`](docs/Execution/windows-direct-start.md)。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/start_windows.ps1 -Component mysql
+powershell -ExecutionPolicy Bypass -File scripts/start_windows.ps1 -Component chroma
+powershell -ExecutionPolicy Bypass -File scripts/start_windows.ps1 -Component backend
+powershell -ExecutionPolicy Bypass -File scripts/start_windows.ps1 -Component frontend
+```
+
 ## 本地运行
 
 后端：
@@ -54,7 +65,7 @@ npm run dev
 
 后端测试：`python -m pytest -q`
 
-Docker Compose 按执行手册 Step 36 启动和验收；当前本机未安装 Docker。
+Docker Compose 不是 Windows IDE 直启的前置条件；Step 36 仍保留为可选的容器化发布验收。
 
 ## 数据准备
 
