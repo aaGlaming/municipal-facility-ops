@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-27T11:24:56.184322+00:00",
+  "backend_health": {
+    "status_code": 200,
+    "passed": true
+  },
+  "backend_readiness": {
+    "status_code": 503,
+    "passed": false,
+    "response": {
+      "status": "not_ready",
+      "trace_id": "fb01ada2-f839-4d50-af41-c7102d97a54f",
+      "checks": {
+        "mysql": "unavailable",
+        "chroma": "unavailable",
+        "llm": "not_configured"
+      },
+      "code": "DEPENDENCY_NOT_READY",
+      "message": "一个或多个依赖服务不可用",
+      "retryable": true
+    }
+  },
+  "frontend_shell": {
+    "status_code": 200,
+    "passed": true
+  },
+  "dependency_gate": "blocked_by_local_dependencies",
+  "notes": [
+    "/ready 返回 503 时保留依赖 checks，待 Step36 Compose 启动 MySQL、Chroma 和模型服务后复验。"
+  ]
+}

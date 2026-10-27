@@ -138,3 +138,7 @@
 ## Step 32：执行端到端业务验收
 
 **状态：完成**。已新增端到端验收链路，从问题上报、分诊、SLA、巡检、派工、维修、验收、关闭到审计均可重复验证；同时覆盖幂等、来源标签、证据 URI、区域权限和高风险人工确认。86 个后端测试通过。详见 `step32-e2e-acceptance.md`。
+
+## Step 33：完成本地环境最终业务验收
+
+**状态：部分完成，依赖阻断**。本地 FastAPI `/health`、Vite `/login`、前端类型检查/构建和 86 个后端业务回归均通过；但 `/ready` 检测到 MySQL、Chroma 未运行且模型未配置，本机也未安装 Docker，真实依赖门禁需在 Step36 启动 Compose 后复验。详见 `step33-local-acceptance.md` 和 `evaluation/reports/step33-local-acceptance.json`。
