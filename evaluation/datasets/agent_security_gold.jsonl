@@ -1,0 +1,7 @@
+{"id":"route-001","intent":"现场安全风险和围挡","expected_agent":"safety"}
+{"id":"route-002","intent":"查设施台账和历史问题","expected_agent":"facility"}
+{"id":"route-003","intent":"计算 SLA 截止时间","expected_agent":"sla"}
+{"id":"route-004","intent":"安排巡检窗口","expected_agent":"inspection"}
+{"id":"route-005","intent":"调度维修人员派工","expected_agent":"dispatch"}
+{"id":"route-006","intent":"提交维修验收","expected_agent":"acceptance"}
+{"id":"route-007","intent":"描述一个路灯问题","expected_agent":"triage"}

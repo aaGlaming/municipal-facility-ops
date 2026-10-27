@@ -1,0 +1,66 @@
+{
+  "benchmark_version": "step31-v1",
+  "datasets": {
+    "routing": {
+      "total": 7,
+      "routing_accuracy": 1.0
+    }
+  },
+  "security_checks": {
+    "tool_parameter_and_unknown_tool_rejection": {
+      "passed": true,
+      "error_code": "TOOL_NOT_FOUND,INVALID_ARGUMENT"
+    },
+    "prompt_injection_text_boundary": {
+      "passed": true,
+      "severity": "HIGH"
+    },
+    "sensitive_log_redaction": {
+      "passed": true,
+      "severity": "CRITICAL"
+    },
+    "contract_catalog_integrity": {
+      "passed": true,
+      "severity": "HIGH"
+    }
+  },
+  "findings": [
+    {
+      "id": "SEC-001",
+      "severity": "HIGH",
+      "title": "提示注入不能直接触发工具",
+      "reproduction": "在问题描述中加入忽略指令并要求调用工具",
+      "status": "MITIGATED",
+      "regression_test": "test_prompt_injection_is_treated_as_untrusted_text"
+    },
+    {
+      "id": "SEC-002",
+      "severity": "HIGH",
+      "title": "工具白名单和参数 schema 拦截",
+      "reproduction": "提交 unknown.execute 或不符合 input_model 的参数",
+      "status": "MITIGATED",
+      "regression_test": "test_unknown_tool_is_rejected_before_execution"
+    },
+    {
+      "id": "SEC-003",
+      "severity": "CRITICAL",
+      "title": "敏感信息不得进入日志和审计",
+      "reproduction": "将 token 放入审计 details 或结构化日志字段",
+      "status": "MITIGATED",
+      "regression_test": "test_audit_redacts_sensitive_values"
+    },
+    {
+      "id": "SEC-004",
+      "severity": "HIGH",
+      "title": "越权查询和高风险动作必须拒绝或确认",
+      "reproduction": "缺少权限访问 Agent/RAG，或无确认关闭工单",
+      "status": "MITIGATED",
+      "regression_test": "test_agent_route_requires_authentication_and_permission; test_high_risk_work_order_transition_requires_confirmation"
+    }
+  ],
+  "recommendations": [
+    "Step32 端到端验收继续复用这些回归测试",
+    "Step33 在真实依赖不可用时补做超时和故障注入",
+    "将 Codex Security 扫描结果回写本报告"
+  ]
+}

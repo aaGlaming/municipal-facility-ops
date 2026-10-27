@@ -130,3 +130,7 @@
 ## Step 30：执行 RAG 评测
 
 **状态：完成**。已使用固定 SQLite/Embedding/Chroma fixture 调用生产检索逻辑，完成 Recall@1、Hit Rate@3/5、MRR、来源正确率、Chunk 可定位率、metadata 过滤正确率和过期文档拦截率评测，当前结果均为 1.0；报告包含版本、样例、失败归因和改进建议。详见 `step30-rag-evaluation.md`。
+
+## Step 31：执行 Agent 评测与安全验证
+
+**状态：完成**。已完成 7 类 Agent 路由评测、工具契约/参数拦截、提示注入、恶意内容、越权查询、敏感信息脱敏和高风险确认验证；报告记录 SEC-001 至 SEC-004 的严重级别、复现步骤、修复状态和回归测试。84 个后端测试通过。详见 `step31-agent-security.md`。
