@@ -19,7 +19,7 @@
 
 ## 工具契约
 
-`backend/app/tools/contracts.py` 为 13 个工具登记输入 schema、输出 schema、允许的 Agent、权限、风险等级、人工确认策略、错误码、可重试错误、幂等要求和审计动作。工具采用 `domain.verb` 命名并由 `AGENT_TOOL_WHITELIST` 生成每个 Agent 的白名单。
+`backend/app/tools/contracts.py` 为 16 个工具登记输入 schema、输出 schema、允许的 Agent、权限、风险等级、人工确认策略、错误码、可重试错误、幂等要求和审计动作。工具采用 `domain.verb` 命名并由 `AGENT_TOOL_WHITELIST` 生成每个 Agent 的白名单。
 
 | 工具 | 风险 | 确认 | 幂等 | 允许的主要 Agent |
 | --- | --- | --- | --- | --- |
@@ -27,6 +27,7 @@
 | `rag.search` | READ_ONLY | NEVER | 否 | supervisor、triage、facility、sla、safety、acceptance |
 | `sla.calculate` / `staff.capacity` | READ_ONLY | NEVER | 否 | sla、inspection、dispatch |
 | `report.create` / `inspection.create` / `work_order.create` | WRITE | OPTIONAL | 是 | triage、inspection、sla、dispatch |
+| `inspection.assign` / `inspection.update_status` / `work_order.escalate_overdue` | WRITE | OPTIONAL | 是 | inspection、sla、dispatch |
 | `work_order.assign` / `work_order.update_status` | HIGH | REQUIRED | 是 | dispatch、triage、acceptance |
 | `safety.checklist` | READ_ONLY | NEVER | 否 | safety、dispatch、acceptance |
 | `acceptance.submit` | HIGH | REQUIRED | 是 | acceptance |

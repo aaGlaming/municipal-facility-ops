@@ -43,6 +43,7 @@ def test_idempotency_key_is_stable_and_tool_request_is_strict() -> None:
         tool_call_id="CALL-1",
         agent_run_id="RUN-1",
         trace_id="TRACE-1",
+        agent_name="triage",
         tool_name="work_order.create",
         arguments={"priority": "P2"},
         idempotency_key=first,
@@ -61,7 +62,7 @@ def test_idempotency_key_is_stable_and_tool_request_is_strict() -> None:
 def test_tool_catalog_has_schema_whitelist_risk_and_failure_policy() -> None:
     validate_contract_catalog()
     catalog = tool_catalog()
-    assert len(catalog) == len(TOOL_CONTRACTS) == 13
+    assert len(catalog) == len(TOOL_CONTRACTS) == 16
     assert all(item["input"] and item["output"] for item in catalog)
     assert set(AGENT_TOOL_WHITELIST) == {
         "supervisor",

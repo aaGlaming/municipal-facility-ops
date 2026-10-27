@@ -87,6 +87,19 @@ REQUIRED_COLUMNS = {
         "document_version",
     },
     "agent_runs": {"id", "trace_id", "status", "started_at", "finished_at", "source_type", "version", "is_deleted"},
+    "tool_calls": {
+        "id",
+        "agent_run_id",
+        "tool_name",
+        "action",
+        "status",
+        "idempotency_key",
+        "request_json",
+        "response_json",
+        "human_confirmation",
+        "started_at",
+        "finished_at",
+    },
     "audit_logs": {"id", "agent_run_id", "tool_call_id", "action", "human_confirmation", "event_hash", "created_at"},
 }
 REQUIRED_INDEXES = {

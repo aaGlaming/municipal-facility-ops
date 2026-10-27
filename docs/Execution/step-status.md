@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 18 状态
+# 执行手册 Step 1～Step 19 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -81,4 +81,8 @@
 
 ## Step 18：设计 Agent 状态与工具契约
 
-**状态：完成**。已定义 LangGraph `AgentState`、请求/计划/观察/证据/错误/停止原因/人工确认/工具调用结构；已登记 13 个命名空间工具的输入输出 schema、Agent 白名单、权限、风险等级、确认策略、幂等规则、审计动作和可重试错误。详见 `step18-agent-contracts.md`。具体工具执行安排在 Step19，Supervisor 循环安排在 Step20。
+**状态：完成**。已定义 LangGraph `AgentState`、请求/计划/观察/证据/错误/停止原因/人工确认/工具调用结构；已登记 16 个命名空间工具的输入输出 schema、Agent 白名单、权限、风险等级、确认策略、幂等规则、审计动作和可重试错误。详见 `step18-agent-contracts.md`。具体工具执行安排在 Step19，Supervisor 循环安排在 Step20。
+
+## Step 19：实现 Agent 工具层
+
+**状态：完成**。已实现统一工具执行网关，接入设施、历史、报修、SLA、巡检、人员/供应商、工单、安全、验收和审计工具；执行前统一校验 schema、Agent 白名单、权限、区域、业务状态、风险确认和幂等键；工具调用写入持久化 `tool_calls` 记录，重复调用返回原结果。详见 `step19-agent-tools.md`。Step20 尚未开始。

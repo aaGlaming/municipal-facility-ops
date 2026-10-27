@@ -51,6 +51,10 @@ class StaffCapacityInput(BaseModel):
     scheduled_for: date
 
 
+class EscalateOverdueInput(BaseModel):
+    region: str | None = Field(default=None, max_length=100)
+
+
 class ReportCreateInput(BaseModel):
     description: str = Field(min_length=1, max_length=5000)
     issue_type: str = Field(min_length=1, max_length=64)
@@ -67,6 +71,18 @@ class InspectionCreateInput(BaseModel):
     due_at: datetime
     assignee_id: str | None = Field(default=None, max_length=64)
     priority: Literal["P1", "P2", "P3", "P4"] = "P3"
+
+
+class InspectionAssignInput(BaseModel):
+    inspection_id: str = Field(min_length=1, max_length=64)
+    assignee_id: str = Field(min_length=1, max_length=64)
+
+
+class InspectionStatusInput(BaseModel):
+    inspection_id: str = Field(min_length=1, max_length=64)
+    target_status: Literal["SCHEDULED", "ASSIGNED", "IN_PROGRESS", "DEFERRED", "COMPLETED"]
+    reason: str | None = Field(default=None, max_length=2000)
+    result_notes: str | None = Field(default=None, max_length=2000)
 
 
 class WorkOrderCreateInput(BaseModel):
@@ -99,7 +115,7 @@ class SafetyChecklistInput(BaseModel):
 
 class AcceptanceSubmitInput(BaseModel):
     work_order_id: str = Field(min_length=1, max_length=64)
-    result: Literal["ACCEPTED", "REJECTED", "CONDITIONAL"]
+    result: Literal["ACCEPTED", "REJECTED"]
     reason: str | None = Field(default=None, max_length=2000)
     evidence_uri: str | None = Field(default=None, max_length=1024)
 
@@ -135,6 +151,10 @@ class WriteResultOutput(BaseModel):
 class AuditResultOutput(BaseModel):
     audit_id: str
     recorded: bool = True
+
+
+class EscalationOutput(BaseModel):
+    escalated_count: int = Field(ge=0)
 
 
 @dataclass(frozen=True)
@@ -298,6 +318,47 @@ TOOL_CONTRACTS: dict[str, ToolContract] = {
         idempotent=True,
         audit_action="inspection_create",
     ),
+    "inspection.assign": _contract(
+        "inspection.assign",
+        "为已创建的巡检任务分配活跃维修人员；必须通过区域和人员状态校验，返回巡检任务状态。",
+        ("inspection",),
+        ("inspection:write",),
+        "WRITE",
+        "OPTIONAL",
+        InspectionAssignInput,
+        WriteResultOutput,
+        (
+            "INVALID_ARGUMENT",
+            "REGION_SCOPE_DENIED",
+            "TECHNICIAN_NOT_FOUND",
+            "TECHNICIAN_INACTIVE",
+            "DUPLICATE_REQUEST",
+            "DATABASE_UNAVAILABLE",
+        ),
+        ("DATABASE_UNAVAILABLE",),
+        idempotent=True,
+        audit_action="inspection_assign",
+    ),
+    "inspection.update_status": _contract(
+        "inspection.update_status",
+        "按巡检状态机记录开始、延期、恢复或完成结果；非法状态转移必须拒绝并返回当前状态。",
+        ("inspection",),
+        ("inspection:write",),
+        "WRITE",
+        "OPTIONAL",
+        InspectionStatusInput,
+        WriteResultOutput,
+        (
+            "INVALID_ARGUMENT",
+            "REGION_SCOPE_DENIED",
+            "INVALID_INSPECTION_TRANSITION",
+            "DUPLICATE_REQUEST",
+            "DATABASE_UNAVAILABLE",
+        ),
+        ("DATABASE_UNAVAILABLE",),
+        idempotent=True,
+        audit_action="inspection_status_update",
+    ),
     "work_order.create": _contract(
         "work_order.create",
         "从已确认的问题或设施创建维修工单；必须提供优先级和区域，返回工单 ID 与初始状态。",
@@ -333,6 +394,20 @@ TOOL_CONTRACTS: dict[str, ToolContract] = {
         ("DATABASE_UNAVAILABLE",),
         idempotent=True,
         audit_action="work_order_assign",
+    ),
+    "work_order.escalate_overdue": _contract(
+        "work_order.escalate_overdue",
+        "将当前用户区域内已超过 SLA 且未进入终态的工单升级；返回升级数量和工单摘要。",
+        ("sla", "dispatch"),
+        ("work_order:write",),
+        "WRITE",
+        "OPTIONAL",
+        EscalateOverdueInput,
+        EscalationOutput,
+        ("INVALID_ARGUMENT", "REGION_SCOPE_DENIED", "DATABASE_UNAVAILABLE"),
+        ("DATABASE_UNAVAILABLE",),
+        idempotent=True,
+        audit_action="work_order_escalate_overdue",
     ),
     "work_order.update_status": _contract(
         "work_order.update_status",

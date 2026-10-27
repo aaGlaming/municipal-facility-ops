@@ -128,6 +128,7 @@ class ToolCallRequest(BaseModel):
     tool_call_id: str = Field(min_length=1, max_length=64)
     agent_run_id: str = Field(min_length=1, max_length=64)
     trace_id: str = Field(min_length=1, max_length=128)
+    agent_name: AgentName
     tool_name: str = Field(pattern=r"^[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*$", max_length=128)
     arguments: dict[str, Any] = Field(default_factory=dict)
     idempotency_key: str = Field(min_length=16, max_length=255)

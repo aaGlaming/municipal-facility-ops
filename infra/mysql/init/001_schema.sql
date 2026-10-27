@@ -428,6 +428,7 @@ CREATE TABLE IF NOT EXISTS tool_calls (
   request_json JSON,
   response_json JSON,
   error TEXT,
+  human_confirmation BOOLEAN NOT NULL DEFAULT FALSE,
   started_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   finished_at TIMESTAMP NULL,
   KEY idx_tool_agent_started (agent_run_id, started_at),
