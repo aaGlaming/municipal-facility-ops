@@ -175,6 +175,8 @@ MENU_PERMISSIONS = {
     "public_report_import": "report:import",
     "work_orders": "work_order:read",
     "work_order_updates": "work_order:write",
+    "inspections": "inspection:read",
+    "inspection_management": "inspection:write",
     "audit": "audit:read",
     "agents": "agent:run",
     "users": "user:manage",

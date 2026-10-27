@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 12 状态
+# 执行手册 Step 1～Step 13 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -59,4 +59,8 @@
 
 **状态：完成**。已实现设施分页、筛选、详情、历史事件、地址/坐标/类型/区域查询、附近设施、内部问题上报、公开事件导入、来源区分、外部 ID 去重、幂等提交、重复问题候选检测和状态更新。详见 `step12-facilities-reports.md`。
 
-Step 13 尚未开始。
+## Step 13：实现工单与巡检业务模块
+
+**状态：完成**。已实现巡检任务创建、派工、执行、延期和完成；工单创建、分诊、派工、执行、待确认、完成、验收、关闭、拒绝、阻塞、升级、取消和返工；状态机校验、持久化幂等、SLA 截止时间计算、超时升级、处理说明、维修证据和验收材料关联。详见 `step13-work-orders-inspections.md`。
+
+Step 14 尚未开始。

@@ -62,3 +62,13 @@
 - `GET /api/reports`、`GET /api/reports/{report_id}`：按区域、状态、分类和来源查询。
 - `PATCH /api/reports/{report_id}/status`：执行受控状态变更。
 - `POST /api/reports/import/public`：导入公开事件，记录为 `source_type=public`。
+
+## 巡检和工单
+
+- `POST/GET /api/inspections`：创建和查询巡检任务。
+- `PATCH /api/inspections/{task_id}/assign`：分配巡检人员。
+- `PATCH /api/inspections/{task_id}/status`：开始、延期、恢复或完成巡检。
+- `POST/GET /api/work-orders`：创建和查询工单。
+- `POST /api/work-orders/{work_order_id}/status`：执行状态机流转。
+- `POST /api/work-orders/{work_order_id}/acceptance`：提交验收结果和证据。
+- `POST /api/work-orders/escalate-overdue`：将超 SLA 未终态工单升级。

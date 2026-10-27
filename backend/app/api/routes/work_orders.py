@@ -1,61 +1,86 @@
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, Query, Request, Response
+from sqlalchemy.orm import Session
 
-from app.core.auth import AuthPrincipal, ensure_region_access, require_permission
-from app.schemas.common import StatusUpdateRequest
-from app.services.work_order_service import authorize_work_order_update
-from app.tools.work_order_tools import authorize_work_order_tool
+from app.core.auth import AuthPrincipal, require_permission
+from app.core.dependencies import get_db_session
+from app.schemas.work_order import AcceptanceCreate, WorkOrderCreate, WorkOrderStatusUpdate
+from app.services.work_order_service import (
+    accept_work_order,
+    create_work_order,
+    escalate_overdue,
+    get_work_order,
+    list_work_orders,
+    update_work_order_status,
+    work_order_dict,
+)
 
 router = APIRouter(prefix="/api/work-orders", tags=["work-orders"])
 
-WORK_ORDERS = {
-    "WO-000001": {"id": "WO-000001", "status": "NEW", "source_type": "synthetic", "region": "DISTRICT-01"},
-}
-IDEMPOTENCY_RESULTS: dict[str, dict] = {}
-ALLOWED_TRANSITIONS = {
-    "NEW": {"TRIAGED", "CANCELLED"},
-    "TRIAGED": {"ASSIGNED", "BLOCKED", "ESCALATED"},
-    "ASSIGNED": {"IN_PROGRESS", "CANCELLED"},
-    "IN_PROGRESS": {"WAITING_CONFIRMATION", "BLOCKED", "ESCALATED"},
-    "WAITING_CONFIRMATION": {"COMPLETED", "REJECTED"},
-    "COMPLETED": {"ACCEPTED", "REJECTED"},
-    "ACCEPTED": {"CLOSED", "REJECTED"},
-    "REJECTED": {"IN_PROGRESS", "CANCELLED"},
-    "BLOCKED": {"IN_PROGRESS", "ESCALATED", "CANCELLED"},
-    "ESCALATED": {"ASSIGNED", "CANCELLED"},
-    "CANCELLED": set(),
-    "CLOSED": set(),
-}
+
+@router.post("", status_code=201)
+def create(
+    payload: WorkOrderCreate,
+    request: Request,
+    response: Response,
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("work_order:create")),
+) -> dict:
+    order, created = create_work_order(db, principal, request, payload)
+    if not created:
+        response.status_code = 200
+    return {"item": work_order_dict(order), "created": created}
+
+
+@router.post("/escalate-overdue")
+def escalate(
+    request: Request,
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("work_order:write")),
+) -> dict:
+    return {"escalated": escalate_overdue(db, principal, request)}
+
+
+@router.get("")
+def list_route(
+    request: Request,
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=20, ge=1, le=100),
+    status: str | None = Query(default=None, max_length=32),
+    region: str | None = Query(default=None, max_length=100),
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("work_order:read")),
+) -> dict:
+    return list_work_orders(db, principal, request, page, page_size, status, region)
+
+
+@router.get("/{work_order_id}")
+def detail(
+    work_order_id: str,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("work_order:read")),
+) -> dict:
+    return {"item": work_order_dict(get_work_order(db, principal, request, work_order_id))}
 
 
 @router.post("/{work_order_id}/status")
 def update_status(
     work_order_id: str,
-    payload: StatusUpdateRequest,
+    payload: WorkOrderStatusUpdate,
     request: Request,
+    db: Session = Depends(get_db_session),
     principal: AuthPrincipal = Depends(require_permission("work_order:write")),
 ) -> dict:
-    work_order = WORK_ORDERS.get(work_order_id)
-    if work_order is None:
-        raise HTTPException(
-            status_code=404, detail={"code": "WORK_ORDER_NOT_FOUND", "message": "工单不存在", "retryable": False}
-        )
-    ensure_region_access(principal, work_order.get("region"), request)
-    authorize_work_order_update(principal, work_order, payload.status, payload.human_confirmation, request)
-    action = "close" if payload.status == "CLOSED" else "update_status"
-    authorize_work_order_tool(principal, action, work_order, payload.human_confirmation, request)
-    if payload.idempotency_key in IDEMPOTENCY_RESULTS:
-        return IDEMPOTENCY_RESULTS[payload.idempotency_key]
-    current = work_order["status"]
-    if payload.status not in ALLOWED_TRANSITIONS.get(current, set()):
-        raise HTTPException(
-            status_code=409,
-            detail={
-                "code": "INVALID_STATE_TRANSITION",
-                "message": f"不允许从 {current} 变更到 {payload.status}",
-                "retryable": False,
-            },
-        )
-    work_order["status"] = payload.status
-    result = {"item": work_order.copy(), "idempotency_key": payload.idempotency_key, "trace_id": request.state.trace_id}
-    IDEMPOTENCY_RESULTS[payload.idempotency_key] = result
-    return result
+    order, _changed = update_work_order_status(db, principal, request, work_order_id, payload)
+    return {"item": work_order_dict(order), "idempotency_key": payload.idempotency_key}
+
+
+@router.post("/{work_order_id}/acceptance")
+def acceptance(
+    work_order_id: str,
+    payload: AcceptanceCreate,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("work_order:accept")),
+) -> dict:
+    return {"item": work_order_dict(accept_work_order(db, principal, request, work_order_id, payload))}

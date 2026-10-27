@@ -20,6 +20,7 @@ REQUIRED_TABLES = {
     "technicians",
     "sla_rules",
     "acceptance_records",
+    "work_order_status_events",
     "agent_runs",
     "tool_calls",
     "audit_logs",
@@ -48,6 +49,7 @@ REQUIRED_COLUMNS = {
         "version",
         "is_deleted",
     },
+    "inspection_tasks": {"id", "facility_id", "scheduled_at", "due_at", "status", "result_notes", "defer_reason"},
     "agent_runs": {"id", "trace_id", "status", "started_at", "finished_at", "source_type", "version", "is_deleted"},
     "audit_logs": {"id", "agent_run_id", "tool_call_id", "action", "human_confirmation", "event_hash", "created_at"},
 }

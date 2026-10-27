@@ -229,6 +229,8 @@ CREATE TABLE IF NOT EXISTS inspection_tasks (
   assignee_id VARCHAR(64),
   status VARCHAR(32) NOT NULL,
   region VARCHAR(100),
+  result_notes TEXT,
+  defer_reason TEXT,
   source_type VARCHAR(32) NOT NULL,
   source_system VARCHAR(64) NOT NULL,
   data_version VARCHAR(64) NOT NULL DEFAULT 'v1',
@@ -294,6 +296,17 @@ CREATE TABLE IF NOT EXISTS acceptance_records (
   KEY idx_acceptance_reviewer_time (reviewer_id, created_at),
   CONSTRAINT fk_acceptance_order FOREIGN KEY (work_order_id) REFERENCES work_orders(id) ON DELETE RESTRICT,
   CONSTRAINT fk_acceptance_reviewer FOREIGN KEY (reviewer_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS work_order_status_events (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  work_order_id VARCHAR(64) NOT NULL,
+  idempotency_key VARCHAR(255) NOT NULL,
+  from_status VARCHAR(32) NOT NULL,
+  to_status VARCHAR(32) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_status_event_idempotency (idempotency_key),
+  KEY idx_status_event_order_time (work_order_id, created_at)
 );
 
 CREATE TABLE IF NOT EXISTS agent_runs (
