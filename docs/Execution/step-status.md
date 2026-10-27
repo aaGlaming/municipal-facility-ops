@@ -146,3 +146,7 @@
 ## Step 34：完成数据备份与恢复验证
 
 **状态：部分完成，MySQL dump 待依赖环境**。已备份 data、Chroma、评测结果、基础设施和配置模板，生成 63 个文件的 SHA256 清单，并在独立目录恢复验证通过；由于本机 MySQL 未运行，数据库逻辑 dump 留待 Step36 Compose 环境补做。详见 `step34-backup-restore.md` 和 `evaluation/reports/step34-backup-restore.json`。
+
+## Step 35：整理项目文档与交付材料
+
+**状态：完成**。已更新 README、交付总览、文件指南、脚本说明和 API 入口，统一记录启动、验证、配置、评测、失败归因、备份恢复和已知依赖阻断；已补充缓存、覆盖率和备份目录的忽略规则。详见 `step35-documentation-delivery.md` 和 `docs/DELIVERY.md`。

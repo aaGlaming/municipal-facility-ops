@@ -16,5 +16,12 @@ dist/
 data/raw/public/*.zip
 data/raw/public/*.parquet
 data/chroma/
+.chroma/
 .cache/
 chroma.log
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+backups/

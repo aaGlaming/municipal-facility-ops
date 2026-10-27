@@ -99,3 +99,21 @@
 - `POST /api/rag/search/debug`：返回同样的检索结果及召回数量、合并数量、模型和耗时等调试信息。
 
 两个接口需要 `document:read` 权限；结果包含文档名、页码、Chunk ID、相似度、metadata 和原文片段。
+
+## Agent 运行
+
+- `POST /api/agents/runs`：创建受控 Agent 运行，按意图路由并返回 `run_id`。
+- `GET /api/agents/runs/{run_id}`、`GET /api/agents/runs/{run_id}/trace`：查看状态、阶段、工具轨迹、证据和停止原因。
+- `POST /api/agents/runs/{run_id}/confirmation`：提交人工确认或拒绝。
+- `POST /api/agents/runs/{run_id}/cancel`、`POST /api/agents/runs/{run_id}/retry`：取消或重试运行。
+
+运行接口受 Agent 权限和区域范围约束；高风险动作在确认前不会执行。
+
+## 认证与监控
+
+- `POST /api/auth/login`：使用配置的 bootstrap 凭据签发 Bearer Token。
+- `GET /api/auth/me`：返回当前用户、角色、区域和菜单权限。
+- `GET /api/monitoring/overview`、`GET /api/monitoring/runs`、`GET /api/monitoring/audit`：查看依赖、请求指标、Agent 运行和审计事件。
+- `POST /api/monitoring/alerts/{alert_id}/close`：关闭告警，需要审计写权限。
+
+除 `/health`、`/ready` 外的业务接口默认需要 Bearer Token。错误响应统一包含 `code`、`message`、`trace_id` 和 `retryable`；权限不足、区域越权和人工确认均会写安全审计。

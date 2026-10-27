@@ -29,9 +29,9 @@ logs/          运行日志
 uploads/       文档上传暂存区
 ```
 
-## 当前开发阶段
+## 当前交付阶段
 
-当前提交为“项目骨架提交”：已提供可运行的 FastAPI 健康检查、设施来源筛选、工单状态机与幂等示例；Vue 工作台可完成类型检查和生产构建；数据脚本、MySQL schema、Docker Compose 和运行配置已建立。完整 Agent 编排、RAG 入库检索、认证 RBAC 和生产级持久化将在后续阶段实现。
+Step 1～32 的业务、Agent、RAG、前端、评测和离线验收已完成。Step 33 的真实依赖门禁因本机未运行 MySQL、Chroma 和模型而阻断；Step 34 已完成文件备份与独立恢复，MySQL 逻辑 dump 待 Step 36 Compose 环境补做。交付总览见 `docs/DELIVERY.md`。
 
 ## 本地运行
 
@@ -54,7 +54,7 @@ npm run dev
 
 后端测试：`python -m pytest -q`
 
-Docker Compose 按执行手册 Step 36 才实现和启动；当前 Step 1～Step 5 阶段不执行 Compose。当前本机未安装 Docker。
+Docker Compose 按执行手册 Step 36 启动和验收；当前本机未安装 Docker。
 
 ## 数据准备
 
