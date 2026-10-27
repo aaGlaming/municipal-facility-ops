@@ -1,0 +1,22 @@
+{
+  "backup_version": "step34-v1",
+  "output": "D:\\LEARN\\AI\\programs\\AgentTask\\Projects\\backups\\municipal-facility-ops\\step34",
+  "file_count": 63,
+  "bytes": 59373106,
+  "sha256_manifest": "D:\\LEARN\\AI\\programs\\AgentTask\\Projects\\backups\\municipal-facility-ops\\step34\\manifest.json",
+  "restore": {
+    "directory": "D:\\LEARN\\AI\\programs\\AgentTask\\Projects\\backups\\municipal-facility-ops\\step34\\restore-check",
+    "mismatches": [],
+    "missing_critical": [],
+    "passed": true
+  },
+  "mysql": {
+    "status": "unavailable",
+    "dump": "not_run",
+    "reason": "MySQL is not running locally; schema and seed artifacts are included"
+  },
+  "secrets_excluded": [
+    "backend/.env",
+    "frontend/.env"
+  ]
+}

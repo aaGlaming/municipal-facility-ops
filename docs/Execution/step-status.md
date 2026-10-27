@@ -142,3 +142,7 @@
 ## Step 33：完成本地环境最终业务验收
 
 **状态：部分完成，依赖阻断**。本地 FastAPI `/health`、Vite `/login`、前端类型检查/构建和 86 个后端业务回归均通过；但 `/ready` 检测到 MySQL、Chroma 未运行且模型未配置，本机也未安装 Docker，真实依赖门禁需在 Step36 启动 Compose 后复验。详见 `step33-local-acceptance.md` 和 `evaluation/reports/step33-local-acceptance.json`。
+
+## Step 34：完成数据备份与恢复验证
+
+**状态：部分完成，MySQL dump 待依赖环境**。已备份 data、Chroma、评测结果、基础设施和配置模板，生成 63 个文件的 SHA256 清单，并在独立目录恢复验证通过；由于本机 MySQL 未运行，数据库逻辑 dump 留待 Step36 Compose 环境补做。详见 `step34-backup-restore.md` 和 `evaluation/reports/step34-backup-restore.json`。
