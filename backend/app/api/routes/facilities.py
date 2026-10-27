@@ -1,55 +1,65 @@
 from fastapi import APIRouter, Depends, Query, Request
+from sqlalchemy.orm import Session
 
-from app.core.auth import AuthPrincipal, ensure_region_access, require_permission
+from app.core.auth import AuthPrincipal, require_permission
+from app.core.dependencies import get_db_session
+from app.schemas.facility import FacilityPage
+from app.services.facility_service import get_facility, list_facilities, list_facility_events, nearby_facilities
 
 router = APIRouter(prefix="/api/facilities", tags=["facilities"])
 
-FACILITIES = [
-    {
-        "id": "FAC-00001",
-        "type": "street_light",
-        "name": "Central Avenue Light 01",
-        "source_type": "synthetic",
-        "region": "DISTRICT-01",
-    },
-    {
-        "id": "FAC-00002",
-        "type": "traffic_signal",
-        "name": "Central Avenue Signal 01",
-        "source_type": "synthetic",
-        "region": "DISTRICT-01",
-    },
-    {
-        "id": "PUBLIC-311-00001",
-        "type": "road_surface",
-        "name": "Public historical event",
-        "source_type": "public",
-        "region": "PUBLIC",
-    },
-]
 
-
-@router.get("")
-def list_facilities(
+@router.get("/nearby")
+def nearby(
     request: Request,
-    source_type: str | None = Query(default=None),
-    region: str | None = Query(default=None),
+    latitude: float = Query(ge=-90, le=90),
+    longitude: float = Query(ge=-180, le=180),
+    radius_meters: int = Query(default=1000, ge=1, le=50000),
+    facility_type: str | None = Query(default=None, alias="type", max_length=64),
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=20, ge=1, le=100),
+    db: Session = Depends(get_db_session),
     principal: AuthPrincipal = Depends(require_permission("facility:read")),
 ) -> dict:
-    ensure_region_access(principal, region, request)
-    items = [
-        item
-        for item in FACILITIES
-        if (source_type is None or item["source_type"] == source_type)
-        and (region is None or item["region"] == region)
-        and principal.can_access_region(item["region"])
-    ]
-    if (
-        not items
-        and region is None
-        and principal.regions
-        and "*" not in principal.regions
-        and "admin" not in principal.roles
-    ):
-        ensure_region_access(principal, "__no_matching_region__", request)
-    return {"items": items, "total": len(items), "trace_id": request.state.trace_id}
+    return nearby_facilities(db, principal, request, latitude, longitude, radius_meters, facility_type, page, page_size)
+
+
+@router.get("", response_model=FacilityPage)
+def list_route(
+    request: Request,
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=20, ge=1, le=100),
+    facility_type: str | None = Query(default=None, alias="type", max_length=64),
+    status: str | None = Query(default=None, max_length=32),
+    region: str | None = Query(default=None, max_length=100),
+    source_type: str | None = Query(default=None, max_length=32),
+    query: str | None = Query(default=None, max_length=255),
+    address: str | None = Query(default=None, max_length=255),
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("facility:read")),
+) -> dict:
+    return list_facilities(
+        db, principal, request, page, page_size, facility_type, status, region, source_type, query, address
+    )
+
+
+@router.get("/{facility_id}")
+def detail(
+    facility_id: str,
+    request: Request,
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("facility:read")),
+) -> dict:
+    return {"item": get_facility(db, principal, request, facility_id)}
+
+
+@router.get("/{facility_id}/events")
+def events(
+    facility_id: str,
+    request: Request,
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=20, ge=1, le=100),
+    db: Session = Depends(get_db_session),
+    principal: AuthPrincipal = Depends(require_permission("facility:read")),
+) -> dict:
+    return list_facility_events(db, principal, request, facility_id, page, page_size)

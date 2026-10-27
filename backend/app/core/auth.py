@@ -169,6 +169,10 @@ def require_human_confirmation(
 
 MENU_PERMISSIONS = {
     "facilities": "facility:read",
+    "reports": "report:read",
+    "report_creation": "report:create",
+    "report_triage": "report:update",
+    "public_report_import": "report:import",
     "work_orders": "work_order:read",
     "work_order_updates": "work_order:write",
     "audit": "audit:read",

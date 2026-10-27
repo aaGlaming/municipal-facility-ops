@@ -48,3 +48,17 @@
 ```
 
 完整 OpenAPI 描述由 FastAPI 在 `/openapi.json` 提供。
+
+## 设施
+
+- `GET /api/facilities`：分页、类型、状态、区域、来源和关键词筛选。
+- `GET /api/facilities/{facility_id}`：设施详情和位置。
+- `GET /api/facilities/{facility_id}/events`：设施关联问题历史。
+- `GET /api/facilities/nearby`：按 WGS84 坐标、半径和类型查询附近设施。
+
+## 问题上报
+
+- `POST /api/reports`：创建内部问题，支持 `idempotency_key` 和 `external_id`。
+- `GET /api/reports`、`GET /api/reports/{report_id}`：按区域、状态、分类和来源查询。
+- `PATCH /api/reports/{report_id}/status`：执行受控状态变更。
+- `POST /api/reports/import/public`：导入公开事件，记录为 `source_type=public`。
