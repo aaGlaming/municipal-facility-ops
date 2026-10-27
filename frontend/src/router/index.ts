@@ -4,6 +4,7 @@ import AgentWorkspace from '../views/AgentWorkspace.vue'
 import FacilityMap from '../views/FacilityMap.vue'
 import LoginView from '../views/LoginView.vue'
 import ModuleView from '../views/ModuleView.vue'
+import WorkOrderView from '../views/WorkOrderView.vue'
 import RagWorkbench from '../views/RagWorkbench.vue'
 
 const routes = [
@@ -11,7 +12,7 @@ const routes = [
   { path: '/login', component: LoginView, meta: { public: true, title: '登录' } },
   { path: '/workspace', component: AgentWorkspace, meta: { title: '值守总览', permission: 'agent:run' } },
   { path: '/facilities', component: FacilityMap, meta: { title: '设施台账', permission: 'facility:read' } },
-  { path: '/work-orders', component: ModuleView, meta: { title: '工单中心', permission: 'work_order:read', module: 'work-orders', state: 'ready' } },
+  { path: '/work-orders', component: WorkOrderView, meta: { title: '工单中心', permission: 'work_order:read', module: 'work-orders', state: 'ready' } },
   { path: '/agents/:module', component: ModuleView, meta: { title: 'Agent 工作台', permission: 'agent:run', module: 'agent' } },
   { path: '/rag', redirect: '/rag/documents' },
   { path: '/rag/:module', component: ModuleView, meta: { title: 'RAG 工作台', permission: 'document:read', module: 'rag' } },
