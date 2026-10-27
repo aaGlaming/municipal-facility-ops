@@ -75,7 +75,7 @@ def _redaction() -> bool:
 
             os.chdir(directory)
             record_security_event("security_evaluation", request=_request(), details={"token": "secret-value"})
-            content = (Path(directory) / "logs" / "security_events.jsonl").read_text(encoding="utf-8")
+            content = (Path(directory) / "logs" / "security" / "security_events.jsonl").read_text(encoding="utf-8")
             return "secret-value" not in content and "[REDACTED]" in content
         finally:
             os.chdir(old)

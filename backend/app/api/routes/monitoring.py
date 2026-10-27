@@ -76,7 +76,7 @@ def audit(
     limit: int = Query(default=100, ge=1, le=500),
     principal: AuthPrincipal = Depends(require_permission("audit:read")),
 ) -> dict[str, Any]:
-    path = Path("logs/security_events.jsonl")
+    path = Path(get_settings().log_directory) / "security" / "security_events.jsonl"
     items: list[dict[str, Any]] = []
     if path.exists():
         for line in reversed(path.read_text(encoding="utf-8").splitlines()):

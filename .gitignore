@@ -10,6 +10,10 @@ dist/
 **/logs/*.jsonl
 **/logs/*.out
 **/logs/*.err
+**/logs/*/*.log
+**/logs/*/*.jsonl
+**/logs/*/*.out
+**/logs/*/*.err
 **/uploads/*
 !**/uploads/.gitkeep
 .superpowers/

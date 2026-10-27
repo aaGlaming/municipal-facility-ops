@@ -58,6 +58,6 @@ def test_unknown_tool_is_rejected_before_execution() -> None:
 def test_audit_redacts_sensitive_values(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     record_security_event("security_test", request=_request(), details={"token": "secret-token", "safe": "ok"})
-    payload = json.loads((tmp_path / "logs" / "security_events.jsonl").read_text(encoding="utf-8"))
+    payload = json.loads((tmp_path / "logs" / "security" / "security_events.jsonl").read_text(encoding="utf-8"))
     assert payload["details"]["token"] == "[REDACTED]"
-    assert "secret-token" not in (tmp_path / "logs" / "security_events.jsonl").read_text(encoding="utf-8")
+    assert "secret-token" not in (tmp_path / "logs" / "security" / "security_events.jsonl").read_text(encoding="utf-8")

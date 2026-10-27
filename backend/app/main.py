@@ -45,7 +45,7 @@ def _error_response(
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     runtime_settings = settings or get_settings()
-    configure_logging(runtime_settings.log_level)
+    configure_logging(runtime_settings.log_level, runtime_settings.log_directory)
     application = FastAPI(
         title="Municipal Facility Operations API",
         version="0.1.0",

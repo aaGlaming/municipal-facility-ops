@@ -24,7 +24,8 @@ def test_monitoring_overview_and_runs_are_permissioned(client, monkeypatch) -> N
 def test_audit_endpoint_is_permissioned_and_reads_append_only_stream(client, tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     (tmp_path / "logs").mkdir()
-    (tmp_path / "logs" / "security_events.jsonl").write_text(
+    (tmp_path / "logs" / "security" / "security_events.jsonl").parent.mkdir(parents=True)
+    (tmp_path / "logs" / "security" / "security_events.jsonl").write_text(
         '{"event_type":"permission_denied","subject":"user-1","details":{"token":"[REDACTED]"}}\n',
         encoding="utf-8",
     )

@@ -39,6 +39,10 @@ chroma run --path .chroma --host 127.0.0.1 --port 8001
 
 前端地址为 `http://127.0.0.1:5173/login`，后端文档为 `http://127.0.0.1:8000/docs`。
 
+## 日志目录
+
+运行后日志按模块写入 `logs/` 子目录：后端结构化日志按 `app.api`、`app.services`、`app.agents` 等模块写入对应目录，安全审计在 `logs/security/`，前端启动输出在 `logs/frontend/`，Chroma 输出在 `logs/chroma/`，MySQL 服务启动记录在 `logs/mysql/`。后端日志按模块 logger 路由并按大小轮转，默认保留 5 个历史文件；可通过 `LOG_DIRECTORY` 修改根目录。
+
 ## 初始化和检查
 
 ```powershell

@@ -7,6 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
+New-Item -ItemType Directory -Force -Path 'logs/backend', 'logs/frontend', 'logs/chroma', 'logs/mysql', 'logs/security' | Out-Null
 
 function Ensure-EnvFile {
     if (-not (Test-Path -LiteralPath 'backend/.env')) {
@@ -28,16 +29,16 @@ function Start-Frontend {
     if (-not (Test-Path -LiteralPath 'frontend/node_modules') -and -not $SkipNpmInstall) {
         npm --prefix frontend ci
     }
-    npm --prefix frontend run dev -- --host 127.0.0.1 --port 5173
+    npm --prefix frontend run dev -- --host 127.0.0.1 --port 5173 2>&1 | Tee-Object -FilePath 'logs/frontend/frontend.log'
 }
 
 function Start-Chroma {
     New-Item -ItemType Directory -Force -Path '.chroma' | Out-Null
     $chroma = Get-Command chroma -ErrorAction SilentlyContinue
     if ($chroma) {
-        & $chroma.Source run --path '.chroma' --host 127.0.0.1 --port 8001
+        & $chroma.Source run --path '.chroma' --host 127.0.0.1 --port 8001 2>&1 | Tee-Object -FilePath 'logs/chroma/chroma.log'
     } else {
-        python -m chromadb.cli.cli run --path '.chroma' --host 127.0.0.1 --port 8001
+        python -m chromadb.cli.cli run --path '.chroma' --host 127.0.0.1 --port 8001 2>&1 | Tee-Object -FilePath 'logs/chroma/chroma.log'
     }
 }
 
@@ -48,8 +49,10 @@ function Start-MySql {
     }
     if ($service.Status -ne 'Running') {
         Start-Service -Name 'MySQL84'
+        'MySQL84 started at {0}' -f (Get-Date -Format o) | Tee-Object -FilePath 'logs/mysql/service.log' -Append
         Write-Host 'MySQL84 已启动。'
     } else {
+        'MySQL84 already running at {0}' -f (Get-Date -Format o) | Tee-Object -FilePath 'logs/mysql/service.log' -Append
         Write-Host 'MySQL84 已在运行。'
     }
 }

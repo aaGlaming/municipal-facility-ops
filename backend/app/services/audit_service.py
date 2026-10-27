@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -41,7 +42,7 @@ def record_security_event(
         "trace_id": getattr(getattr(request, "state", None), "trace_id", "") if request else "",
         "details": _redact(details or {}),
     }
-    path = Path("logs/security_events.jsonl")
+    path = Path(os.getenv("LOG_DIRECTORY", "logs")) / "security" / "security_events.jsonl"
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("a", encoding="utf-8") as stream:

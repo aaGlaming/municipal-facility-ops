@@ -7,7 +7,7 @@
 - `facility:read` 保护设施列表；`work_order:write` 保护工单状态更新。
 - 区域范围在路由层、`work_order_service` 服务层和 `work_order_tools` 工具层重复执行，防止绕过入口调用。
 - 关闭工单属于高风险动作，必须携带 `human_confirmation=true`；缺少确认时返回 `HUMAN_CONFIRMATION_REQUIRED`。
-- 登录成功、登录失败、无效令牌、权限拒绝、区域范围拒绝和人工确认要求写入 `logs/security_events.jsonl`，该运行时日志已加入 Git 忽略。
+- 登录成功、登录失败、无效令牌、权限拒绝、区域范围拒绝和人工确认要求写入 `logs/security/security_events.jsonl`，该运行时日志已加入 Git 忽略。
 
 ## 权限和菜单映射
 

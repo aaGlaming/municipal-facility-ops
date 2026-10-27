@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     agent_max_tool_calls: int = Field(16, ge=1, le=16, validation_alias="AGENT_MAX_TOOL_CALLS")
     agent_timeout_seconds: int = Field(90, ge=1, le=900, validation_alias="AGENT_TIMEOUT_SECONDS")
     log_level: str = "INFO"
+    log_directory: str = Field("logs", validation_alias="LOG_DIRECTORY")
     cors_origins: str = Field("http://localhost:5173", validation_alias="CORS_ORIGINS")
     db_connect_timeout_seconds: int = Field(5, ge=1, le=60, validation_alias="DB_CONNECT_TIMEOUT_SECONDS")
     db_pool_recycle_seconds: int = Field(1800, ge=60, le=86400, validation_alias="DB_POOL_RECYCLE_SECONDS")
