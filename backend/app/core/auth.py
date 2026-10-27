@@ -173,6 +173,8 @@ MENU_PERMISSIONS = {
     "report_creation": "report:create",
     "report_triage": "report:update",
     "public_report_import": "report:import",
+    "documents": "document:read",
+    "document_upload": "document:upload",
     "work_orders": "work_order:read",
     "work_order_updates": "work_order:write",
     "inspections": "inspection:read",

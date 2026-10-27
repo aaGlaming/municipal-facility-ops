@@ -7,7 +7,7 @@ from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.routes import auth, facilities, health, inspections, reports, work_orders
+from app.api.routes import auth, facilities, health, inspections, rag, reports, work_orders
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging, request_log_fields
 
@@ -25,15 +25,20 @@ def _request_id(value: str | None) -> str:
     return str(uuid4())
 
 
-def _error_response(request: Request, status_code: int, code: str, message: str, retryable: bool) -> JSONResponse:
+def _error_response(
+    request: Request, status_code: int, code: str, message: str, retryable: bool, extra: dict[str, object] | None = None
+) -> JSONResponse:
+    content: dict[str, object] = {
+        "code": code,
+        "message": message,
+        "trace_id": getattr(request.state, "trace_id", ""),
+        "retryable": retryable,
+    }
+    if extra:
+        content.update(extra)
     return JSONResponse(
         status_code=status_code,
-        content={
-            "code": code,
-            "message": message,
-            "trace_id": getattr(request.state, "trace_id", ""),
-            "retryable": retryable,
-        },
+        content=content,
     )
 
 
@@ -80,6 +85,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             str(detail.get("code", "HTTP_ERROR")),
             str(detail.get("message", exc.detail)),
             bool(detail.get("retryable", exc.status_code >= 500)),
+            {key: value for key, value in detail.items() if key not in {"code", "message", "retryable"}},
         )
 
     @application.exception_handler(RequestValidationError)
@@ -103,6 +109,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(facilities.router)
     application.include_router(reports.router)
     application.include_router(inspections.router)
+    application.include_router(rag.router)
     application.include_router(work_orders.router)
     return application
 

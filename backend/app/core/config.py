@@ -31,6 +31,10 @@ class Settings(BaseSettings):
     auth_bootstrap_password: str = Field("", validation_alias="AUTH_BOOTSTRAP_PASSWORD")
     auth_bootstrap_roles: str = Field("admin", validation_alias="AUTH_BOOTSTRAP_ROLES")
     auth_bootstrap_permissions: str = Field("*", validation_alias="AUTH_BOOTSTRAP_PERMISSIONS")
+    rag_storage_directory: str = Field("uploads/documents", validation_alias="RAG_STORAGE_DIRECTORY")
+    rag_max_upload_bytes: int = Field(
+        10 * 1024 * 1024, ge=1024, le=100 * 1024 * 1024, validation_alias="RAG_MAX_UPLOAD_BYTES"
+    )
 
     model_config = SettingsConfigDict(
         env_file=("backend/.env", ".env"), extra="ignore", case_sensitive=False, populate_by_name=True

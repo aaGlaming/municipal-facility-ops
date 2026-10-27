@@ -72,3 +72,10 @@
 - `POST /api/work-orders/{work_order_id}/status`：执行状态机流转。
 - `POST /api/work-orders/{work_order_id}/acceptance`：提交验收结果和证据。
 - `POST /api/work-orders/escalate-overdue`：将超 SLA 未终态工单升级。
+
+## RAG 文档
+
+- `POST /api/rag/documents`：上传并解析 PDF、DOCX、Markdown、TXT 或 HTML 文档。
+- `GET /api/rag/documents/{document_id}`：查看文档元数据、解析状态和原文分段。
+
+上传接口需要 `document:upload` 权限，查看接口需要 `document:read` 权限；解析失败会保留失败文档记录并返回 `DOCUMENT_PARSE_FAILED`。

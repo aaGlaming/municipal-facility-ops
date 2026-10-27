@@ -1,4 +1,4 @@
-# 执行手册 Step 1～Step 13 状态
+# 执行手册 Step 1～Step 14 状态
 
 依据：`D:\LEARN\AI\programs\AgentTask\Projects\municipal-facility-ops\docs\municipal-facility-ops.md`
 
@@ -63,4 +63,8 @@
 
 **状态：完成**。已实现巡检任务创建、派工、执行、延期和完成；工单创建、分诊、派工、执行、待确认、完成、验收、关闭、拒绝、阻塞、升级、取消和返工；状态机校验、持久化幂等、SLA 截止时间计算、超时升级、处理说明、维修证据和验收材料关联。详见 `step13-work-orders-inspections.md`。
 
-Step 14 尚未开始。
+## Step 14：实现 RAG 文档上传与解析
+
+**状态：完成**。已实现 PDF、DOCX、Markdown、TXT、HTML 上传，文件大小/类型/文件名/内容安全校验、SHA256 去重、来源元数据、原始文件保存、段落/标题/页码/表格解析和失败状态记录。详见 `step14-rag-documents.md`。
+
+Step 15 尚未开始。
