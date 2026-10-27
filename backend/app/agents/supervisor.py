@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import time
 from datetime import UTC, datetime
 from typing import Any, Protocol
@@ -32,6 +33,7 @@ from app.tools.runner import execute_tool
 
 PROMPT_VERSION = "supervisor-v1"
 SPECIALIST_AGENTS = ("triage", "facility", "sla", "inspection", "dispatch", "safety", "acceptance")
+logger = logging.getLogger(__name__)
 
 
 class SupervisorDecision(BaseModel):
@@ -119,6 +121,7 @@ class Supervisor:
             else route_intent(agent_request.intent)
         )
         state = initial_agent_state(agent_request.model_copy(update={"agent_name": specialist}), run_id, started)
+        request.state.agent_run_id = run_id
         state["status"] = "RUNNING"
         self._save_run(db, state, specialist, status="RUNNING")
         deadline = time.monotonic() + agent_request.timeout_seconds
@@ -243,6 +246,24 @@ class Supervisor:
         finished = _now()
         state["finished_at"] = finished
         self._save_run(db, state, specialist, status=state["status"], finished_at=finished)
+        input_tokens = int(state.get("model_input_tokens", 0))
+        output_tokens = int(state.get("model_output_tokens", 0))
+        logger.info(
+            "agent run completed",
+            extra={
+                "request_id": getattr(request.state, "request_id", ""),
+                "trace_id": agent_request.trace_id,
+                "agent_run_id": run_id,
+                "user_id": principal.subject,
+                "duration_ms": round((finished - started).total_seconds() * 1000, 2),
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+                "cost_usd": (input_tokens / 1000 * self.settings.llm_input_cost_per_1k)
+                + (output_tokens / 1000 * self.settings.llm_output_cost_per_1k),
+                "retry_count": 0,
+                "error_code": state.get("stop_reason") if state["status"] == "FAILED" else None,
+            },
+        )
         return AgentResponse(
             agent_run_id=run_id,
             trace_id=agent_request.trace_id,
@@ -305,8 +326,8 @@ class Supervisor:
             db.add(row)
         row.status = status
         row.iterations = state.get("model_calls", 0) + state.get("tool_calls", 0)
-        row.input_tokens = state.get("model_tokens", 0)  # type: ignore[arg-type]
-        row.output_tokens = 0
+        row.input_tokens = state.get("model_input_tokens", 0)
+        row.output_tokens = state.get("model_output_tokens", 0)
         row.stop_reason = state.get("stop_reason")
         row.finished_at = finished_at
         db.commit()

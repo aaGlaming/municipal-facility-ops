@@ -7,9 +7,10 @@ from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.routes import agents, auth, facilities, health, inspections, rag, reports, work_orders
+from app.api.routes import agents, auth, facilities, health, inspections, monitoring, rag, reports, work_orders
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging, request_log_fields
+from app.core.monitoring import metrics
 
 logger = logging.getLogger(__name__)
 
@@ -73,6 +74,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             raise
         response.headers["X-Request-Id"] = request.state.request_id
         response.headers["X-Trace-Id"] = request.state.trace_id
+        metrics.record_request(
+            status_code=response.status_code,
+            duration_ms=dict(request_log_fields(request, response.status_code, started_at))["duration_ms"],
+            path=request.url.path,
+            method=request.method,
+        )
         logger.info("request completed", extra=dict(request_log_fields(request, response.status_code, started_at)))
         return response
 
@@ -105,6 +112,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return _error_response(request, 500, "INTERNAL_ERROR", "服务内部错误", True)
 
     application.include_router(health.router)
+    application.include_router(monitoring.router)
     application.include_router(auth.router)
     application.include_router(agents.router)
     application.include_router(facilities.router)

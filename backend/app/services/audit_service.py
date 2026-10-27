@@ -9,6 +9,22 @@ from typing import Any
 
 from fastapi import Request
 
+_SENSITIVE_KEYS = {"password", "passwd", "token", "secret", "api_key", "authorization", "cookie"}
+
+
+def _redact(value: Any, key: str = "") -> Any:
+    if key.casefold() in _SENSITIVE_KEYS or any(
+        part in key.casefold() for part in ("password", "token", "secret", "api_key")
+    ):
+        return "[REDACTED]"
+    if isinstance(value, dict):
+        return {str(item_key): _redact(item_value, str(item_key)) for item_key, item_value in value.items()}
+    if isinstance(value, list):
+        return [_redact(item, key) for item in value[:50]]
+    if isinstance(value, str):
+        return value[:8000]
+    return value
+
 
 def record_security_event(
     event_type: str,
@@ -23,9 +39,7 @@ def record_security_event(
         "subject": subject,
         "request_id": getattr(getattr(request, "state", None), "request_id", "") if request else "",
         "trace_id": getattr(getattr(request, "state", None), "trace_id", "") if request else "",
-        "details": {
-            key: value for key, value in (details or {}).items() if key.lower() not in {"password", "token", "secret"}
-        },
+        "details": _redact(details or {}),
     }
     path = Path("logs/security_events.jsonl")
     try:

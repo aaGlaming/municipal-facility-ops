@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     llm_base_url: str = Field("http://localhost:11434/v1", validation_alias="LLM_BASE_URL")
     llm_api_key: str = Field("replace_me", validation_alias="LLM_API_KEY")
     llm_model: str = Field("replace_me", validation_alias="LLM_MODEL")
+    llm_input_cost_per_1k: float = Field(0.0, ge=0, validation_alias="LLM_INPUT_COST_PER_1K")
+    llm_output_cost_per_1k: float = Field(0.0, ge=0, validation_alias="LLM_OUTPUT_COST_PER_1K")
     embedding_model: str = Field("replace_me", validation_alias="EMBEDDING_MODEL")
     open311_base_url: str = Field("https://data.cityofnewyork.us", validation_alias="OPEN311_BASE_URL")
     agent_max_model_calls: int = Field(8, ge=1, le=8, validation_alias="AGENT_MAX_MODEL_CALLS")

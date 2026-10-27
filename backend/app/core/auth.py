@@ -132,6 +132,7 @@ def get_current_principal(
     except TokenError:
         record_security_event("invalid_token", request=request)
         raise _auth_error("INVALID_TOKEN", "令牌无效或已过期", 401) from None
+    request.state.user_id = principal.subject
     return principal
 
 

@@ -6,6 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import ModuleView from '../views/ModuleView.vue'
 import WorkOrderView from '../views/WorkOrderView.vue'
 import RagWorkbench from '../views/RagWorkbench.vue'
+import RecordsView from '../views/RecordsView.vue'
 
 const routes = [
   { path: '/', redirect: '/workspace' },
@@ -16,7 +17,7 @@ const routes = [
   { path: '/agents/:module', component: ModuleView, meta: { title: 'Agent 工作台', permission: 'agent:run', module: 'agent' } },
   { path: '/rag', redirect: '/rag/documents' },
   { path: '/rag/:module', component: RagWorkbench, meta: { title: 'RAG 工作台', permission: 'document:read', module: 'rag' } },
-  { path: '/records/:module', component: ModuleView, meta: { title: '运行与审计记录', permission: 'agent:read', module: 'records' } },
+  { path: '/records/:module', component: RecordsView, meta: { title: '运行与审计记录', module: 'records' } },
 ]
 
 const router = createRouter({ history: createWebHistory(), routes })
