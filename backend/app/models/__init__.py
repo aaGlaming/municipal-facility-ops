@@ -7,6 +7,7 @@ from app.models.document import Document, DocumentPart
 from app.models.embedding import EmbeddingBatch
 from app.models.facility import CitizenReport, Facility, Location
 from app.models.people import Technician, Vendor
+from app.models.session_memory import SessionMemory
 from app.models.tool_call import ToolCall
 from app.models.work_order import AcceptanceRecord, InspectionTask, WorkOrder, WorkOrderStatusEvent
 
@@ -20,6 +21,7 @@ __all__ = [
     "EmbeddingBatch",
     "Facility",
     "InspectionTask",
+    "SessionMemory",
     "Location",
     "Technician",
     "ToolCall",
