@@ -1,9 +1,9 @@
 from app.core.auth import issue_access_token
-from app.core.config import Settings
+from app.core.config import get_settings
 
 
 def _headers(*permissions: str) -> dict[str, str]:
-    token = issue_access_token("monitor-user", ["admin"], list(permissions), ["*"], Settings().auth_secret, 900)
+    token = issue_access_token("monitor-user", ["admin"], list(permissions), ["*"], get_settings().auth_secret, 900)
     return {"Authorization": f"Bearer {token}"}
 
 

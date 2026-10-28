@@ -1,8 +1,25 @@
 -- Step 13 additive migration. Safe to run after 001_schema.sql on an existing database.
 USE municipal_ops;
 
-ALTER TABLE inspection_tasks ADD COLUMN IF NOT EXISTS result_notes TEXT;
-ALTER TABLE inspection_tasks ADD COLUMN IF NOT EXISTS defer_reason TEXT;
+-- MySQL 8.4 does not support ALTER TABLE ... ADD COLUMN IF NOT EXISTS.
+-- Use metadata checks so this migration remains safe for older databases.
+SET @step13_result_notes_sql = (
+  SELECT IF(COUNT(*) = 0, 'ALTER TABLE inspection_tasks ADD COLUMN result_notes TEXT', 'SELECT 1')
+  FROM information_schema.columns
+  WHERE table_schema = DATABASE() AND table_name = 'inspection_tasks' AND column_name = 'result_notes'
+);
+PREPARE step13_result_notes_stmt FROM @step13_result_notes_sql;
+EXECUTE step13_result_notes_stmt;
+DEALLOCATE PREPARE step13_result_notes_stmt;
+
+SET @step13_defer_reason_sql = (
+  SELECT IF(COUNT(*) = 0, 'ALTER TABLE inspection_tasks ADD COLUMN defer_reason TEXT', 'SELECT 1')
+  FROM information_schema.columns
+  WHERE table_schema = DATABASE() AND table_name = 'inspection_tasks' AND column_name = 'defer_reason'
+);
+PREPARE step13_defer_reason_stmt FROM @step13_defer_reason_sql;
+EXECUTE step13_defer_reason_stmt;
+DEALLOCATE PREPARE step13_defer_reason_stmt;
 
 CREATE TABLE IF NOT EXISTS work_order_status_events (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,

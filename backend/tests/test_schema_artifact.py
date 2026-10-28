@@ -37,3 +37,13 @@ def test_step8_permission_template_has_no_real_secret_and_is_least_privilege() -
     assert "replace_with_secret" in template
     assert "grant select, insert, update, delete" in template
     assert "grant all privileges" not in template
+
+
+def test_mysql_migrations_avoid_unsupported_add_column_if_not_exists() -> None:
+    migrations = "\n".join(
+        Path(path).read_text(encoding="utf-8").lower() for path in Path("infra/mysql/init").glob("*.sql")
+    )
+    assert "alter table inspection_tasks add column if not exists" not in migrations
+    assert "alter table document_chunks add column if not exists" not in migrations
+    assert "alter table tool_calls add column if not exists" not in migrations
+    assert "information_schema.columns" in migrations

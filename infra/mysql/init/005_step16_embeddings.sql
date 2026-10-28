@@ -1,9 +1,35 @@
 -- Step 16 additive migration for existing databases.
 USE municipal_ops;
 
-ALTER TABLE document_chunks ADD COLUMN IF NOT EXISTS embedding_status VARCHAR(32) NOT NULL DEFAULT 'PENDING';
-ALTER TABLE document_chunks ADD COLUMN IF NOT EXISTS embedding_batch_id VARCHAR(64);
-ALTER TABLE document_chunks ADD COLUMN IF NOT EXISTS embedding_model VARCHAR(255);
+-- MySQL 8.4 does not support ALTER TABLE ... ADD COLUMN IF NOT EXISTS.
+SET @step16_embedding_status_sql = (
+  SELECT IF(COUNT(*) = 0,
+    'ALTER TABLE document_chunks ADD COLUMN embedding_status VARCHAR(32) NOT NULL DEFAULT ''PENDING''',
+    'SELECT 1')
+  FROM information_schema.columns
+  WHERE table_schema = DATABASE() AND table_name = 'document_chunks' AND column_name = 'embedding_status'
+);
+PREPARE step16_embedding_status_stmt FROM @step16_embedding_status_sql;
+EXECUTE step16_embedding_status_stmt;
+DEALLOCATE PREPARE step16_embedding_status_stmt;
+
+SET @step16_embedding_batch_sql = (
+  SELECT IF(COUNT(*) = 0, 'ALTER TABLE document_chunks ADD COLUMN embedding_batch_id VARCHAR(64)', 'SELECT 1')
+  FROM information_schema.columns
+  WHERE table_schema = DATABASE() AND table_name = 'document_chunks' AND column_name = 'embedding_batch_id'
+);
+PREPARE step16_embedding_batch_stmt FROM @step16_embedding_batch_sql;
+EXECUTE step16_embedding_batch_stmt;
+DEALLOCATE PREPARE step16_embedding_batch_stmt;
+
+SET @step16_embedding_model_sql = (
+  SELECT IF(COUNT(*) = 0, 'ALTER TABLE document_chunks ADD COLUMN embedding_model VARCHAR(255)', 'SELECT 1')
+  FROM information_schema.columns
+  WHERE table_schema = DATABASE() AND table_name = 'document_chunks' AND column_name = 'embedding_model'
+);
+PREPARE step16_embedding_model_stmt FROM @step16_embedding_model_sql;
+EXECUTE step16_embedding_model_stmt;
+DEALLOCATE PREPARE step16_embedding_model_stmt;
 
 CREATE TABLE IF NOT EXISTS embedding_batches (
   id VARCHAR(64) PRIMARY KEY,
