@@ -2,7 +2,7 @@
 
 ## 已实现能力
 
-- 通过 `LLM_BASE_URL`、`LLM_API_KEY` 和 `EMBEDDING_MODEL` 配置 OpenAI 兼容 Embedding 服务。
+- 通过 `EMBEDDING_BASE_URL`、`EMBEDDING_API_KEY` 和 `EMBEDDING_MODEL` 配置独立 OpenAI-compatible Embedding 服务；前两项为空时回退到 `LLM_BASE_URL` 和 `LLM_API_KEY`。
 - 按 `EMBEDDING_BATCH_SIZE` 批量生成向量；客户端设置请求超时，并按 `EMBEDDING_MAX_RETRIES` 做指数退避重试。
 - 使用每分钟调用窗口限流，避免批量重建时超过 `EMBEDDING_RATE_LIMIT_PER_MINUTE`。
 - 使用 `EMBEDDING_CACHE_DIRECTORY` 保存以模型和 Chunk 原文 SHA256 计算的缓存，重复重建命中缓存时不重复调用模型。
@@ -29,6 +29,8 @@
 - `EMBEDDING_RATE_LIMIT_PER_MINUTE=60`
 - `EMBEDDING_CACHE_DIRECTORY=.cache/embeddings`
 - `CHROMA_COLLECTION_NAME=municipal_facility_ops`
+
+Embedding 模型必须返回与输入文本数量一致的浮点向量；模型名称会写入 Chunk metadata 和 `embedding_batches`，切换模型后应重新构建文档向量。
 
 ## 验证结果
 

@@ -16,6 +16,7 @@ from app.core.auth import AuthPrincipal, ensure_region_access
 from app.core.config import Settings
 from app.models.chunk import DocumentChunk
 from app.models.document import Document
+from app.rag import reranker
 from app.schemas.rag import RagSearchRequest
 from app.services import embedding_service
 from app.services.audit_service import record_security_event
@@ -318,11 +319,25 @@ def search_documents(
         vector_score = vector_scores.get(chunk_id, 0.0)
         keyword_score = keyword_scores.get(chunk_id, _keyword_score(chunk, rewrite.terms))
         score = 0.7 * vector_score + 0.3 * keyword_score if vector_scores else keyword_score
-        if payload.rerank and rewrite.terms:
-            heading = (chunk.heading or "").lower()
-            score += 0.1 if any(term in heading for term in rewrite.terms) else 0.0
         scored.append((min(1.0, score), chunk, document))
     scored.sort(key=lambda value: (-value[0], value[1].chunk_index))
+    if payload.rerank:
+        try:
+            provider = reranker.get_rerank_provider(settings)
+            rerank_results = provider.rerank(
+                rewrite.text,
+                [chunk.text for _, chunk, _ in scored],
+                len(scored),
+            )
+            score_by_index = {index: score for index, score in rerank_results}
+            scored = [
+                (max(0.0, min(1.0, score_by_index[index])), chunk, document)
+                for index, (_, chunk, document) in enumerate(scored)
+                if index in score_by_index
+            ]
+            scored.sort(key=lambda value: (-value[0], value[1].chunk_index))
+        except reranker.RerankProviderError:
+            warnings.append("重排模型暂不可用，已使用向量与关键词排序")
     items: list[dict[str, Any]] = []
     for score, chunk, document in scored[: payload.top_k]:
         items.append(

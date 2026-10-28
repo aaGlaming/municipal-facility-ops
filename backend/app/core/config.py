@@ -18,7 +18,14 @@ class Settings(BaseSettings):
     llm_model: str = Field("replace_me", validation_alias="LLM_MODEL")
     llm_input_cost_per_1k: float = Field(0.0, ge=0, validation_alias="LLM_INPUT_COST_PER_1K")
     llm_output_cost_per_1k: float = Field(0.0, ge=0, validation_alias="LLM_OUTPUT_COST_PER_1K")
+    embedding_base_url: str = Field("", validation_alias="EMBEDDING_BASE_URL")
+    embedding_api_key: str = Field("", validation_alias="EMBEDDING_API_KEY")
     embedding_model: str = Field("replace_me", validation_alias="EMBEDDING_MODEL")
+    rerank_url: str = Field("", validation_alias="RERANK_URL")
+    rerank_api_key: str = Field("", validation_alias="RERANK_API_KEY")
+    rerank_model: str = Field("", validation_alias="RERANK_MODEL")
+    rerank_timeout_seconds: float = Field(30.0, ge=1, le=300, validation_alias="RERANK_TIMEOUT_SECONDS")
+    rerank_max_retries: int = Field(2, ge=0, le=6, validation_alias="RERANK_MAX_RETRIES")
     open311_base_url: str = Field("https://data.cityofnewyork.us", validation_alias="OPEN311_BASE_URL")
     agent_max_model_calls: int = Field(8, ge=1, le=8, validation_alias="AGENT_MAX_MODEL_CALLS")
     agent_max_tool_calls: int = Field(16, ge=1, le=16, validation_alias="AGENT_MAX_TOOL_CALLS")
@@ -66,6 +73,22 @@ class Settings(BaseSettings):
     @property
     def llm_configured(self) -> bool:
         return self.llm_api_key not in {"", "replace_me"} and self.llm_model not in {"", "replace_me"}
+
+    @property
+    def embedding_endpoint(self) -> str:
+        return self.embedding_base_url or self.llm_base_url
+
+    @property
+    def embedding_api_token(self) -> str:
+        return self.embedding_api_key or self.llm_api_key
+
+    @property
+    def embedding_configured(self) -> bool:
+        return self.embedding_api_token not in {"", "replace_me"} and self.embedding_model not in {"", "replace_me"}
+
+    @property
+    def rerank_configured(self) -> bool:
+        return self.rerank_url not in {"", "replace_me"} and self.rerank_model not in {"", "replace_me"}
 
 
 @lru_cache

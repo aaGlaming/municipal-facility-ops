@@ -51,7 +51,7 @@ class EmbeddingProvider:
     """OpenAI compatible embedding client with bounded retries and timeout."""
 
     def __init__(self, settings: Settings) -> None:
-        if settings.llm_api_key in {"", "replace_me"} or settings.embedding_model in {"", "replace_me"}:
+        if not settings.embedding_configured:
             raise EmbeddingProviderError("embedding model is not configured", retryable=False)
         try:
             from openai import OpenAI
@@ -60,8 +60,8 @@ class EmbeddingProvider:
         self.model = settings.embedding_model
         self._settings = settings
         self._client = OpenAI(
-            api_key=settings.llm_api_key,
-            base_url=settings.llm_base_url,
+            api_key=settings.embedding_api_token,
+            base_url=settings.embedding_endpoint,
             timeout=settings.embedding_timeout_seconds,
         )
 

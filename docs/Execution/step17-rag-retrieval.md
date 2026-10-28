@@ -5,7 +5,7 @@
 - 对查询做确定性改写和字段提取，识别设施类型、区域、文档版本和生效日期；请求显式过滤优先于查询中识别出的字段。
 - 组合 Chroma 向量召回和 MySQL 关键词召回，以 Chunk ID 去重并合并候选；默认返回 Top-K 为 5，允许调用方调整到 1～50。
 - 支持区域权限、设施类型、区域、版本和当前生效日期过滤；解析失败、软删除、未索引和过期文档不会进入结果。
-- 支持可选的确定性轻量 rerank，对标题命中的候选进行加权，不依赖额外模型调用。
+- 支持通过 `RERANK_URL`、`RERANK_API_KEY` 和 `RERANK_MODEL` 接入真实 `/rerank` 模型；响应兼容 `results[{index,relevance_score}]` 或 `score`。未配置或服务失败时保留向量/关键词排序并返回 warning。
 - 返回文档名、页码、Chunk ID、相似度、文档版本、来源、区域、设施类型和原文片段。
 - 无召回时返回 `NO_RECALL` 和原因；向量服务不可用但关键词有结果时返回 `PARTIAL` 与 warning；两类召回都不可用时返回 `RETRIEVAL_UNAVAILABLE`。
 - 提供检索调试接口，返回关键词/向量/合并/返回数量、Embedding 模型、失败提示和耗时，不返回密钥或原始凭据。
@@ -26,6 +26,13 @@
 ```
 
 响应中的 `items` 包含 `document_name`、`page_number`、`chunk_id`、`similarity`、`snippet` 和 `metadata`，可直接用于原文定位展示。
+
+## Rerank 配置
+
+- `RERANK_URL`：重排服务完整 HTTP 地址，不自动拼接路径。
+- `RERANK_API_KEY`：可选 Bearer Token。
+- `RERANK_MODEL`：重排模型名称。
+- `RERANK_TIMEOUT_SECONDS`、`RERANK_MAX_RETRIES`：超时和重试策略。
 
 ## 验证结果
 
